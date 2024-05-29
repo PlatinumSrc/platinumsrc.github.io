@@ -1,0 +1,32 @@
+{% assign pagetitle = page.title %}
+<!DOCTYPE html>
+<html lang="en" style="padding: 0px;">
+    <head>
+        <title>PlatinumSrc: {{ pagetitle }}</title>
+        <link rel="icon" href="/icon.png"></link>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/base.css">
+        <meta name="description" content="PlatinumSrc">
+        <meta property="og:title" content="PlatinumSrc">
+        <meta property="og:description" content="PlatinumSrc GitHub Page">
+        <meta property="og:image" content="/mbedicon.png">
+    </head>
+    <body bgcolor=#000000 style="display: flex; flex-flow: row;">
+        <div class="sidebar" style="min-width: 200px; max-width: 200px;">
+            {% include sidebar.html %}
+        </div>
+        <div style="min-width: 20px;"></div>
+        <div style="display: flex; flex: 1 1 auto; flex-flow: column;">
+            <div class="header" style="flex: 0 1 auto;">
+                {% include header.html %}
+            </div>
+            <div class="content" style="flex: 1 1 auto;">
+                {{ content }}
+            </div>
+            <div class="footer" style="flex: 0 1 auto;">
+                {% include footer.html %}
+            </div>
+        </div>
+    </body>
+</html>

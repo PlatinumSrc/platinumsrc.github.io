@@ -1,0 +1,26 @@
+:root {
+    --font-color: #fff;
+    --bg-color: #090f34;
+    color: var(--font-color);
+}
+
+html, body {
+    font-family: arial, helvetica, sans-serif;
+    color: var(--font-color);
+    background-color: var(--bg-color);
+}
+body {
+    margin: 8px 10vw 8px 10vw;
+    min-height: calc(100vh - 16px);
+}
+
+a {
+    color: #fff07b;
+}
+
+.sidebar {
+    background: #2b335f;
+    border: 2px solid #7b8dc3;
+    border-radius: 8px;
+    padding: 8px;
+}

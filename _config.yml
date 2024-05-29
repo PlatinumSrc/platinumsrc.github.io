@@ -1,0 +1,7 @@
+title: PlatinumSrc
+description: PlatinumSrc Game Engine
+domain: platinumsrc.github.io
+url: https://platinumsrc.github.io
+baseurl: /
+plugins:
+  - jekyll-remote-include
