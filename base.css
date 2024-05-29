@@ -1,21 +1,54 @@
 :root {
-    --font-color: #fff;
+    /* theme */
     --bg-color: #090f34;
-    color: var(--font-color);
-}
-
-html, body {
+    --font-color: #fff;
+    --link-color: #fff09b;
+    --hover-link-color: #fffcee;
     font-family: arial, helvetica, sans-serif;
     color: var(--font-color);
     background-color: var(--bg-color);
+    /* layout */
+    --sidebar-width: max(10em, min(17.5vw, 200px));
+    font-size: max(8pt, min(1.5vw, 12pt));
 }
+
 body {
-    margin: 8px 10vw 8px 10vw;
+    margin: 8px max(8px, calc(12.5vw - 70px));
     min-height: calc(100vh - 16px);
 }
 
 a {
-    color: #fff07b;
+    text-decoration: none;
+    color: var(--link-color);
+}
+a:hover {
+    text-decoration: underline;
+    color: var(--hover-link-color);
+}
+
+.collapsible-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--link-color);
+}
+.collapsible-link:hover {
+    text-decoration: underline;
+    color: var(--hover-link-color);
+}
+.collapsible>collapcontent {
+    display: block;
+    margin-left: 16px;
+}
+.collapsible>collapcontent {
+    display: block;
+    margin-left: 16px;
+}
+collapcontent {
+    display: block;
+    margin-left: 16px;
+}
+collapcontent.hidden {
+    display: none;
 }
 
 .sidebar {
@@ -23,4 +56,6 @@ a {
     border: 2px solid #7b8dc3;
     border-radius: 8px;
     padding: 8px;
+    min-width: var(--sidebar-width);
+    max-width: var(--sidebar-width);
 }

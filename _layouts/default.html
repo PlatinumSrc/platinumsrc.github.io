@@ -11,9 +11,10 @@
         <meta property="og:title" content="PlatinumSrc">
         <meta property="og:description" content="PlatinumSrc GitHub Page">
         <meta property="og:image" content="/mbedicon.png">
+        <meta name="theme-color" content="#2350e2">
     </head>
-    <body bgcolor=#000000 style="display: flex; flex-flow: row;">
-        <div class="sidebar" style="min-width: 200px; max-width: 200px;">
+    <body style="display: flex; flex-flow: row;">
+        <div class="sidebar">
             {% include sidebar.html %}
         </div>
         <div style="min-width: 20px;"></div>
@@ -29,4 +30,49 @@
             </div>
         </div>
     </body>
+    <script type="module">
+    {
+        var clist = document.getElementsByTagName("collapsible");
+        var ccache;
+        if (window.localStorage) {
+            ccache = window.sessionStorage.getItem("collapcache");
+            if (ccache && ccache.length != clist.length) {
+                window.sessionStorage.removeItem("collapcache");
+            }
+        }
+        if (!ccache) ccache = "0".repeat(clist.length);
+        for (var i = 0; i < clist.length; ++i) {
+            var c = clist[i];
+            c.setAttribute("ccacheno", i);
+            var elist = c.getElementsByTagName("collaptext");
+            for (var j = 0; j < elist.length; ++j) {
+                var e = elist[j];
+                e.classList.add("collapsible-link");
+                e.onclick = function() {
+                    var p = this.parentElement;
+                    var ccn = p.getAttribute("ccacheno");
+                    var contentlist = p.getElementsByTagName("collapcontent");
+                    if (contentlist[0].classList.contains("hidden")) {
+                        ccache = ccache.substring(0, ccn) + "1" + ccache.substring(ccn + 1);
+                        for (var n = 0; n < contentlist.length; ++n) {
+                            contentlist[n].classList.remove("hidden");
+                        }
+                    } else {
+                        ccache = ccache.substring(0, ccn) + "0" + ccache.substring(ccn + 1);
+                        for (var n = 0; n < contentlist.length; ++n) {
+                            contentlist[n].classList.add("hidden");
+                        }
+                    }
+                    if (p.getAttribute("nocache") == null) window.sessionStorage.setItem("collapcache", ccache);
+                };
+            }
+            if (ccache[i] != '1') {
+                elist = c.getElementsByTagName("collapcontent");
+                for (var j = 0; j < elist.length; ++j) {
+                    elist[j].classList.add("hidden");
+                }
+            }
+        }
+    }
+    </script>
 </html>
