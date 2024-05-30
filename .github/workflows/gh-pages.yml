@@ -30,7 +30,7 @@ jobs:
           source: ./
           destination: ./_site
       - name: Out with the old
-        run: echo "!!! SHELL !!!:: $SHELL"; find !(_site) -type f \( -iname \*.html -o -iname \*.js -o -iname \*.css \) | for read -r i; do rm "$i"; done
+        run: "echo \"!!! SHELL !!!: $SHELL\"; find !(_site) -type f \\( -iname \\*.html -o -iname \\*.js -o -iname \\*.css \\) | for read -r i; do rm "$i"; done"
       - name: Pages Minify
         uses: DrA1ex/pages-minify@v1.0.3
       - name: Upload artifact
