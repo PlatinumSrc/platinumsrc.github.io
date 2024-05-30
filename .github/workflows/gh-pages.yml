@@ -31,7 +31,7 @@ jobs:
       - name: Out with the old
         run: |
           echo --- BEFORE ---; ls *
-          shopt -s extglob; find !(_site) -type f \( -iname \*.html -o -iname \*.js -o -iname \*.css \) | for read -r i; do rm "$i"; done
+          ls | grep -v _site | while read -r d; do find "$d" \( -iname \*.html -o -iname \*.js -o -iname \*.css \) | while read -r i; do rm "$i"; done; done
           echo --- AFTER ---; ls *
       - name: Pages Minify
         uses: DrA1ex/pages-minify@v1.0.3
