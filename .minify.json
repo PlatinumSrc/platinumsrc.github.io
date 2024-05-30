@@ -1,0 +1,6 @@
+{
+    "html": {
+        "removeRedundantAttributes": false,
+		"removeEmptyAttributes": false
+    }
+}
