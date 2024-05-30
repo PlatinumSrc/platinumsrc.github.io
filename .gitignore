@@ -14,4 +14,6 @@
 !/favicon.ico
 !/_config.yml
 .**
+!/.github/
+!/.github/**
 !/.gitignore
