@@ -1,20 +1,27 @@
 :root {
     /* theme */
-    --bg-color: #090f34;
-    --font-color: #fff;
-    --link-color: #fff09b;
+    --bg-color: #061034;
+    --font-color: #ffffff;
+    --inactive-color: #bbbbbb;
+    --link-color: #fff07a;
     --hover-link-color: #fffcee;
+    --dead-link-color: #bbbbbb;
+    --hover-dead-link-color: #d9d9d9;
     font-family: arial, helvetica, sans-serif;
     color: var(--font-color);
     background-color: var(--bg-color);
     /* layout */
-    --sidebar-width: max(10em, min(17.5vw, 200px));
-    font-size: max(8pt, min(1.5vw, 12pt));
+    --sidebar-width: max(10em, min(17.5vw, 180px));
+    --hsep-size: max(6px, min(calc(10vw - 74px), 16px));
+    --vsep-size: max(4px, min(calc(10vw - 74px), 16px));
+    font-size: max(6pt, min(1.5vw, 12pt));
+    line-height: 1.2;
+    cursor: default;
 }
 
 body {
-    margin: 8px max(8px, calc(12.5vw - 70px));
-    min-height: calc(100vh - 16px);
+    margin: 6px max(6px, calc(20vw - 150px));
+    min-height: calc(100vh - 12px);
 }
 
 a {
@@ -26,6 +33,26 @@ a:hover {
     color: var(--hover-link-color);
 }
 
+br {
+    display: block;
+    margin: 0.15em 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+    line-height: 1.5;
+}
+h1 {font-size: 2em;}
+h2 {font-size: 1.8em;}
+h3 {font-size: 1.6em;}
+h4 {font-size: 1.4em;}
+h5 {font-size: 1.2em;}
+h6 {font-size: 1em;}
+
+inactive {
+    color: var(--inactive-color);
+}
+
 .collapsible-link {
     cursor: pointer;
     text-decoration: none;
@@ -34,6 +61,14 @@ a:hover {
 .collapsible-link:hover {
     text-decoration: underline;
     color: var(--hover-link-color);
+}
+.collapsible-empty {
+    text-decoration: none;
+    color: var(--dead-link-color);
+}
+.collapsible-empty:hover {
+    text-decoration: underline;
+    color: var(--hover-dead-link-color);
 }
 .collapsible>collapcontent {
     display: block;
@@ -51,11 +86,26 @@ collapcontent.hidden {
     display: none;
 }
 
-.sidebar {
-    background: #2b335f;
-    border: 2px solid #7b8dc3;
-    border-radius: 8px;
+.header, .footer, .sidebar {
+    background: #20305f;
+    border: 2px solid #6d8dcb;
+    border-radius: 0.35em;
     padding: 8px;
+}
+.header, .footer {
+    margin: 0px;
+    padding: calc(4px - 0.06em) 8px calc(4px + 0.06em) 8px;
+}
+.header {
+    margin-bottom: var(--hsep-size);
+}
+.footer {
+    margin-top: var(--hsep-size);
+}
+.content {
+    padding: 2em 2.75em calc(2em + 2px) 2.75em;
+}
+.sidebar {
     min-width: var(--sidebar-width);
     max-width: var(--sidebar-width);
 }

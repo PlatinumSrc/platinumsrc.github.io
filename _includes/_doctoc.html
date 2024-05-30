@@ -1,0 +1,22 @@
+{% assign lim = 256 %}
+<h3>Table of contents</h3><br><ul>
+{% assign ls = site.pages %}
+{% assign c = page.start %}
+{% for i in (1..lim) %}
+{% assign url = page.dir | append: c | append: "/" %}
+{% for p in ls %}
+{% if p.url == url %}
+<li><a href="{{ p.url }}">{{ p.title }}</a>
+{% if p.description != nil %}
+ - {{ p.description }}<br>
+{% endif %}
+</li><br>
+{% assign c = p.next %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% if c == nil %}
+{% break %}
+{% endif %}
+{% endfor %}
+</ul>

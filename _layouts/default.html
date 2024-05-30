@@ -1,23 +1,28 @@
-{% assign pagetitle = page.title %}
+{% if page.section == nil %}
+{% assign pagetitle = "PlatinumSrc - " | append: page.title %}
+{% else %}
+{% assign pagetitle = "PlatinumSrc: " | append: page.section | append: " - " | append: page.title %}
+{% endif %}
 <!DOCTYPE html>
 <html lang="en" style="padding: 0px;">
     <head>
-        <title>PlatinumSrc: {{ pagetitle }}</title>
+        <title>{{ pagetitle }}</title>
         <link rel="icon" href="/icon.png"></link>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/base.css">
+        <script async src="/base.js"></script>
         <meta name="description" content="PlatinumSrc">
         <meta property="og:title" content="PlatinumSrc">
         <meta property="og:description" content="PlatinumSrc GitHub Page">
         <meta property="og:image" content="/mbedicon.png">
-        <meta name="theme-color" content="#2350e2">
+        <meta name="theme-color" content="#5f8bc3">
     </head>
     <body style="display: flex; flex-flow: row;">
         <div class="sidebar">
             {% include sidebar.html %}
         </div>
-        <div style="min-width: 20px;"></div>
+        <div style="min-width: var(--vsep-size);"></div>
         <div style="display: flex; flex: 1 1 auto; flex-flow: column;">
             <div class="header" style="flex: 0 1 auto;">
                 {% include header.html %}
@@ -30,49 +35,4 @@
             </div>
         </div>
     </body>
-    <script type="module">
-    {
-        var clist = document.getElementsByTagName("collapsible");
-        var ccache;
-        if (window.localStorage) {
-            ccache = window.sessionStorage.getItem("collapcache");
-            if (ccache && ccache.length != clist.length) {
-                window.sessionStorage.removeItem("collapcache");
-            }
-        }
-        if (!ccache) ccache = "0".repeat(clist.length);
-        for (var i = 0; i < clist.length; ++i) {
-            var c = clist[i];
-            c.setAttribute("ccacheno", i);
-            var elist = c.getElementsByTagName("collaptext");
-            for (var j = 0; j < elist.length; ++j) {
-                var e = elist[j];
-                e.classList.add("collapsible-link");
-                e.onclick = function() {
-                    var p = this.parentElement;
-                    var ccn = p.getAttribute("ccacheno");
-                    var contentlist = p.getElementsByTagName("collapcontent");
-                    if (contentlist[0].classList.contains("hidden")) {
-                        ccache = ccache.substring(0, ccn) + "1" + ccache.substring(ccn + 1);
-                        for (var n = 0; n < contentlist.length; ++n) {
-                            contentlist[n].classList.remove("hidden");
-                        }
-                    } else {
-                        ccache = ccache.substring(0, ccn) + "0" + ccache.substring(ccn + 1);
-                        for (var n = 0; n < contentlist.length; ++n) {
-                            contentlist[n].classList.add("hidden");
-                        }
-                    }
-                    if (p.getAttribute("nocache") == null) window.sessionStorage.setItem("collapcache", ccache);
-                };
-            }
-            if (ccache[i] != '1') {
-                elist = c.getElementsByTagName("collapcontent");
-                for (var j = 0; j < elist.length; ++j) {
-                    elist[j].classList.add("hidden");
-                }
-            }
-        }
-    }
-    </script>
 </html>

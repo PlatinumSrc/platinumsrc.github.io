@@ -4,4 +4,10 @@ domain: platinumsrc.github.io
 url: https://platinumsrc.github.io
 baseurl: /
 plugins:
-  - jekyll-remote-include
+  - jekyll-minifier
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
