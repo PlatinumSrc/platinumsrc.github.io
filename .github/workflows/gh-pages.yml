@@ -22,8 +22,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Pages Minify
-        uses: DrA1ex/pages-minify@v1.0.3
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
@@ -31,6 +29,10 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      - name: Out with the old
+        run: echo "!!! SHELL !!!:: $SHELL"; find !(_site) -type f \( -iname \*.html -o -iname \*.js -o -iname \*.css \) | for read -r i; do rm "$i"; done
+      - name: Pages Minify
+        uses: DrA1ex/pages-minify@v1.0.3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 

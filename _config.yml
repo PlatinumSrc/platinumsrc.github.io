@@ -3,8 +3,6 @@ description: PlatinumSrc Game Engine
 domain: platinumsrc.github.io
 url: https://platinumsrc.github.io
 baseurl: /
-plugins:
-  - jekyll-minifier
 defaults:
   -
     scope:
