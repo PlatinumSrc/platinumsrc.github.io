@@ -16,7 +16,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
@@ -31,13 +30,11 @@ jobs:
           destination: ./_site
       - name: Out with the old
         run: |
-          echo "!!! SHELL !!!: $SHELL"; find !(_site) -type f \( -iname \*.html -o -iname \*.js -o -iname \*.css \) | for read -r i; do rm "$i"; done"
-      - name: Pages Minify
-        uses: DrA1ex/pages-minify@v1.0.3
+          echo "!!! SHELL !!!: $SHELL";# find !(_site) -type f \( -iname \*.html -o -iname \*.js -o -iname \*.css \) | for read -r i; do rm "$i"; done"
+#      - name: Pages Minify
+#        uses: DrA1ex/pages-minify@v1.0.3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-
-  # Deployment job
   deploy:
     environment:
       name: github-pages
