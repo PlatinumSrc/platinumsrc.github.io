@@ -18,24 +18,23 @@
         <meta name="theme-color" content="#5f8bc3">
     </head>
     <body style="display: flex; flex-flow: row;">
-        <div class="sidebar">
-            {% include sidebar.html %}
+        <div id="sidebar">
+{% include sidebar.html %}
         </div>
         <div style="min-width: var(--vsep-size);"></div>
-        <div style="display: flex; flex: 1 1 auto; flex-flow: column;">
-            <div class="header" style="flex: 0 1 auto;">
-                {% include header.html %}
+        <div id="main" style="display: flex; flex: 1 1 auto; flex-flow: column;">
+            <div id="header" style="flex: 0 1 auto;">
+{% include header.html %}
             </div>
-            <div class="content" style="flex: 1 1 auto;">
-                {{ content }}
+            <div id="content" style="flex: 1 1 auto;">
+{{ content }}
             </div>
-            <div class="footer" style="flex: 0 1 auto;">
-                {% include footer.html %}
+            <div id="footer" style="flex: 0 1 auto;">
+{% include footer.html %}
             </div>
         </div>
     </body>
     <script type="module">
-    {
         var clist = document.getElementsByTagName("collapsible");
         var ccache;
         if (window.localStorage) {
@@ -99,6 +98,5 @@
                 }
             }
         }
-    }
     </script>
 </html>

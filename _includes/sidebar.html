@@ -1,10 +1,10 @@
-<a href="/"><img src="/icon.png" style="height: var(--sidebar-width); width: var(--sidebar-width);"></img></a>
-<hr style="border: 1px solid #7b8dc3;"><br>
+<a href="/"><img src="/icon.png" class="sidebarimg"></img></a>
+<hr><br>
 <b>Links</b><br>
 <a href="https://github.com/PlatinumSrc">GitHub Organization</a><br>
 <a href="https://github.com/PlatinumSrc/PlatinumSrc">Engine source code</a><br>
 <a href="https://github.com/PlatinumSrc/platinumsrc.github.io">Website source code</a><br>
-<hr style="border: 1px dashed #7b8dc3;"><br>
+<hr style="border-style: dashed;"><br>
 <b>Downloads</b><br>
 <collapsible nocache>
     <collaptext>Editor</collaptext><br>
@@ -24,29 +24,36 @@
         <a href="https://github.com/PlatinumSrc/PlatinumSrc/releases/latest/download/psrc_engine_nxdk.zip" target="_blank">Xbox (NXDK)</a><br>
     </collapcontent>
 </collapsible>
-<hr style="border: 1px dashed #7b8dc3;"><br>
+<collapsible nocache>
+    <collaptext>Dedicated server</collaptext><br>
+    <collapcontent>
+        <a href="https://github.com/PlatinumSrc/PlatinumSrc/releases/latest/download/psrc_server_linux_x86_64.tar.gz" target="_blank">Linux x86_64</a><br>
+        <a href="https://github.com/PlatinumSrc/PlatinumSrc/releases/latest/download/psrc_server_windows_i686.zip" target="_blank">Windows i686</a><br>
+    </collapcontent>
+</collapsible>
+<hr style="border-style: dashed;"><br>
 <b>Documentation</b><br>
 <collapsible>
     <collaptext>Editor</collaptext><br>
     <collapcontent>
-        {% include _doclinks.html dir='editor' %}
+{% include _doclinks.html dir='editor' %}
     </collapcontent>
 </collapsible>
 <collapsible>
     <collaptext>PBASIC</collaptext><br>
     <collapcontent>
-        {% include _doclinks.html dir='pbasic' %}
+{% include _doclinks.html dir='pbasic' %}
     </collapcontent>
 </collapsible>
 <collapsible>
     <collaptext>Engine</collaptext><br>
     <collapcontent>
-        {% include _doclinks.html dir='engine' %}
+{% include _doclinks.html dir='engine' %}
     </collapcontent>
 </collapsible>
 <collapsible>
     <collaptext>File formats</collaptext><br>
     <collapcontent>
-        {% include _doclinks.html dir='formats' %}
+{% include _doclinks.html dir='formats' %}
     </collapcontent>
 </collapsible>

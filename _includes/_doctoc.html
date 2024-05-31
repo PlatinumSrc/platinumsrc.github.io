@@ -8,7 +8,7 @@
 {% if p.url == url %}
 <li><a href="{{ p.url }}">{{ p.title }}</a>
 {% if p.description != nil %}
- - {{ p.description }}<br>
+ - {{ p.description }}
 {% endif %}
 </li><br>
 {% assign c = p.next %}
