@@ -106,18 +106,18 @@ pre {
     line-height: 1.225em;
 }
 
-pre.highlight > code > span {
-    &.o {color: var(--code-op-color);}
-    &.k {color: var(--code-kw-color); font-weight: bold;}
-    &.kt {color: var(--code-type-color); font-weight: bold;}
-    &.mi, &.mo, &.mh, &.mb {color: var(--code-num-color);}
-    &.s {color: var(--code-str-color);}
-    &.sc {color: var(--code-char-color);}
-    &.se {color: var(--code-esc-color);}
-    &.c1, &.cm {color: var(--code-comment-color);}
-    &.cp {color: var(--code-preproc-color); font-weight: bold;}
-    &.cpf {color: var(--code-preprocfile-color); font-weight: normal;}
-}
+{% assign tmp = "pre.highlight > code > span" %}
+{{ tmp }}.o {color: var(--code-op-color);}
+{{ tmp }}.k {color: var(--code-kw-color); font-weight: bold;}
+{{ tmp }}.kt {color: var(--code-type-color); font-weight: bold;}
+{{ tmp }}:is(.mi, .mo, .mh, .mb) {color: var(--code-num-color);}
+{{ tmp }}.s {color: var(--code-str-color);}
+{{ tmp }}.sc {color: var(--code-char-color);}
+{{ tmp }}.se {color: var(--code-esc-color);}
+{{ tmp }}:is(.c1, .cm) {color: var(--code-comment-color);}
+{{ tmp }}.cp {color: var(--code-preproc-color); font-weight: bold;}
+{{ tmp }}.cpf {color: var(--code-preprocfile-color); font-weight: normal;}
+{% assign tmp = nil %}
 
 hr {
     border: 1px solid var(--border-color);
