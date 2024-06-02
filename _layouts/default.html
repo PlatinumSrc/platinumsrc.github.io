@@ -4,7 +4,7 @@
 {% assign pagetitle = "PlatinumSrc: " | append: page.section | append: " - " | append: page.title %}
 {% endif %}
 <!DOCTYPE html>
-<html lang="en" style="padding: 0px;">
+<html lang="en">
     <head>
         <title>{{ pagetitle }}</title>
         <link rel="icon" href="/icon.png"></link>
@@ -17,19 +17,18 @@
         <meta property="og:image" content="/mbedicon.png">
         <meta name="theme-color" content="#5f8bc3">
     </head>
-    <body style="display: flex; flex-flow: row;">
-        <div id="sidebar">
+    <body>
+        <div id="_sidebar">
 {% include sidebar.html %}
         </div>
-        <div style="min-width: var(--vsep-size);"></div>
-        <div id="main" style="display: flex; flex: 1 1 auto; flex-flow: column;">
-            <div id="header" style="flex: 0 1 auto;">
+        <div id="_main">
+            <div id="_header">
 {% include header.html %}
             </div>
-            <div id="content" style="flex: 1 1 auto;">
+            <div id="_content">
 {{ content }}
             </div>
-            <div id="footer" style="flex: 0 1 auto;">
+            <div id="_footer">
 {% include footer.html %}
             </div>
         </div>

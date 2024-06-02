@@ -1,5 +1,5 @@
 {% assign lim = 256 %}
-<h3>Table of contents</h3><br><ul>
+<h3>Table of contents</h3><ul>
 {% assign ls = site.pages %}
 {% assign c = page.start %}
 {% for i in (1..lim) %}
@@ -10,7 +10,7 @@
 {% if p.description != nil %}
  - {{ p.description }}
 {% endif %}
-</li><br>
+</li>
 {% assign c = p.next %}
 {% break %}
 {% endif %}
