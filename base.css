@@ -55,8 +55,8 @@ html {
 body {
     display: flex;
     flex-flow: row;
-    margin: 0 calc(20vw - 160px);
-    padding: 0.5em;
+    padding: 0 calc(20vw - 160px);
+    margin: 0.5em;
     min-height: 100%;
     flex: 1 1 auto;
 }
@@ -167,6 +167,10 @@ th:not(:first-child), td:not(:first-child) {
 }
 td:last-child {
     border-right: none;
+}
+
+ul, ol {
+    padding-left: 2.5em;
 }
 
 center {

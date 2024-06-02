@@ -1,10 +1,14 @@
 ---
 title: P3M (3D models)
-section: PBASIC Documentation
-#next: 
+section: File formats
+next: ptf
 ---
 
 ## Format
+
+- Current version is `1.1`
+- File extension is `.p3m`
+- Data is little endian
 
 | Type | Description
 | -
