@@ -117,18 +117,20 @@ pre {
     word-wrap: break-word;
 }
 
-{% assign tmp = "pre.highlight > code > span" %}
-{{ tmp }}.o {color: var(--code-op-color);}
-{{ tmp }}.k {color: var(--code-kw-color); font-weight: bold;}
-{{ tmp }}.kt {color: var(--code-type-color); font-weight: bold;}
-{{ tmp }}:is(.mi, .mo, .mh, .mb) {color: var(--code-num-color);}
-{{ tmp }}.s {color: var(--code-str-color);}
-{{ tmp }}.sc {color: var(--code-char-color);}
-{{ tmp }}.se {color: var(--code-esc-color);}
-{{ tmp }}:is(.c1, .cm) {color: var(--code-comment-color);}
-{{ tmp }}.cp {color: var(--code-preproc-color); font-weight: bold;}
-{{ tmp }}.cpf {color: var(--code-preprocfile-color); font-weight: normal;}
-{% assign tmp = nil %}
+@media screen {
+    {% assign tmp = "pre.highlight > code > span" %}
+    {{ tmp }}.o {color: var(--code-op-color);}
+    {{ tmp }}.k {color: var(--code-kw-color); font-weight: bold;}
+    {{ tmp }}.kt {color: var(--code-type-color); font-weight: bold;}
+    {{ tmp }}:is(.mi, .mo, .mh, .mb) {color: var(--code-num-color);}
+    {{ tmp }}.s {color: var(--code-str-color);}
+    {{ tmp }}.sc {color: var(--code-char-color);}
+    {{ tmp }}.se {color: var(--code-esc-color);}
+    {{ tmp }}:is(.c1, .cm) {color: var(--code-comment-color);}
+    {{ tmp }}.cp {color: var(--code-preproc-color); font-weight: bold;}
+    {{ tmp }}.cpf {color: var(--code-preprocfile-color); font-weight: normal;}
+    {% assign tmp = nil %}
+}
 
 hr {
     border: none;
@@ -253,14 +255,25 @@ collapcontent.hidden {
         margin-right: var(--vsep-size);
     }
 }
-@media print {
-    * :not(html, body, #_main, #_content, #_content *) {
-        display: none !important;
-    }
-}
 .sidebarimg {
     width: var(--sidebar-width);
     height: var(--sidebar-width);
     max-width: {{ sidebar_maxwidth }};
     max-height: {{ sidebar_maxwidth }};
+}
+@media print {
+    code {
+        border: 0.1em solid var(--code-bg-color);
+        padding: 0 0.2em;
+    }
+    pre > code {
+        border-width: 0;
+        padding: 0;
+    }
+    pre {
+        border: 0.1em solid var(--code-bg-color);
+    }
+    * :not(html, body, #_main, #_content, #_content *) {
+        display: none !important;
+    }
 }
