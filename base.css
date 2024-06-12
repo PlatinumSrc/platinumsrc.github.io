@@ -93,7 +93,7 @@ h6 {font-size: 1rem;}
     animation-duration: 3s;
 }
 
-code, pre {
+code, pre, textarea {
     cursor: text;
     font-family: hack, courier new, monospace;
     background: var(--code-bg-color);
@@ -115,6 +115,19 @@ pre {
     padding: 0.5em;
     overflow-x: auto;
     word-wrap: break-word;
+}
+textarea {
+    font-size: 1em;
+    color: var(--font-color);
+    width: calc(100% - 1em);
+    margin: 0.3em 0;
+    padding: 0.5em;
+    border: 0;
+}
+
+canvas {
+    border-radius: 0.275em;
+    border: 0 none;
 }
 
 @media screen {
@@ -204,13 +217,14 @@ collapcontent {
     display: block;
     margin-left: 1.5rem;
 }
-collapcontent.hidden {
-    display: none;
-}
 
 .mdbr {
     margin-top: 0.65rem;
     margin-bottom: 0.45rem;
+}
+
+.hidden {
+    display: none !important;
 }
 
 #_header, #_footer, #_sidebar {

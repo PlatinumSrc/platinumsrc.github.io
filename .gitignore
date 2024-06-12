@@ -4,7 +4,6 @@
 !/news/
 !/news/**
 !/online-demo/
-!/online-demo/**
 !/_includes/
 !/_includes/**
 !/_layouts/
@@ -17,7 +16,8 @@
 !/favicon.ico
 !/_config.yml
 .**
-!/online-demo/.**
+!/online-demo/.emscr_shell.html
+!/online-demo/.make.sh
 !/.github/
 !/.github/**
 !/.gitignore
