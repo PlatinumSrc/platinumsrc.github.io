@@ -23,6 +23,21 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v14
+      - name: Build PlatinumSrc online demo
+        run: |
+          cd online-demo
+          git clone --depth 1 https://github.com/PlatinumSrc/PlatinumSrc
+          cd PlatinumSrc
+          git clone --depth 1 https://github.com/PQCraft/H-74
+          ln -s H-74/games games
+          ln -s H-74/mods mods
+          mkdir games/test
+          wget 'https://github.com/PQCraft/PQCraft/raw/master/test_model.p3m' -O games/test/test_model.p3m
+          ../.make.sh -j$(nproc)
+          cd ..
+          rm -rf PlatinumSrc
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:

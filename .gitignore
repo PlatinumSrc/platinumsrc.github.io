@@ -1,6 +1,10 @@
 *
 !/docs/
 !/docs/**
+!/news/
+!/news/**
+!/online-demo/
+!/online-demo/**
 !/_includes/
 !/_includes/**
 !/_layouts/
@@ -13,6 +17,7 @@
 !/favicon.ico
 !/_config.yml
 .**
+!/online-demo/.**
 !/.github/
 !/.github/**
 !/.gitignore
