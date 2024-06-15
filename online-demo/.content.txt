@@ -1,0 +1,5 @@
+# Optional content
+url https://github.com/PQCraft/PQCraft/raw/master/test_model.p3m games/test/test_model.p3m
+
+# Games
+git https://github.com/PQCraft/H-74 --depth 1

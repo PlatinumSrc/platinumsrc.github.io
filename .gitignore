@@ -16,8 +16,10 @@
 !/favicon.ico
 !/_config.yml
 .**
+!/online-demo/.content.txt
 !/online-demo/.emscr_shell.html
 !/online-demo/.make.sh
+!/online-demo/.mkdemo.sh
 !/.github/
 !/.github/**
 !/.gitignore
