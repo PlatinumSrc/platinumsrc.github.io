@@ -31,7 +31,7 @@ while read -r l; do
     [ "$(printf '%.1s' "$l")" == '#' ] || eval "download $l"
 done < ../.content.txt
 
-printf '%s\n' 'defaultgame=h74' 'mods=hqsounds' 'onlinedemo=true' > internal/config.cfg
+printf '%s\n' 'defaultgame=h74' 'mods=hqsounds' 'onlinedemo=true' '[Renderer]' 'gl.fastclear=false' > internal/config.cfg
 
 ../.make.sh -j$(nproc)
 
