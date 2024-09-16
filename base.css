@@ -51,9 +51,10 @@ layout: none
 html {
     display: flex;
     min-height: 100%;
+    background-color: var(--bg-color) !important;
 }
 body {
-    display: flex;
+    display: flex !important;
     flex-flow: row;
     padding: 0 calc(20vw - 160px);
     margin: 0.5em;
