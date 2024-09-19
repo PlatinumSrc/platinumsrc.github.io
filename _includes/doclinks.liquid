@@ -1,0 +1,23 @@
+{% assign doclinks_output = "" -%}
+{%- assign _lim = 256 -%}
+{%- assign _ls = site.pages -%}
+{%- assign _starturl = include.dir | prepend: "/docs/" | append: "/" -%}
+{%- for p in _ls -%}
+    {%- if p.url == _starturl -%}
+        {%- assign _c = p.start -%}
+        {%- break -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- for i in (1.._lim) -%}
+    {%- assign _url = _starturl | append: _c | append: "/" -%}
+    {%- for p in _ls -%}
+        {%- if p.url == _url -%}
+            {%- assign doclinks_output = doclinks_output | append: '<a href="' | append: p.url | append: '">' | append: p.title | append: '</a><br>' -%}
+            {%- assign _c = p.next -%}
+            {%- break -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {%- if _c == nil -%}
+        {%- break -%}
+    {%- endif -%}
+{%- endfor %}

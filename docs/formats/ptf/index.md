@@ -1,5 +1,6 @@
 ---
-title: PTF (Textures)
+title: PTF
+description: textures
 section: File formats
 next: ptm
 ---

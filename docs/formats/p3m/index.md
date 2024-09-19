@@ -1,5 +1,6 @@
 ---
-title: P3M (3D models)
+title: P3M
+description: 3D models
 section: File formats
 next: ptf
 ---

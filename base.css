@@ -2,10 +2,12 @@
 layout: none
 ---
 
+{%- include globals.liquid -%}
+
 :root {
     /* theme */
 
-    --bg-color: #061034;
+    --bg-color: #{{ bg-color }};
     --panel-bg-color: #20305f;
     --panel-border-color: #6d8dcb;
     --code-bg-color: #3b4668;
@@ -36,10 +38,10 @@ layout: none
 
     /* layout */
 
-    {% assign sidebar_maxwidth = "180px" %}
+    {% assign sidebar_maxwidth = "180px" -%}
     --sidebar-maxwidth: {{ sidebar_maxwidth }};
     --sidebar-width: max(10rem, min(16vw, var(--sidebar-maxwidth)));
-    {% assign sep_maxsize = "16px" %}
+    {% assign sep_maxsize = "16px" -%}
     --hsep-size: max(6px, min(calc(10vw - 74px), {{ sep_maxsize }}));
     --vsep-size: max(4px, min(calc(10vw - 74px), {{ sep_maxsize }}));
 
@@ -69,6 +71,13 @@ a {
 a:hover {
     text-decoration: underline;
     color: var(--hover-link-color);
+}
+a.secret {
+    text-decoration: none;
+    color: var(--font-color);
+}
+a.secret:hover {
+    text-decoration: underline;
 }
 
 p {
@@ -132,7 +141,7 @@ canvas {
 }
 
 @media screen {
-    {% assign tmp = "pre.highlight > code > span" %}
+    {% assign tmp = "pre.highlight > code > span" -%}
     {{ tmp }}.o {color: var(--code-op-color);}
     {{ tmp }}.k {color: var(--code-kw-color); font-weight: bold;}
     {{ tmp }}.kt {color: var(--code-type-color); font-weight: bold;}
@@ -143,7 +152,7 @@ canvas {
     {{ tmp }}:is(.c1, .cm) {color: var(--code-comment-color);}
     {{ tmp }}.cp {color: var(--code-preproc-color); font-weight: bold;}
     {{ tmp }}.cpf {color: var(--code-preprocfile-color); font-weight: normal;}
-    {% assign tmp = nil %}
+    {%- assign tmp = nil %}
 }
 
 hr {

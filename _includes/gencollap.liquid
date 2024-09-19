@@ -1,0 +1,15 @@
+<collapsible>
+{%- assign tmp = include.content | strip -%}
+{%- if tmp != "" -%}
+    <collaptext>
+    {%- if include.link -%}
+        <a href="{{ include.link }}">{{ include.header }}</a>
+    {%- else -%}
+        {{- include.header -}}
+    {%- endif -%}
+    </collaptext><br>
+    <collapcontent>{{ include.content }}</collapcontent>
+{%- else -%}
+    <collaptext class="collapsible-empty">{{ include.header }}</collaptext><br>
+{%- endif -%}
+</collapsible>

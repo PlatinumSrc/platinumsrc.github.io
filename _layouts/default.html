@@ -1,17 +1,19 @@
-{% if page.section == nil %}
-{% assign pagetitle = "PlatinumSrc - " | append: page.title %}
-{% else %}
-{% assign pagetitle = "PlatinumSrc: " | append: page.section | append: " - " | append: page.title %}
-{% endif %}
+{%- include globals.liquid -%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{{ pagetitle }}</title>
+        <title>
+        {%- if page.section == nil -%}
+            {{- "PlatinumSrc - " | append: page.title -}}
+        {%- else -%}
+            {{- "PlatinumSrc: " | append: page.section | append: " - " | append: page.title -}}
+        {%- endif -%}
+        </title>
         <link rel="icon" href="/icon.png"></link>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
-            html {background-color: #061034;}
+            html {background-color: #{{ bg-color }};}
             body {display: none;}
         </style>
         <link rel="stylesheet" href="/base.css">
@@ -23,17 +25,17 @@
     </head>
     <body>
         <div id="_sidebar">
-{% include sidebar.html %}
+            {%- include sidebar.html -%}
         </div>
         <div id="_main">
             <div id="_header">
-{% include header.html %}
+                {%- include header.html -%}
             </div>
             <div id="_content">
-{{ content }}
+                {{- content -}}
             </div>
             <div id="_footer">
-{% include footer.html %}
+                {%- include footer.html -%}
             </div>
         </div>
     </body>
@@ -88,16 +90,13 @@
                                 contentlist[n].classList.remove("hidden");
                             }
                         }
+                        return false;
                     };
                 }
                 if (ccache[i] != '1') {
                     for (e of elist2) {
                         e.classList.add("hidden");
                     }
-                }
-            } else {
-                for (e of elist1) {
-                    e.classList.add("collapsible-empty");
                 }
             }
         }
