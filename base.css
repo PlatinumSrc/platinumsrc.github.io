@@ -38,13 +38,7 @@ layout: none
 
     /* layout */
 
-    {% assign sidebar_maxwidth = "180px" -%}
-    --sidebar-maxwidth: {{ sidebar_maxwidth }};
-    --sidebar-width: max(10rem, min(16vw, var(--sidebar-maxwidth)));
-    {% assign sep_maxsize = "16px" -%}
-    --hsep-size: max(6px, min(calc(10vw - 74px), {{ sep_maxsize }}));
-    --vsep-size: max(4px, min(calc(10vw - 74px), {{ sep_maxsize }}));
-
+    font-size: 12pt;
     font-size: max(6pt, min(1.5vw, 12pt));
     line-height: 135%;
     cursor: default;
@@ -58,7 +52,7 @@ html {
 body {
     display: flex !important;
     flex-flow: row;
-    padding: 0 calc(20vw - 160px);
+    padding: 0 calc(20vw - 180px);
     margin: 0.5em;
     min-height: 100%;
     flex: 1 1 auto;
@@ -253,14 +247,14 @@ collapcontent {
     padding: 0.2rem 0.5rem 0.25rem 0.5rem;
 }
 #_header {
-    margin-bottom: var(--hsep-size);
+    margin-bottom: 0.5rem;
 }
 #_footer {
-    margin-top: var(--hsep-size);
+    margin-top: 0.5rem;
 }
 #_content {
     flex: 1 1 auto;
-    padding: 2rem 2.75rem 2.25rem 2.75rem;
+    padding: 2.25rem 3rem 2.25rem 3rem;
 }
 #_content > :is(h1, h2, h3, h4, h5, h6):first-child {
     margin-top: 0;
@@ -270,20 +264,15 @@ collapcontent {
 }
 #_sidebar {
     padding: 0.5rem;
-    margin-right: {{ sep_maxsize }};
-    min-width: var(--sidebar-width);
-    max-width: var(--sidebar-width);
-}
-@media (width >= 0px) {
-    #_sidebar {
-        margin-right: var(--vsep-size);
-    }
+    margin-right: 0.5rem;
+    width: 10rem;
+    width: calc(10rem + 1vw);
 }
 .sidebarimg {
-    width: var(--sidebar-width);
-    height: var(--sidebar-width);
-    max-width: {{ sidebar_maxwidth }};
-    max-height: {{ sidebar_maxwidth }};
+    width: 10rem;
+    width: calc(10rem + 1vw);
+    height: 10rem;
+    height: calc(10rem + 1vw);
 }
 @media print {
     code {
