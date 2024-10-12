@@ -39,8 +39,8 @@ layout: none
     /* layout */
 
     font-size: 12pt;
-    font-size: max(6pt, min(1.5vw, 12pt));
-    line-height: 135%;
+    font-size: max(10pt, min(1.0vw, 12pt));
+    line-height: 140%;
     cursor: default;
 }
 
@@ -52,8 +52,8 @@ html {
 body {
     display: flex !important;
     flex-flow: row;
-    padding: 0 calc(20vw - 180px);
-    margin: 0.5em;
+    padding: 0 calc(50vw - 45rem);
+    margin: 0.5rem;
     min-height: 100%;
     flex: 1 1 auto;
 }
@@ -254,7 +254,7 @@ collapcontent {
 }
 #_content {
     flex: 1 1 auto;
-    padding: 2.25rem 3rem 2.25rem 3rem;
+    padding: 3rem 3.25rem 3rem 3.25rem;
 }
 #_content > :is(h1, h2, h3, h4, h5, h6):first-child {
     margin-top: 0;
