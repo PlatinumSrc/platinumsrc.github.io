@@ -7,7 +7,7 @@ next: ptm
 
 ## Format
 
-- Current revision is `0`
+- Current version is `0.0`
 - File extension is `.ptf`
 - Data is little endian
 - LZ4 is used for compression
@@ -24,16 +24,16 @@ next: ptm
 | Type | Value | Description
 | -
 | `char[3]` | `{'P', 'T', 'F'}` | Header magic
-| `u8` | `0` | Revision
+| `u8` | `0` | Major version
 | `u8` | [Header info byte](#header-info-byte) | Flags and resolution
 
 ##### Header info byte
 
-| Bit | Value | Description
+| Bit \(LSB first\) | Value | Description
 | -
-| 1-3 | `0` | Unused
-| 4 | -- | Has alpha
-| 5-8 | -- | Resolution
+| 1-4 | -- | Resolution
+| 5 | -- | Has alpha
+| 6-8 | `0` | Reserved
 
 ---
 

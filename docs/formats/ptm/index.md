@@ -7,7 +7,7 @@ section: File formats
 
 ## Format
 
-- Current revision is `0`
+- Current version is `0.0`
 - File extension is `.ptm`
 - Data is little endian
 
@@ -21,7 +21,7 @@ section: File formats
 | Type | Value | Description
 | -
 | `char[3]` | `{'P', 'T', 'M'}` | Header magic
-| `u8` | `0` | Revision
+| `u8` | `0` | Major version
 | `char[1...]` | `{..., 0}` | Song name
 | `char[1...]` | `{..., 0}` | Author
 | `char[1...]` | `{..., 0}` | Comments

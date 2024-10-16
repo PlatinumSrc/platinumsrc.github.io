@@ -7,34 +7,34 @@ layout: none
 :root {
     /* theme */
 
-    --bg-color: #{{ bg-color }};
-    --panel-bg-color: #20305f;
-    --panel-border-color: #6d8dcb;
-    --code-bg-color: #3b4668;
-    --table-bg-color: #000822;
-    --thead-bg-color: #20305f;
-    --border-color: #7b8dc3;
-    --font-color: #ffffff;
-    --inactive-color: #bbbbbb;
-    --link-color: #fff07a;
-    --hover-link-color: #fffcee;
-    --dead-link-color: #bbbbbb;
-    --hover-dead-link-color: #d9d9d9;
+    {%- assign panel-bg-color = "#20305f" -%}
+    {%- assign panel-border-color = "#6d8dcb" -%}
+    {%- assign panel-border-color = "#6d8dcb" -%}
+    {%- assign code-bg-color = "#3b4668" -%}
+    {%- assign table-bg-color = "#000822" -%}
+    {%- assign thead-bg-color = "#20305f" -%}
+    {%- assign border-color = "#7b8dc3" -%}
+    {%- assign font-color = "#ffffff" -%}
+    {%- assign inactive-color = "#bbbbbb" -%}
+    {%- assign link-color = "#fff07a" -%}
+    {%- assign hover-link-color = "#fffcee" -%}
+    {%- assign dead-link-color = "#bbbbbb" -%}
+    {%- assign hover-dead-link-color = "#d9d9d9" -%}
 
-    --code-op-color: #fff286;
-    --code-kw-color: #ff8f34;
-    --code-type-color: #4ca8ff;
-    --code-num-color: #ff4b4b;
-    --code-str-color: #64ff64;
-    --code-esc-color: #a5a9a5;
-    --code-char-color: #f185ff;
-    --code-comment-color: #bde0ff;
-    --code-preproc-color: #2bffff;
-    --code-preprocfile-color: #d9ffff;
+    {%- assign code-op-color = "#fff286" -%}
+    {%- assign code-kw-color = "#ff8f34" -%}
+    {%- assign code-type-color = "#4ca8ff" -%}
+    {%- assign code-num-color = "#ff4b4b" -%}
+    {%- assign code-str-color = "#64ff64" -%}
+    {%- assign code-esc-color = "#a5a9a5" -%}
+    {%- assign code-char-color = "#f185ff" -%}
+    {%- assign code-comment-color = "#bde0ff" -%}
+    {%- assign code-preproc-color = "#2bffff" -%}
+    {%- assign code-preprocfile-color = "#d9ffff" %}
 
     font-family: arial, helvetica, sans-serif;
-    color: var(--font-color);
-    background-color: var(--bg-color);
+    color: {{ font-color }};
+    background-color: {{ bg-color }};
 
     /* layout */
 
@@ -47,7 +47,7 @@ layout: none
 html {
     display: flex;
     min-height: 100%;
-    background-color: var(--bg-color) !important;
+    background-color: {{ bg-color }} !important;
 }
 body {
     display: flex !important;
@@ -60,15 +60,15 @@ body {
 
 a {
     text-decoration: none;
-    color: var(--link-color);
+    color: {{ link-color }};
 }
 a:hover {
     text-decoration: underline;
-    color: var(--hover-link-color);
+    color: {{ hover-link-color }};
 }
 a.secret {
     text-decoration: none;
-    color: var(--font-color);
+    color: {{ font-color }};
 }
 a.secret:hover {
     text-decoration: underline;
@@ -100,11 +100,11 @@ h6 {font-size: 1rem;}
 code, pre, textarea {
     cursor: text;
     font-family: hack, courier new, monospace;
-    background: var(--code-bg-color);
+    background: {{ code-bg-color }};
     border-radius: 0.275em;
 }
 code {
-    border: 0 solid var(--code-bg-color);
+    border: 0 solid {{ code-bg-color }};
     border-width: 0 0.2em;
 }
 pre > code {
@@ -122,7 +122,7 @@ pre {
 }
 textarea {
     font-size: 1em;
-    color: var(--font-color);
+    color: {{ font-color }};
     width: calc(100% - 1em);
     margin: 0.3em 0;
     padding: 0.5em;
@@ -136,22 +136,22 @@ canvas {
 
 @media screen {
     {% assign tmp = "pre.highlight > code > span" -%}
-    {{ tmp }}.o {color: var(--code-op-color);}
-    {{ tmp }}.k {color: var(--code-kw-color); font-weight: bold;}
-    {{ tmp }}.kt {color: var(--code-type-color); font-weight: bold;}
-    {{ tmp }}:is(.mi, .mo, .mh, .mb) {color: var(--code-num-color);}
-    {{ tmp }}.s {color: var(--code-str-color);}
-    {{ tmp }}.sc {color: var(--code-char-color);}
-    {{ tmp }}.se {color: var(--code-esc-color);}
-    {{ tmp }}:is(.c1, .cm) {color: var(--code-comment-color);}
-    {{ tmp }}.cp {color: var(--code-preproc-color); font-weight: bold;}
-    {{ tmp }}.cpf {color: var(--code-preprocfile-color); font-weight: normal;}
+    {{ tmp }}.o {color: {{ code-op-color }};}
+    {{ tmp }}.k {color: {{ code-kw-color }}; font-weight: bold;}
+    {{ tmp }}.kt {color: {{ code-type-color }}; font-weight: bold;}
+    {{ tmp }}:is(.mi, .mo, .mh, .mb) {color: {{ code-num-color }};}
+    {{ tmp }}.s {color: {{ code-str-color }};}
+    {{ tmp }}.sc {color: {{ code-char-color }};}
+    {{ tmp }}.se {color: {{ code-esc-color }};}
+    {{ tmp }}:is(.c1, .cm) {color: {{ code-comment-color }};}
+    {{ tmp }}.cp {color: {{ code-preproc-color }}; font-weight: bold;}
+    {{ tmp }}.cpf {color: {{ code-preprocfile-color }}; font-weight: normal;}
     {%- assign tmp = nil %}
 }
 
 hr {
     border: none;
-    border-top: 0.15rem solid var(--border-color);
+    border-top: 0.15rem solid {{ border-color }};
     margin-top: 1.25em;
     margin-bottom: 1.25em;
 }
@@ -164,16 +164,16 @@ hr.semi {
 }
 
 table {
-    background: var(--table-bg-color);
-    border: 0.15rem solid var(--border-color);
+    background: {{ table-bg-color }};
+    border: 0.15rem solid {{ border-color }};
     border-radius: 0.275em;
     border-spacing: 0;
 }
 thead {
-    background: var(--thead-bg-color);
+    background: {{ thead-bg-color }};
 }
 tr {
-    border-top: 0.15rem solid var(--border-color);
+    border-top: 0.15rem solid {{ border-color }};
 }
 th, td {
     padding: 0.25rem 0.3rem;
@@ -182,7 +182,7 @@ td {
     border: inherit;
 }
 th:not(:first-child), td:not(:first-child) {
-    border-left: 0.15rem dotted var(--border-color);
+    border-left: 0.15rem dotted {{ border-color }};
 }
 td:last-child {
     border-right: none;
@@ -192,30 +192,36 @@ ul, ol {
     padding-left: 2.5em;
 }
 
+blockquote {
+    margin: 0;
+    padding: 0 0.8em;
+    border-left: 0.2em solid {{ border-color }};
+}
+
 center {
     text-align: center;
 }
 
 inactive {
-    color: var(--inactive-color);
+    color: {{ inactive-color }};
 }
 
 .collapsible-link {
     cursor: pointer;
     text-decoration: none;
-    color: var(--link-color);
+    color: {{ link-color }};
 }
 .collapsible-link:hover {
     text-decoration: underline;
-    color: var(--hover-link-color);
+    color: {{ hover-link-color }};
 }
 .collapsible-empty {
     text-decoration: none;
-    color: var(--dead-link-color);
+    color: {{ dead-link-color }};
 }
 .collapsible-empty:hover {
     text-decoration: underline;
-    color: var(--hover-dead-link-color);
+    color: {{ hover-dead-link-color }};
 }
 collapcontent {
     display: block;
@@ -232,8 +238,8 @@ collapcontent {
 }
 
 #_header, #_footer, #_sidebar {
-    background: var(--panel-bg-color);
-    border: 0.15rem solid var(--panel-border-color);
+    background: {{ panel-bg-color }};
+    border: 0.15rem solid {{ panel-border-color }};
     border-radius: 0.35rem;
 }
 #_main {
@@ -276,7 +282,7 @@ collapcontent {
 }
 @media print {
     code {
-        border: 0.1em solid var(--code-bg-color);
+        border: 0.1em solid {{ code-bg-color }};
         padding: 0 0.2em;
     }
     pre > code {
@@ -284,7 +290,7 @@ collapcontent {
         padding: 0;
     }
     pre {
-        border: 0.1em solid var(--code-bg-color);
+        border: 0.1em solid {{ code-bg-color }};
     }
     * :not(html, body, #_main, #_content, #_content *) {
         display: none !important;
