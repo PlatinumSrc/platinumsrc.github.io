@@ -1,14 +1,15 @@
 {%- include globals.liquid -%}
+{%- capture title -%}
+    {%- if page.section -%}
+        {{- "PlatinumSrc: " | append: page.section | append: " - " | append: page.title -}}
+    {%- else -%}
+        {{- "PlatinumSrc - " | append: page.title -}}
+    {%- endif -%}
+{%- endcapture -%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>
-        {%- if page.section == nil -%}
-            {{- "PlatinumSrc - " | append: page.title -}}
-        {%- else -%}
-            {{- "PlatinumSrc: " | append: page.section | append: " - " | append: page.title -}}
-        {%- endif -%}
-        </title>
+        <title>{{ title }}</title>
         <link rel="icon" href="/icon.png"></link>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +19,7 @@
         </style>
         <link rel="stylesheet" href="/base.css">
         <meta name="description" content="PlatinumSrc">
-        <meta property="og:title" content="PlatinumSrc">
+        <meta property="og:title" content="{{ title }}">
         <meta property="og:description" content="PlatinumSrc GitHub Page">
         <meta property="og:image" content="/mbedicon.png">
         <meta name="theme-color" content="#5f8bc3">
