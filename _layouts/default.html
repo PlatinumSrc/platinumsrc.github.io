@@ -7,7 +7,7 @@
     {%- endif -%}
 {%- endcapture -%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" bgcolor="{{ bg-color }}" style="background-color: {{ bg-color }};">
     <head>
         <title>{{ title }}</title>
         <link rel="icon" href="/icon.png"></link>
@@ -18,14 +18,10 @@
         <meta property="og:description" content="PlatinumSrc GitHub Page">
         <meta property="og:image" content="/mbedicon.png">
         <meta name="theme-color" content="#5f8bc3">
-        <style>
-            html {background-color: {{ bg-color }};}
-            body {display: none;}
-        </style>
         <link rel="stylesheet" href="/base.css">
-        <script type="module" src="/base.js"></script>
+        <script src="/base.js"></script>
     </head>
-    <body>
+    <body bgcolor="{{ bg-color }}" style="display: none; background-color: {{ bg-color }};">
         <div id="_sidebar">
             {%- include sidebar.html -%}
         </div>
@@ -41,4 +37,5 @@
             </div>
         </div>
     </body>
+    <script >setup();</script>
 </html>
