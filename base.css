@@ -272,13 +272,10 @@ collapcontent {
     padding: 0.5rem;
     margin-right: 0.5rem;
     width: 10rem;
-    width: calc(10rem + 1vw);
 }
 .sidebarimg {
     width: 10rem;
-    width: calc(10rem + 1vw);
     height: 10rem;
-    height: calc(10rem + 1vw);
 }
 @media print {
     code {
