@@ -103,7 +103,12 @@ next: ptf
 | -
 | `u16` | Vertices to skip
 | `u16` | Weight count \(0 if last range\)
-| `u8[0...]` | Weights \(`round(W * 256) - 1` where `W` is a weight in \[0.0, 1.0\]\)
+| `u8[0...]` | Weights
+
+> Note:
+> Weights in Blender are stored as floats from 0.0 to 1.0. The P3M exporter multiplies each weight by 256 and rounds it.
+> Weights with a value of 0 are omitted and the remaining non-zero weights are decremented by 1.
+> To read in weights, add 1, then divide by 256.0.
 
 ---
 
@@ -111,11 +116,15 @@ next: ptf
 
 | Type | Value | Description
 | -
-| `u8` | [Material render mode](#material-render-mode) | Transparency render mode
+| `u8` | [Material render mode](#material-render-mode) | Render mode
 | `u8` | -- | Texture index \(255 for none\)
 | `u8[4]` | -- | RGBA color
 | `u8[3]` | -- | RGB emission
 | `u8` | -- | Shading
+
+> Note:
+> The 'shading' value determines how directional light is.
+> The lower the value, the more light is evenly distributed.
 
 ##### Material render mode
 
@@ -205,6 +214,9 @@ next: ptf
 | `P3M_ACTPARTVIS_WHITE` | 2
 | `P3M_ACTPARTVIS_BLACK` | 3
 
+> Note:
+> The modes with "DEFAULT" in the name use the part visibility mask instead of starting with all or none.
+
 #### Action data
 
 | Type | Value | Description
@@ -223,7 +235,8 @@ next: ptf
 | `float[0...][3]` | -- | Rotation keyframes
 | `float[0...][3]` | -- | Scale keyframes
 
-> Note: A keyframe's interpolation mode is used to interpolate from the previous keyframe.
+> Note:
+> A keyframe's interpolation mode is used to interpolate from the previous keyframe.
 
 ##### Action interpolation mode
 

@@ -8,12 +8,13 @@
 !/_includes/**
 !/_layouts/
 !/_layouts/**
-!/base.css
 !/404.html
+!/base.css
+!/base.js
+!/favicon.ico
 !/index.html
 !/icon.png
 !/mbedicon.png
-!/favicon.ico
 !/_config.yml
 .**
 !/online-demo/.content.txt

@@ -31,6 +31,7 @@ layout: none
     {%- assign code-comment-color = "#bde0ff" -%}
     {%- assign code-preproc-color = "#2bffff" -%}
     {%- assign code-preprocfile-color = "#d9ffff" %}
+    {%- assign code-error-bgcolor = "#ff5555" %}
 
     font-family: arial, helvetica, sans-serif;
     color: {{ font-color }};
@@ -38,8 +39,6 @@ layout: none
 
     /* layout */
 
-    font-size: 12pt;
-    font-size: max(10pt, min(1.0vw, 12pt));
     line-height: 140%;
     cursor: default;
 }
@@ -135,19 +134,24 @@ canvas {
 }
 
 @media screen {
-    {% assign tmp = "pre.highlight > code > span" -%}
-    {{ tmp }}.o {color: {{ code-op-color }};}
-    {{ tmp }}.k {color: {{ code-kw-color }}; font-weight: bold;}
-    {{ tmp }}.kt {color: {{ code-type-color }}; font-weight: bold;}
-    {{ tmp }}:is(.mi, .mo, .mh, .mb) {color: {{ code-num-color }};}
-    {{ tmp }}.s {color: {{ code-str-color }};}
-    {{ tmp }}.sc {color: {{ code-char-color }};}
-    {{ tmp }}.se {color: {{ code-esc-color }};}
-    {{ tmp }}:is(.c1, .cm) {color: {{ code-comment-color }};}
-    {{ tmp }}.cp {color: {{ code-preproc-color }}; font-weight: bold;}
-    {{ tmp }}.cpf {color: {{ code-preprocfile-color }}; font-weight: normal;}
-    {%- assign tmp = nil %}
-}
+    .highlight .o, .highlight .ow {color: {{ code-op-color }};}
+    .highlight .k {color: {{ code-kw-color }}; font-weight: bold;}
+    .highlight .kt {color: {{ code-type-color }}; font-weight: bold;}
+    .highlight .m, .highlight .mb, .highlight .mf,
+        .highlight .mh, .highlight .mi, .highlight .li,
+        .highlight .mo, .highlight .mx {color: {{ code-num-color }};}
+    .highlight .s, .highlight .sa, .highlight .sb,
+        .highlight .dl, .highlight .sd, .highlight .s2,
+        .highlight .sh, .highlight .si, .highlight .sx,
+        .highlight .sr, .highlight .s1, .highlight .ss {color: {{ code-str-color }};}
+    .highlight .sc {color: {{ code-char-color }};}
+    .highlight .se {color: {{ code-esc-color }};}
+    .highlight .c, .highlight .cd, .highlight .cm,
+        .highlight .c1, .highlight .cs {color: {{ code-comment-color }};}
+    .highlight .ch {color: {{ code-comment-color }}; font-weight: bold;}
+    .highlight .cp {color: {{ code-preproc-color }}; font-weight: bold;}
+    .highlight .cpf {color: {{ code-preprocfile-color }}; font-weight: normal;}
+    .highlight .err {color: {{ font-color }}; background-color: {{ code-error-bgcolor }};}}
 
 hr {
     border: none;
@@ -240,7 +244,7 @@ collapcontent {
 #_header, #_footer, #_sidebar {
     background: {{ panel-bg-color }};
     border: 0.15rem solid {{ panel-border-color }};
-    border-radius: 0.35rem;
+    border-radius: 0.225rem;
 }
 #_main {
     display: flex;

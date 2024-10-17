@@ -43,13 +43,13 @@ next: ptm
 | -
 | Compressed <code>{"<a href="#rgb-pixel">RGB pixel</a>"|"<a href="#rgba-pixel">RGBA pixel</a>"}[0...]</code> | Compressed pixels
 
-##### RGB pixel
+#### RGB pixel
 
 | Type | Description
 | -
 | `u8[3]` | RGB
 
-##### RGBA pixel
+#### RGBA pixel
 
 | Type | Description
 | -
