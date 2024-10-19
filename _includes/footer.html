@@ -1,9 +1,15 @@
-<div style="display: flex; flex-flow: row;">
-    <div style="flex: 1 1 auto;">
-        {{- site.domain -}}
-    </div>
-    <div style="min-width: var(--vsep-size);"></div>
-    <div>
-        <inactive>Generated {{ site.time }}</inactive>
-    </div>
-</div>
+<table class="container">
+    <tbody class="container">
+        <tr class="container">
+            <td class="container" style="">
+                {{- site.domain -}}
+            </td>
+            <td class="container">
+                <div style="width: 0.5em;"></div>
+            </td>
+            <td class="container inactive" style="width: 100%; text-align: right;">
+                Generated {{ site.time }}
+            </td>
+        </tr>
+    </tbody>
+</table>

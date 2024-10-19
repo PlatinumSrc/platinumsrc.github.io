@@ -105,8 +105,10 @@ next: ptf
 | `u16` | Weight count \(0 if last range\)
 | `u8[0...]` | Weights
 
-> Note:
-> Weights in Blender are stored as floats from 0.0 to 1.0. The P3M exporter multiplies each weight by 256 and rounds it.
+{:.note}
+> **Note:**
+> Weights in Blender are stored as floats from 0.0 to 1.0.
+> The P3M exporter multiplies each weight by 256 and rounds it.
 > Weights with a value of 0 are omitted and the remaining non-zero weights are decremented by 1.
 > To read in weights, add 1, then divide by 256.0.
 
@@ -122,7 +124,8 @@ next: ptf
 | `u8[3]` | -- | RGB emission
 | `u8` | -- | Shading
 
-> Note:
+{:.note}
+> **Note:**
 > The 'shading' value determines how directional light is.
 > The lower the value, the more light is evenly distributed.
 
@@ -214,7 +217,8 @@ next: ptf
 | `P3M_ACTPARTVIS_WHITE` | 2
 | `P3M_ACTPARTVIS_BLACK` | 3
 
-> Note:
+{:.note}
+> **Note:**
 > The modes with "DEFAULT" in the name use the part visibility mask instead of starting with all or none.
 
 #### Action data
@@ -235,8 +239,12 @@ next: ptf
 | `float[0...][3]` | -- | Rotation keyframes
 | `float[0...][3]` | -- | Scale keyframes
 
-> Note:
-> A keyframe's interpolation mode is used to interpolate from the previous keyframe.
+{:.note}
+> **Note:**
+> In Blender, a keyframe's interpolation type is used to transition from that keyframe to the next.
+> In P3M, a keyframe's interpolation mode is used to transition from the previous keyframe to that keyframe.
+> The P3M exporter will start with the interpolation mode from the last keyframe before the start of the action.
+> If there are no keyframes before the start of the action, the exporter will start with 'LINEAR'.
 
 ##### Action interpolation mode
 

@@ -11,10 +11,12 @@
 !/404.html
 !/base.css
 !/base.js
+!/bg.png
 !/favicon.ico
 !/index.html
 !/icon.png
 !/mbedicon.png
+!/sidebar.png
 !/_config.yml
 .**
 !/online-demo/.content.txt

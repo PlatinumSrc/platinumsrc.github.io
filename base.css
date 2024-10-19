@@ -4,57 +4,48 @@ layout: none
 
 {%- include globals.liquid -%}
 
-:root {
-    /* theme */
+{%- assign panel-bg-color = "#314b78" -%}
+{%- assign panel-border-br-color = "#38578e" -%}
+{%- assign panel-border-dim-color = "#1c3057" -%}
+{%- assign code-bg-color = "#3b4668" -%}
+{%- assign code-border-br-color = "#4a5881" -%}
+{%- assign code-border-dim-color = "#2d364f" -%}
+{%- assign table-bg-color = "#131626" -%}
+{%- assign thead-bg-color = "#314b78" -%}
+{%- assign table-border-br-color = "#38578e" -%}
+{%- assign table-border-dim-color = "#1c3057" -%}
+{%- assign border-br-color = "#5f82be" -%}
+{%- assign border-dim-color = "#435d86" -%}
+{%- assign blockquote-bg-color = "#131626" -%}
+{%- assign font-color = "#ffffff" -%}
+{%- assign inactive-color = "#bbbbbb" -%}
+{%- assign link-color = "#fff07a" -%}
+{%- assign hover-link-color = "#fffcee" -%}
+{%- assign dead-link-color = "#bbbbbb" -%}
+{%- assign hover-dead-link-color = "#d9d9d9" -%}
 
-    {%- assign panel-bg-color = "#20305f" -%}
-    {%- assign panel-border-color = "#6d8dcb" -%}
-    {%- assign panel-border-color = "#6d8dcb" -%}
-    {%- assign code-bg-color = "#3b4668" -%}
-    {%- assign table-bg-color = "#000822" -%}
-    {%- assign thead-bg-color = "#20305f" -%}
-    {%- assign border-color = "#7b8dc3" -%}
-    {%- assign font-color = "#ffffff" -%}
-    {%- assign inactive-color = "#bbbbbb" -%}
-    {%- assign link-color = "#fff07a" -%}
-    {%- assign hover-link-color = "#fffcee" -%}
-    {%- assign dead-link-color = "#bbbbbb" -%}
-    {%- assign hover-dead-link-color = "#d9d9d9" -%}
-
-    {%- assign code-op-color = "#fff286" -%}
-    {%- assign code-kw-color = "#ff8f34" -%}
-    {%- assign code-type-color = "#4ca8ff" -%}
-    {%- assign code-num-color = "#ff4b4b" -%}
-    {%- assign code-str-color = "#64ff64" -%}
-    {%- assign code-esc-color = "#a5a9a5" -%}
-    {%- assign code-char-color = "#f185ff" -%}
-    {%- assign code-comment-color = "#bde0ff" -%}
-    {%- assign code-preproc-color = "#2bffff" -%}
-    {%- assign code-preprocfile-color = "#d9ffff" %}
-    {%- assign code-error-bgcolor = "#ff5555" %}
-
-    font-family: arial, helvetica, sans-serif;
-    color: {{ font-color }};
-    background-color: {{ bg-color }};
-
-    /* layout */
-
-    line-height: 140%;
-    cursor: default;
-}
+{%- assign code-op-color = "#fff286" -%}
+{%- assign code-kw-color = "#ff8f34" -%}
+{%- assign code-type-color = "#4ca8ff" -%}
+{%- assign code-num-color = "#ff4b4b" -%}
+{%- assign code-str-color = "#64ff64" -%}
+{%- assign code-esc-color = "#a5a9a5" -%}
+{%- assign code-char-color = "#f185ff" -%}
+{%- assign code-comment-color = "#bde0ff" -%}
+{%- assign code-preproc-color = "#2bffff" -%}
+{%- assign code-preprocfile-color = "#d9ffff" %}
+{%- assign code-error-bgcolor = "#ff5555" %}
 
 html {
-    display: flex;
-    min-height: 100%;
-    background-color: {{ bg-color }} !important;
+    font-family: arial, helvetica, sans-serif;
+    color: {{ font-color }};
+    line-height: 140%;
+    cursor: default;
+    margin: 0;
 }
 body {
-    display: flex !important;
-    flex-flow: row;
-    padding: 0 calc(50vw - 45rem);
-    margin: 0.5rem;
-    min-height: 100%;
-    flex: 1 1 auto;
+    margin: 0;
+    padding: 0 calc(50vw - 45em);
 }
 
 a {
@@ -85,13 +76,13 @@ h1, h2, h3, h4, h5, h6 {
     width: fit-content;
     margin: 0.5em 0;
 }
-h1 {font-size: 2rem;}
-h2 {font-size: 1.8rem;}
-h3 {font-size: 1.6rem;}
-h4 {font-size: 1.4rem;}
-h5 {font-size: 1.2rem;}
-h6 {font-size: 1rem;}
-:is(h1, h2, h3, h4, h5, h6):target {
+h1 {font-size: 2em;}
+h2 {font-size: 1.8em;}
+h3 {font-size: 1.6em;}
+h4 {font-size: 1.4em;}
+h5 {font-size: 1.2em;}
+h6 {font-size: 1em;}
+h1:target, h2:target, h3:target, h4:target, h5:target, h6:target {
     animation-name: headerjump;
     animation-duration: 3s;
 }
@@ -99,8 +90,9 @@ h6 {font-size: 1rem;}
 code, pre, textarea {
     cursor: text;
     font-family: hack, courier new, monospace;
+    font-size: 1em;
     background: {{ code-bg-color }};
-    border-radius: 0.275em;
+    border-radius: 0.2em;
 }
 code {
     border: 0 solid {{ code-bg-color }};
@@ -120,17 +112,26 @@ pre {
     word-wrap: break-word;
 }
 textarea {
-    font-size: 1em;
     color: {{ font-color }};
-    width: calc(100% - 1em);
+    width: calc(100% - 1.4em);
     margin: 0.3em 0;
     padding: 0.5em;
     border: 0;
 }
+pre, textarea {
+    border-top: 0.2em solid {{ code-border-dim-color }};
+    border-left: 0.2em solid {{ code-border-dim-color }};
+    border-bottom: 0.2em solid {{ code-border-br-color }};
+    border-right: 0.2em solid {{ code-border-br-color }};
+}
 
+img {
+    border: none;
+    border-radius: 0.2em;
+}
 canvas {
-    border-radius: 0.275em;
-    border: 0 none;
+    border: none;
+    border-radius: 0.2em;
 }
 
 @media screen {
@@ -155,7 +156,7 @@ canvas {
 
 hr {
     border: none;
-    border-top: 0.15rem solid {{ border-color }};
+    border-top: 0.2em groove {{ border-br-color }};
     margin-top: 1.25em;
     margin-bottom: 1.25em;
 }
@@ -164,32 +165,45 @@ hr.slim {
     margin-bottom: 0.5em;
 }
 hr.semi {
-    border-top-style: dotted;
+    border-top: 0.15em solid {{ border-dim-color }};
 }
 
 table {
     background: {{ table-bg-color }};
-    border: 0.15rem solid {{ border-color }};
-    border-radius: 0.275em;
+    border-top: 0.2em solid {{ table-border-br-color }};
+    border-left: 0.2em solid {{ table-border-br-color }};
+    border-bottom: 0.2em solid {{ table-border-dim-color }};
+    border-right: 0.2em solid {{ table-border-dim-color }};
+    border-radius: 0.2em;
     border-spacing: 0;
 }
 thead {
     background: {{ thead-bg-color }};
 }
 tr {
-    border-top: 0.15rem solid {{ border-color }};
+    border-top: 0.2em groove {{ table-border-br-color }};
 }
 th, td {
-    padding: 0.25rem 0.3rem;
+    padding: 0.25em 0.4em;
 }
 td {
     border: inherit;
 }
-th:not(:first-child), td:not(:first-child) {
-    border-left: 0.15rem dotted {{ border-color }};
+th {
+    border-left: 0.2em groove {{ table-border-br-color }};
 }
-td:last-child {
-    border-right: none;
+td {
+    border-left: 0.2em groove {{ table-border-br-color }};
+}
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+table.container, tbody.container, thead.container, tr.container, th.container, td.container {
+    border: none;
+    padding: 0;
+    background: none;
+    vertical-align: top;
 }
 
 ul, ol {
@@ -199,14 +213,30 @@ ul, ol {
 blockquote {
     margin: 0;
     padding: 0 0.8em;
-    border-left: 0.2em solid {{ border-color }};
+    border-left: 0.2em ridge {{ border-br-color }};
+    width: fit-content;
+}
+blockquote.note {
+    border-left-color: #0084ff;
+}
+blockquote.tip {
+    border-left-color: #00ff00;
+}
+blockquote.important {
+    border-left-color: #8f05ff;
+}
+blockquote.warning {
+    border-left-color: #fff700;
+}
+blockquote.caution {
+    border-left-color: #ff0000;
 }
 
 center {
     text-align: center;
 }
 
-inactive {
+.inactive {
     color: {{ inactive-color }};
 }
 
@@ -227,14 +257,14 @@ inactive {
     text-decoration: underline;
     color: {{ hover-dead-link-color }};
 }
-collapcontent {
+.collapcontent {
     display: block;
-    margin-left: 1.5rem;
+    margin-left: 1.5em;
 }
 
 .mdbr {
-    margin-top: 0.65rem;
-    margin-bottom: 0.45rem;
+    margin-top: 0.65em;
+    margin-bottom: 0.45em;
 }
 
 .hidden {
@@ -243,43 +273,31 @@ collapcontent {
 
 #_header, #_footer, #_sidebar {
     background: {{ panel-bg-color }};
-    border: 0.15rem solid {{ panel-border-color }};
-    border-radius: 0.225rem;
-}
-#_main {
-    display: flex;
-    flex: 1 1 auto;
-    flex-flow: column;
+    border-top: 0.2em solid {{ panel-border-br-color }};
+    border-left: 0.2em solid {{ panel-border-br-color }};
+    border-bottom: 0.2em solid {{ panel-border-dim-color }};
+    border-right: 0.2em solid {{ panel-border-dim-color }};
+    border-radius: 0.2em;
 }
 #_header, #_footer {
-    flex: 0 1 auto;
     margin: 0;
-    padding: 0.2rem 0.5rem 0.25rem 0.5rem;
-}
-#_header {
-    margin-bottom: 0.5rem;
-}
-#_footer {
-    margin-top: 0.5rem;
+    padding: 0.2em 0.5em 0.25em 0.5em;
 }
 #_content {
-    flex: 1 1 auto;
-    padding: 3rem 3.25rem 3rem 3.25rem;
+    padding: 3.25em;
 }
-#_content > :is(h1, h2, h3, h4, h5, h6):first-child {
+#_content > *:first-child {
     margin-top: 0;
 }
-#_content > :is(p):last-child {
-    margin-bottom: 0;
-}
 #_sidebar {
-    padding: 0.5rem;
-    margin-right: 0.5rem;
-    width: 10rem;
+    padding: 0.5em;
+}
+.sidebarcontainer {
+    width: 10em;
 }
 .sidebarimg {
-    width: 10rem;
-    height: 10rem;
+    width: 10em;
+    height: 10em;
 }
 @media print {
     code {

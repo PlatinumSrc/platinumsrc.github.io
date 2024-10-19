@@ -1,63 +1,151 @@
 setup = function () {
-    let clist = document.getElementsByTagName("collapsible");
-    let ccache;
-    if (window.sessionStorage) {
+    function repeatstr(s, l) {
+        repeatstr_out = "";
+        for (repeatstr_i = 0; repeatstr_i < l; ++repeatstr_i) {
+            repeatstr_out += s;
+        }
+        delete repeatstr_i;
+        ret = repeatstr_out;
+        delete repeatstr_out;
+        return ret;
+    }
+    function hasclass(e, c) {
+        hasclass_l = e.getAttribute("class");
+        if (hasclass_l === null) return false;
+        hasclass_l = hasclass_l.split(' ');
+        for (hasclass_i = 0; hasclass_i < hasclass_l.length; ++hasclass_i) {
+            if (hasclass_l[hasclass_i] == c) return true;
+        }
+        delete hasclass_l;
+        delete hasclass_i;
+        return false;
+    }
+    function addclass(e, c) {
+        if (e.classList !== undefined) {
+            e.classList.add(c);
+        } else {
+            addclass_c = e.getAttribute("class");
+            if (addclass_c === null) addclass_c = "";
+            else if (addclass_c != "") addclass_c += ' ';
+            addclass_c += c;
+            e.setAttribute("class", addclass_c);
+            delete addclass_c;
+        }
+    }
+    function removeclass(e, c) {
+        if (e.classList !== undefined) {
+            e.classList.remove(c);
+        } else {
+            removeclass_l = e.getAttribute("class");
+            if (removeclass_l === null) {delete removeclass_l; return;}
+            removeclass_l = removeclass_l.split(' ');
+            removeclass_c = "";
+            if (removeclass_l[0] != c) removeclass_c += removeclass_l[0];
+            for (removeclass_i = 1; removeclass_i < removeclass_l.length; ++removeclass_i) {
+                if (removeclass_l[removeclass_i] != c) removeclass_c += ' ' + removeclass_l[removeclass_i];
+            }
+            delete removeclass_l;
+            delete removeclass_i;
+            e.setAttribute("class", removeclass_c);
+            delete removeclass_c;
+        }
+    }
+    function filterbyclass(l, c) {
+        filterbyclass_l = []
+        for (filterbyclass_i = 0; filterbyclass_i < l.length; ++filterbyclass_i) {
+            if (hasclass(l[filterbyclass_i], c)) filterbyclass_l.push(l[filterbyclass_i]);
+        }
+        delete filterbyclass_i;
+        ret = filterbyclass_l;
+        delete filterbyclass_l;
+        return ret;
+    }
+    clist = filterbyclass(document.getElementsByTagName("span"), "collapsible");
+    ccache = null;
+    if (window.sessionStorage !== undefined) {
         ccache = window.sessionStorage.getItem("collapcache");
         if (ccache && ccache.length != clist.length) {
             window.sessionStorage.removeItem("collapcache");
             ccache = null;
         }
     }
-    if (!ccache) ccache = "0".repeat(clist.length);
-    for (let i = 0; i < clist.length; ++i) {
-        let c = clist[i];
+    if (!ccache) ccache = repeatstr("0", clist.length);
+    for (i = 0; i < clist.length; ++i) {
+        c = clist[i];
         c.setAttribute("ccacheno", i);
-        let elist1 = c.getElementsByTagName("collaptext");
-        let elist2 = c.getElementsByTagName("collapcontent");
-        let hascontent = false;
-        for (let e of elist2) {
-            if (e.innerHTML.trim() != "") {
-                hascontent = true;
-                break;
+        elist1 = filterbyclass(c.getElementsByTagName("span"), "collaptext");
+        elist2 = filterbyclass(c.getElementsByTagName("span"), "collapcontent");
+        hascontent = false;
+        if ("".trim !== undefined) {
+            for (j = 0; j < elist2.length; ++j) {
+                if (elist2[j].innerHTML.trim() != "") {
+                    hascontent = true;
+                    break;
+                }
             }
-        }
-        if (hascontent) {
-            for (let j = 0; j < elist1.length; ++j) {
-                let e = elist1[j];
-                e.classList.add("collapsible-link");
-                e.onclick = function() {
-                    function setccache(n, v, c) {
-                        ccache = ccache.substring(0, n) + v + ccache.substring(n + 1);
-                        if (window.sessionStorage && c) {
-                            let tmpccache = window.sessionStorage.getItem("collapcache");
-                            if (!tmpccache) tmpccache = "0".repeat(clist.length);
-                            tmpccache = tmpccache.substring(0, n) + v + ccache.substring(n + 1);
-                            window.sessionStorage.setItem("collapcache", tmpccache);
-                        }
-                    }
-                    let p = this.parentElement;
-                    let ccn = parseInt(p.getAttribute("ccacheno"));
-                    let contentlist = p.getElementsByTagName("collapcontent");
-                    if (ccache[ccn] == 1) {
-                        setccache(ccn, "0", p.getAttribute("nocache") == null);
-                        for (let n = 0; n < contentlist.length; ++n) {
-                            contentlist[n].classList.add("hidden");
-                        }
-                    } else {
-                        setccache(ccn, "1", p.getAttribute("nocache") == null);
-                        for (let n = 0; n < contentlist.length; ++n) {
-                            contentlist[n].classList.remove("hidden");
-                        }
-                    }
-                    return false;
-                };
-            }
-            if (ccache[i] != '1') {
-                for (let e of elist2) {
-                    e.classList.add("hidden");
+        } else {
+            for (j = 0; j < elist2.length; ++j) {
+                if (elist2[j].innerHTML.replace(/\s/g, '') != "") {
+                    hascontent = true;
+                    break;
                 }
             }
         }
+        //console.log("hascontent: ", hascontent);
+        if (hascontent) {
+            for (j = 0; j < elist1.length; ++j) {
+                e = elist1[j];
+                addclass(e, "collapsible-link");
+                e.onclick = function() {
+                    //console.log("CLICK!");
+                    function setccache(n, v, c) {
+                        ccache = ccache.substring(0, n) + v + ccache.substring(n + 1);
+                        if (window.sessionStorage !== undefined && c) {
+                            tmpccache = window.sessionStorage.getItem("collapcache");
+                            if (!tmpccache) tmpccache = repeatstr("0", clist.length);
+                            tmpccache = tmpccache.substring(0, n) + v + ccache.substring(n + 1);
+                            window.sessionStorage.setItem("collapcache", tmpccache);
+                            delete tmpccache;
+                        }
+                    }
+                    p = this.parentElement;
+                    ccn = parseInt(p.getAttribute("ccacheno"));
+                    contentlist = filterbyclass(p.getElementsByTagName("span"), "collapcontent");
+                    if (ccache[ccn] == 1) {
+                        //console.log("  HIDE!");
+                        setccache(ccn, "0", p.getAttribute("nocache") === null);
+                        for (n = 0; n < contentlist.length; ++n) {
+                            addclass(contentlist[n], "hidden");
+                        }
+                        delete n;
+                    } else {
+                        //console.log("  SHOW!");
+                        setccache(ccn, "1", p.getAttribute("nocache") === null);
+                        for (n = 0; n < contentlist.length; ++n) {
+                            removeclass(contentlist[n], "hidden");
+                        }
+                        delete n;
+                    }
+                    delete p;
+                    delete ccn;
+                    delete contentlist;
+                    return false;
+                }
+            }
+            delete e;
+            delete j;
+            if (ccache[i] != '1') {
+                for (j = 0; j < elist2.length; ++j) {
+                    addclass(elist2[j], "hidden");
+                }
+                delete j;
+            }
+        }
     }
+    delete c;
+    delete elist1;
+    delete elist2;
+    delete hascontent;
+    delete i;
     delete setup;
 };

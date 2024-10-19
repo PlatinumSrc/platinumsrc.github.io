@@ -1,4 +1,4 @@
-<a href="/"><img src="/icon.png" class="sidebarimg"></img></a>
+<a href="/"><img src="/sidebar.png" class="sidebarimg"></img></a>
 <hr class="slim">
 <b>Links</b><br>
 <a href="https://github.com/{{ org }}">GitHub organization</a><br>
@@ -6,53 +6,53 @@
 <a href="https://github.com/{{ org }}/{{ site.domain }}">Website source code</a><br>
 <hr class="slim semi">
 <b><a href="https://github.com/{{ org }}/{{ repo }}/releases/latest" class="secret">Downloads</a></b><br>
-<collapsible nocache>
-    <collaptext>Engine</collaptext><br>
-    <collapcontent>
+<span class="collapsible" nocache>
+    <span class="collaptext">Engine</span><br>
+    <span class="collapcontent">
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_base.zip"><b>Required files</b></a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_linux_x86_64.tar.gz">Linux x86 64-bit</a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_linux_i686.tar.gz">Linux x86 32-bit</a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_windows_i686.zip">Windows x86</a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_nxdk.zip">Xbox (NXDK)</a><br>
-    </collapcontent>
-</collapsible>
-<collapsible nocache>
-    <collaptext>Dedicated server</collaptext><br>
-    <collapcontent>
+    </span>
+</span>
+<span class="collapsible" nocache>
+    <span class="collaptext">Dedicated server</span><br>
+    <span class="collapcontent">
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_base_server.zip"><b>Required files</b></a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_server_linux_x86_64.tar.gz">Linux x86 64-bit</a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_server_windows_i686.zip">Windows x86</a><br>
-    </collapcontent>
-</collapsible>
-<collapsible nocache>
-    <collaptext>Editor</collaptext><br>
-    <collapcontent>
+    </span>
+</span>
+<span class="collapsible" nocache>
+    <span class="collaptext">Editor</span><br>
+    <span class="collapcontent">
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_base.zip"><b>Required files</b></a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_editor_linux_x86_64.tar.gz">Linux x86 64-bit</a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_editor_windows_i686.zip">Windows x86</a><br>
-    </collapcontent>
-</collapsible>
-<collapsible nocache>
-    <collaptext>Tools</collaptext><br>
-    <collapcontent>
+    </span>
+</span>
+<span class="collapsible" nocache>
+    <span class="collaptext">Tools</span><br>
+    <span class="collapcontent">
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_tools.zip">Platform agnostic</a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_tools_linux_x86_64.tar.gz">Linux x86 64-bit</a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_tools_windows_i686.zip">Windows x86</a><br>
-    </collapcontent>
-</collapsible>
+    </span>
+</span>
 <hr class="slim semi">
 <b><a href="/docs" class="secret">Documentation</a></b><br>
 {% include doclinks.liquid dir='editor' -%}
-{%- include gencollap.liquid header="Editor" link="/docs/editor" content=doclinks_output -%}
-{%- include doclinks.liquid dir='pbasic' -%}
-{%- include gencollap.liquid header="PBASIC" link="/docs/pbasic" content=doclinks_output -%}
-{%- include doclinks.liquid dir='engine' -%}
-{%- include gencollap.liquid header="Engine" link="/docs/engine" content=doclinks_output -%}
-{%- include doclinks.liquid dir='formats' -%}
+{%- include gencollap.liquid header="Editor" link="/docs/editor" content=doclinks_output %}
+{% include doclinks.liquid dir='pbasic' -%}
+{%- include gencollap.liquid header="PBASIC" link="/docs/pbasic" content=doclinks_output %}
+{% include doclinks.liquid dir='engine' -%}
+{%- include gencollap.liquid header="Engine" link="/docs/engine" content=doclinks_output %}
+{% include doclinks.liquid dir='formats' -%}
 {%- include gencollap.liquid header="File formats" link="/docs/formats" content=doclinks_output %}
 <hr class="slim semi">
 <b>Other pages</b><br>
 <a href="/online-demo">Online demo</a><br>
-<collapsible>
-    <collaptext class="collapsible-empty">News</collaptext><br>
-</collapsible>
+<span class="collapsible">
+    <span class="collaptext collapsible-empty">News</span><br>
+</span>

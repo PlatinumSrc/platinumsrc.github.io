@@ -7,7 +7,7 @@
     {%- endif -%}
 {%- endcapture -%}
 <!DOCTYPE html>
-<html lang="en" bgcolor="{{ bg-color }}" style="background-color: {{ bg-color }};">
+<html lang="en" bgcolor="{{ bg-color }}" style="height: 100%; background-color: {{ bg-color }};">
     <head>
         <title>{{ title }}</title>
         <link rel="icon" href="/icon.png"></link>
@@ -21,21 +21,55 @@
         <link rel="stylesheet" href="/base.css">
         <script src="/base.js"></script>
     </head>
-    <body bgcolor="{{ bg-color }}" style="display: none; background-color: {{ bg-color }};">
-        <div id="_sidebar">
-            {%- include sidebar.html -%}
-        </div>
-        <div id="_main">
-            <div id="_header">
-                {%- include header.html -%}
-            </div>
-            <div id="_content">
-                {{- content -}}
-            </div>
-            <div id="_footer">
-                {%- include footer.html -%}
-            </div>
-        </div>
+    <body bgcolor="{{ bg-color }}" style="height: 100%; background-color: {{ bg-color }};" background="/bg.png">
+        <table class="container" style="width: 100%; height: 100%;">
+            <tbody class="container">
+                <tr class="container">
+                    <td class="container">
+                        <div style="height: 0.5em;"></div>
+                    </td>
+                </tr>
+                <tr class="container" style="height: 100%;">
+                    <td rowspan=2 class="container">
+                        <div style="width: 0.5em;"></div>
+                    </td>
+                    <td rowspan=2 class="container" id="_sidebar">
+                        <div class="sidebarcontainer">
+                            {%- include sidebar.html -%}
+                        </div>
+                    </td>
+                    <td rowspan=2 class="container">
+                        <div style="width: 0.5em;"></div>
+                    </td>
+                    <td class="container" style="width: 100%; position: relative;">
+                        <div id="_header">
+                            {%- include header.html -%}
+                        </div>
+                        <div style="height: 0.5em;"></div>
+                        <div id="_content">
+                            {{- content -}}
+                        </div>
+                        <div style="height: 0.5em;"></div>
+                    </td>
+                    <td class="container">
+                        <div style="width: 0.5em;"></div>
+                    </td>
+                </tr>
+                <tr class="container">
+                    <td class="container" style="vertical-align: bottom;">
+                        <div id="_footer">
+                            {%- include footer.html -%}
+                        </div>
+                    </td>
+                </tr>
+                <tr class="container">
+                    <td class="container">
+                        <div style="height: 0.5em;"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script>setup();</script>
+        <style>html {background-color: transparent !important;}</style>
     </body>
-    <script >setup();</script>
 </html>
