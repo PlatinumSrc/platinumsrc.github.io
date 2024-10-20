@@ -4,6 +4,8 @@
 !/news/
 !/news/**
 !/online-demo/
+!/propaganda/
+!/propaganda/**
 !/_includes/
 !/_includes/**
 !/_layouts/

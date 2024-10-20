@@ -9,6 +9,15 @@ setup = function () {
         delete repeatstr_out;
         return ret;
     }
+    if ("".trim !== void(0)) {
+        function trimstr(s) {
+            return s.trim();
+        }
+    } else {
+        function trimstr(s) {
+            return s.replace(/\s/g, '');
+        }
+    }
     function hasclass(e, c) {
         hasclass_l = e.getAttribute("class");
         if (hasclass_l === null) return false;
@@ -21,7 +30,7 @@ setup = function () {
         return false;
     }
     function addclass(e, c) {
-        if (e.classList !== undefined) {
+        if (e.classList !== void(0)) {
             e.classList.add(c);
         } else {
             addclass_c = e.getAttribute("class");
@@ -33,7 +42,7 @@ setup = function () {
         }
     }
     function removeclass(e, c) {
-        if (e.classList !== undefined) {
+        if (e.classList !== void(0)) {
             e.classList.remove(c);
         } else {
             removeclass_l = e.getAttribute("class");
@@ -53,7 +62,7 @@ setup = function () {
     function filterbyclass(l, c) {
         filterbyclass_l = []
         for (filterbyclass_i = 0; filterbyclass_i < l.length; ++filterbyclass_i) {
-            if (hasclass(l[filterbyclass_i], c)) filterbyclass_l.push(l[filterbyclass_i]);
+            if (hasclass(l[filterbyclass_i], c)) filterbyclass_l = filterbyclass_l.concat(l[filterbyclass_i]);
         }
         delete filterbyclass_i;
         ret = filterbyclass_l;
@@ -62,7 +71,7 @@ setup = function () {
     }
     clist = filterbyclass(document.getElementsByTagName("span"), "collapsible");
     ccache = null;
-    if (window.sessionStorage !== undefined) {
+    if (window.sessionStorage !== void(0)) {
         ccache = window.sessionStorage.getItem("collapcache");
         if (ccache && ccache.length != clist.length) {
             window.sessionStorage.removeItem("collapcache");
@@ -76,19 +85,10 @@ setup = function () {
         elist1 = filterbyclass(c.getElementsByTagName("span"), "collaptext");
         elist2 = filterbyclass(c.getElementsByTagName("span"), "collapcontent");
         hascontent = false;
-        if ("".trim !== undefined) {
-            for (j = 0; j < elist2.length; ++j) {
-                if (elist2[j].innerHTML.trim() != "") {
-                    hascontent = true;
-                    break;
-                }
-            }
-        } else {
-            for (j = 0; j < elist2.length; ++j) {
-                if (elist2[j].innerHTML.replace(/\s/g, '') != "") {
-                    hascontent = true;
-                    break;
-                }
+        for (j = 0; j < elist2.length; ++j) {
+            if (trimstr(elist2[j].innerHTML) != "") {
+                hascontent = true;
+                break;
             }
         }
         //console.log("hascontent: ", hascontent);
@@ -100,7 +100,7 @@ setup = function () {
                     //console.log("CLICK!");
                     function setccache(n, v, c) {
                         ccache = ccache.substring(0, n) + v + ccache.substring(n + 1);
-                        if (window.sessionStorage !== undefined && c) {
+                        if (window.sessionStorage !== void(0) && c) {
                             tmpccache = window.sessionStorage.getItem("collapcache");
                             if (!tmpccache) tmpccache = repeatstr("0", clist.length);
                             tmpccache = tmpccache.substring(0, n) + v + ccache.substring(n + 1);

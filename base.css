@@ -5,14 +5,14 @@ layout: none
 {%- include globals.liquid -%}
 
 {%- assign panel-bg-color = "#314b78" -%}
-{%- assign panel-border-br-color = "#38578e" -%}
+{%- assign panel-border-br-color = "#3b5788" -%}
 {%- assign panel-border-dim-color = "#1c3057" -%}
 {%- assign code-bg-color = "#3b4668" -%}
 {%- assign code-border-br-color = "#4a5881" -%}
 {%- assign code-border-dim-color = "#2d364f" -%}
 {%- assign table-bg-color = "#131626" -%}
 {%- assign thead-bg-color = "#314b78" -%}
-{%- assign table-border-br-color = "#38578e" -%}
+{%- assign table-border-br-color = "#3b5788" -%}
 {%- assign table-border-dim-color = "#1c3057" -%}
 {%- assign border-br-color = "#5f82be" -%}
 {%- assign border-dim-color = "#435d86" -%}
