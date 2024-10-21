@@ -8,30 +8,26 @@ title: Propaganda Wall
 
 ## 88x31 Badges
 
-**Free**
-
+**Free**<br>
 ![](free.png "Static PNG")
 ![](free-glint.gif "Animated glint GIF")
-![](free-spinning.gif "Animated spinning GIF")
+![](free-spin.gif "Animated spinning GIF")
 ![](free-dissolve.gif "Animated dissolve GIF")
 ![](free-ripple.gif "Animated ripple GIF")
 ![](free-sphere.gif "Animated sphere GIF")
 ![](free-stone.png "Static stone PNG")
 
-**Get**
-
+**Get**<br>
 ![](get.png "Static PNG")
 ![](get-stone.png "Static stone PNG")
 ![](get-blue-stone.png "Static blue stone PNG")
 ![](get-marble.png "Static marble PNG")
 
-**Powered by**
-
+**Powered by**<br>
 ![](powered-by.png "Static PNG")
 ![](powered-by-blue-stone.png "Static blue stone PNG")
 
-**Logo and text**
-
+**Logo and text**<br>
 ![](logo.png "Static PNG")
 ![](logo-stone.png "Static stone PNG")
 ![](logo-blue-stone.png "Static blue stone PNG")
@@ -39,8 +35,7 @@ title: Propaganda Wall
 ![](logo-marble.png "Static marble PNG")
 ![](logo-marble-shiny.gif "Animated shiny marble GIF")
 ![](logo-water.png "Static water PNG")
-![](logo-water-ripple.gif "Animated water ripple GIF")
-
+![](logo-water-ripple.gif "Animated water ripple GIF")<br>
 ![](logo-alt-text.png "Static alternate text PNG")
 ![](logo-alt-text-stone.png "Static alternate text stone PNG")
 ![](logo-alt-text-blue-stone.png "Static alternate text blue stone PNG")
@@ -48,8 +43,7 @@ title: Propaganda Wall
 ![](logo-alt-text-marble.png "Static alternate text marble PNG")
 ![](logo-alt-text-water.png "Static alternate text water PNG")
 
-**Text only**
-
+**Text only**<br>
 ![](text.png "Static PNG")
 ![](text-stone.png "Static stone PNG")
 ![](text-blue-stone.png "Static blue stone PNG")
@@ -57,17 +51,15 @@ title: Propaganda Wall
 ![](text-marble.png "Static marble PNG")
 ![](text-water.png "Static water PNG")
 
-**Miscellaneous**
-
+**Miscellaneous**<br>
 ![](got-psrc.png "Static PNG")
 
 ---
 
-## Other GIFs
+## [MakeSweet](https://makesweet.com/) GIFs
 
-**Locket**
-
-[Link](locket.gif)
+[Heart Locket](locket.gif)<br>
+[Circuit board](board.gif)
 
 ---
 
