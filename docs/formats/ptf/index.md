@@ -29,7 +29,7 @@ next: ptm
 
 ##### Header info byte
 
-| Bit \(LSB first\) | Value | Description
+| Bit \(Listed from LSB to MSB\) | Value | Description
 | -
 | 1-4 | -- | Resolution
 | 5 | -- | Has alpha

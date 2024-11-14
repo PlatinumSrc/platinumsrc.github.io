@@ -28,7 +28,7 @@ next: ptf
 
 ##### Header flags
 
-| Bit \(LSB first\) | Value | Description
+| Bit \(Listed from LSB to MSB\) | Value | Description
 | -
 | 1-8 | `0` | Reserved
 
@@ -39,7 +39,7 @@ next: ptf
 | Type | Value | Description
 | -
 | `u8` | -- | Part count
-| `u8[0..32]` | -- | Part visibility bitmask \(LSB first\)
+| `u8[0..32]` | -- | Part visibility bitmask \(Bytes ordered from least to most significant\)
 | <code>"<a href="#part">Part</a>"[0...]</code> | -- | Parts
 | `u8` | -- | Material count
 | <code>"<a href="#material">Material</a>"[0...]</code> | -- | Materials
@@ -72,7 +72,7 @@ next: ptf
 
 ##### Part flags
 
-| Bit \(LSB first\) | Value | Description
+| Bit \(Listed from LSB to MSB\) | Value | Description
 | -
 | 1 | -- | Has normals
 | 2-8 | `0` | Reserved
@@ -184,7 +184,7 @@ next: ptf
 | -
 | <code>"<a href="#string">String</a>"</code> | Name
 | `u8` | Action count
-| <code>"<a href="#animation-action">Animation action</a>"</code> | Action reference
+| <code>"<a href="#animation-action">Animation action</a>"[0...]</code> | Action reference
 
 #### Animation action
 
@@ -212,10 +212,10 @@ next: ptf
 
 | Name | Value
 | -
-| `P3M_ACTPARTVIS_DEFAULTWHITE` | 0
-| `P3M_ACTPARTVIS_DEFAULTBLACK` | 1
-| `P3M_ACTPARTVIS_WHITE` | 2
-| `P3M_ACTPARTVIS_BLACK` | 3
+| `P3M_ACTPARTLISTMODE_DEFAULTWHITE` | 0
+| `P3M_ACTPARTLISTMODE_DEFAULTBLACK` | 1
+| `P3M_ACTPARTLISTMODE_WHITE` | 2
+| `P3M_ACTPARTLISTMODE_BLACK` | 3
 
 {:.note}
 > **Note:**
