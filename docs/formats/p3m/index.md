@@ -95,7 +95,7 @@ next: ptf
 | Type | Description
 | -
 | <code>"<a href="#string">String</a>"</code> | Bone name
-| <code>"<a href="#weight-range">Weight range</a>"</code> | Weight data
+| <code>"<a href="#weight-range">Weight range</a>"[0...]</code> | Weight data
 
 #### Weight range
 
