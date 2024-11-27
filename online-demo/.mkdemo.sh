@@ -16,7 +16,7 @@ download() {
     shift
     case "$T" in
         git)
-            git clone "$@" tmp
+            git clone --depth 1 "$@" tmp
             copy
             rm -rf tmp
             ;;
@@ -33,7 +33,7 @@ done < ../.content.txt
 
 printf '%s\n' 'defaultgame=h74' 'mods=hqsounds' 'onlinedemo=true' '[Renderer]' 'gl.fastclear=false' > internal/config.cfg
 
-../.make.sh -j$(nproc)
+make CROSS=emscr LDFLAGS+=-sMINIFY_HTML=0 OUTDIR=.. EMSCR_SHELL=../.emscr_shell.html -j$(nproc)
 
 cd ..
 rm -rf PlatinumSrc
