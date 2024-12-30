@@ -5,6 +5,35 @@ section: File formats
 next: ptf
 ---
 
+# Table of contents
+
+- [Format](#format)
+    - [Header](#header)
+        - [Header flags](#header-flags)
+    - [Data](#data)
+        - [Part](#part)
+            - [Part flags](#part-flags)
+            - [Vertex](#vertex)
+            - [Normal](#normal)
+            - [Weight group](#weight-group)
+            - [Weight range](#weight-range)
+        - [Material](#material)
+        - [Material render mode](#material-render-mode)
+        - [Texture](#texture)
+            - [Texture type](#texture-type)
+            - [Embedded texture](#embedded-texture)
+            - [External texture](#external-texture)
+        - [Bone](#bone)
+        - [Animation](#animation)
+            - [Animation action](#animation-action)
+        - [Action](#action)
+            - [Action part list mode](#action-part-list-mode)
+            - [Action data](#action-data)
+            - [Action interpolation mode](#action-interpolation-mode)
+        - [String](#string)
+
+---
+
 ## Format
 
 - Current version is `0.0`
@@ -28,7 +57,7 @@ next: ptf
 
 ##### Header flags
 
-| Bit \(Listed from LSB to MSB\) | Value | Description
+| Bits \(LSB to MSB\) | Value | Description
 | -
 | 1-8 | `0` | Reserved
 
@@ -40,17 +69,17 @@ next: ptf
 | -
 | `u8` | -- | Part count
 | `u8[0..32]` | -- | Part visibility bitmask \(Bytes ordered from least to most significant\)
-| <code>"<a href="#part">Part</a>"[0...]</code> | -- | Parts
+| <code>"<a href="#part">Part</a>"...</code> | -- | Parts
 | `u8` | -- | Material count
-| <code>"<a href="#material">Material</a>"[0...]</code> | -- | Materials
+| <code>"<a href="#material">Material</a>"...</code> | -- | Materials
 | `u8` | -- | Texture count
-| <code>"<a href="#texture">Texture</a>"[0...]</code> | -- | Textures
+| <code>"<a href="#texture">Texture</a>"...</code> | -- | Textures
 | `u8` | -- | Bone count
-| <code>"<a href="#bone">Bone</a>"[0...]</code> | -- | Bones
+| <code>"<a href="#bone">Bone</a>"...</code> | -- | Bones
 | `u8` | -- | Animation count
-| <code>"<a href="#animation">Animation</a>"[0...]</code> | -- | Animations
+| <code>"<a href="#animation">Animation</a>"...</code> | -- | Animations
 | `u8` | -- | Action count
-| <code>"<a href="#action">Action</a>"[0...]</code> | -- | Actions
+| <code>"<a href="#action">Action</a>"...</code> | -- | Actions
 | `char[1...]` | `{..., 0}` | String table
 
 ---
@@ -63,16 +92,16 @@ next: ptf
 | <code>"<a href="#string">String</a>"</code> | -- | Part name
 | `u8` | -- | Material index
 | `u16` | -- | Vertex count
-| <code>"<a href="#vertex">Vertex</a>"[0...]</code> | -- | Vertices
-| <code>"<a href="#normal">Normal</a>"[0...]</code> | -- | Normals \(only present if "Has normals" flag is set\)
+| <code>"<a href="#vertex">Vertex</a>"...</code> | -- | Vertices
+| <code>"<a href="#normal">Normal</a>"...</code> | -- | Normals \(only present if "Has normals" flag is set\)
 | `u16` | -- | Index count
-| `u16[0...]` | -- | Indices
+| `u16[]` | -- | Indices
 | `u8` | -- | Weight group count
-| <code>"<a href="#weight-group">Weight group</a>"[0...]</code> | -- | Weight groups
+| <code>"<a href="#weight-group">Weight group</a>"...</code> | -- | Weight groups
 
 ##### Part flags
 
-| Bit \(Listed from LSB to MSB\) | Value | Description
+| Bits \(LSB to MSB\) | Value | Description
 | -
 | 1 | -- | Has normals
 | 2-8 | `0` | Reserved
@@ -95,7 +124,7 @@ next: ptf
 | Type | Description
 | -
 | <code>"<a href="#string">String</a>"</code> | Bone name
-| <code>"<a href="#weight-range">Weight range</a>"[0...]</code> | Weight data
+| <code>"<a href="#weight-range">Weight range</a>"...</code> | Weight data
 
 #### Weight range
 
@@ -103,7 +132,7 @@ next: ptf
 | -
 | `u16` | Vertices to skip
 | `u16` | Weight count \(0 if last range\)
-| `u8[0...]` | Weights
+| `u8[]` | Weights
 
 {:.note}
 > **Note:**
@@ -143,7 +172,7 @@ next: ptf
 | Type | Value | Description
 | -
 | `u8` | [Texture type](#texture-type) | Texture type
-| <code>{"<a href="#embedded-texture">Embedded texture</a>"|"<a href="#external-texture">External texture</a>"}[0...]</code> | -- | Texture data
+| <code>{"<a href="#embedded-texture">Embedded texture</a>"|"<a href="#external-texture">External texture</a>"}...</code> | -- | Texture data
 
 ##### Texture type
 
@@ -157,7 +186,7 @@ next: ptf
 | Type | Value | Description
 | -
 | `u32` | -- | Data size
-| `u8[...]` | [PTF texture]({{ page.dir }}../ptf/) | Data
+| `u8[]` | [PTF texture]({{ page.dir }}../ptf/) | Data
 
 #### External texture
 
@@ -184,7 +213,7 @@ next: ptf
 | -
 | <code>"<a href="#string">String</a>"</code> | Name
 | `u8` | Action count
-| <code>"<a href="#animation-action">Animation action</a>"[0...]</code> | Action reference
+| <code>"<a href="#animation-action">Animation action</a>"...</code> | Action reference
 
 #### Animation action
 
@@ -204,9 +233,9 @@ next: ptf
 | `u32` | -- | Microseconds per frame
 | `u8` | [Action part list mode](#action-part-list-mode) | Part list mode
 | `u8` | -- | Part list length
-| <code>"<a href="#string">String</a>"[0...]</code> | -- | Part list
+| <code>"<a href="#string">String</a>"...</code> | -- | Part list
 | `u8` | -- | Action data list length
-| <code>"<a href="#action-data">Action data</a>"[0...]</code> | -- | Action data
+| <code>"<a href="#action-data">Action data</a>"...</code> | -- | Action data
 
 ##### Action part list mode
 
@@ -229,15 +258,15 @@ next: ptf
 | `u8` | -- | Translation keyframe count
 | `u8` | -- | Rotation keyframe count
 | `u8` | -- | Scale keyframe count
-| `u8[0...]` | -- | Translation keyframe frame skips
-| `u8[0...]` | -- | Rotation keyframe frame skips
-| `u8[0...]` | -- | Scale keyframe frame skips
-| `u8[0...]` | [Action interpolation mode](#action-interpolation-mode) | Translation keyframe interpolation modes
-| `u8[0...]` | [Action interpolation mode](#action-interpolation-mode) | Rotation keyframe interpolation modes
-| `u8[0...]` | [Action interpolation mode](#action-interpolation-mode) | Scale keyframe interpolation modes
-| `float[0...][3]` | -- | Translation keyframes
-| `float[0...][3]` | -- | Rotation keyframes
-| `float[0...][3]` | -- | Scale keyframes
+| `u8[]` | -- | Translation keyframe frame skips
+| `u8[]` | -- | Rotation keyframe frame skips
+| `u8[]` | -- | Scale keyframe frame skips
+| `u8[]` | [Action interpolation mode](#action-interpolation-mode) | Translation keyframe interpolation modes
+| `u8[]` | [Action interpolation mode](#action-interpolation-mode) | Rotation keyframe interpolation modes
+| `u8[]` | [Action interpolation mode](#action-interpolation-mode) | Scale keyframe interpolation modes
+| `float[][3]` | -- | Translation keyframes
+| `float[][3]` | -- | Rotation keyframes
+| `float[][3]` | -- | Scale keyframes
 
 {:.note}
 > **Note:**

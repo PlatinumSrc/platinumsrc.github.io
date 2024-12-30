@@ -2,7 +2,15 @@
 title: PTM
 description: tracker music
 section: File formats
-#next: 
+next: pfa
+---
+
+# Table of contents
+
+- [Format](#format)
+    - [Header](#header)
+    - [Data](#data)
+
 ---
 
 ## Format
@@ -15,6 +23,8 @@ section: File formats
 | -
 | <code>"<a href="#header">Header</a>"</code> | File header
 | <code>"<a href="#data">Data</a>"</code> | Music data
+
+---
 
 ### Header
 

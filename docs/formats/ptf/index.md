@@ -5,12 +5,23 @@ section: File formats
 next: ptm
 ---
 
+# Table of contents
+
+- [Format](#format)
+    - [Header](#header)
+        - [Header info byte](#header-info-byte)
+    - [Data](#data)
+        - [RGB pixel](#rgb-pixel)
+        - [RGBA pixel](#rgba-pixel)
+
+---
+
 ## Format
 
 - Current version is `0.0`
 - File extension is `.ptf`
 - Data is little endian
-- LZ4 is used for compression
+- LZ4F is used for compression
 
 | Type | Description
 | -
@@ -29,7 +40,7 @@ next: ptm
 
 ##### Header info byte
 
-| Bit \(Listed from LSB to MSB\) | Value | Description
+| Bits \(LSB to MSB\) | Value | Description
 | -
 | 1-4 | -- | Resolution
 | 5 | -- | Has alpha
@@ -39,9 +50,9 @@ next: ptm
 
 ### Data
 
-| Type | Description
+| Type | Value | Description
 | -
-| Compressed <code>{"<a href="#rgb-pixel">RGB pixel</a>"|"<a href="#rgba-pixel">RGBA pixel</a>"}[0...]</code> | Compressed pixels
+| `u8[]` | Compressed <code>{"<a href="#rgb-pixel">RGB pixel</a>"|"<a href="#rgba-pixel">RGBA pixel</a>"} × 1...</code> | Compressed pixels
 
 #### RGB pixel
 
