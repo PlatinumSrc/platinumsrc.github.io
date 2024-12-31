@@ -1,7 +1,6 @@
 ---
 title: PTM
-description: tracker music
-section: File formats
+description: Tracker music
 next: pfa
 ---
 
@@ -21,8 +20,8 @@ next: pfa
 
 | Type | Description
 | -
-| <code>"<a href="#header">Header</a>"</code> | File header
-| <code>"<a href="#data">Data</a>"</code> | Music data
+| [Header](#header) | File header
+| [Data](#data) | Music data
 
 ---
 
@@ -31,7 +30,7 @@ next: pfa
 | Type | Value | Description
 | -
 | `char[3]` | `{'P', 'T', 'M'}` | Header magic
-| `u8` | `0` | Major version
+| `u8` | 0 | Major version
 | `char[1...]` | `{..., 0}` | Song name
 | `char[1...]` | `{..., 0}` | Author
 | `char[1...]` | `{..., 0}` | Comments

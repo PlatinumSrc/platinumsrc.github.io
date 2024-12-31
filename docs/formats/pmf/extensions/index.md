@@ -1,4 +1,4 @@
 ---
-title: PMF extensions
+title: PMF Extensions
 ---
 

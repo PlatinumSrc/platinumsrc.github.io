@@ -1,7 +1,6 @@
 ---
 title: PTF
-description: textures
-section: File formats
+description: Textures
 next: ptm
 ---
 
@@ -25,8 +24,8 @@ next: ptm
 
 | Type | Description
 | -
-| <code>"<a href="#header">Header</a>"</code> | File header
-| <code>"<a href="#data">Data</a>"</code> | Image data
+| [Header](#header) | File header
+| [Data](#data) | Image data
 
 ---
 
@@ -52,7 +51,7 @@ next: ptm
 
 | Type | Value | Description
 | -
-| `u8[]` | Compressed <code>{"<a href="#rgb-pixel">RGB pixel</a>"|"<a href="#rgba-pixel">RGBA pixel</a>"} × 1...</code> | Compressed pixels
+| `u8[]` | Compressed '[RGB pixel](#rgb-pixel) × 1...' or '[RGBA pixel](#rgba-pixel) × 1...' | Pixel data
 
 #### RGB pixel
 

@@ -1,7 +1,6 @@
 ---
 title: PMP/PMT
-description: map projects
-section: File formats
+description: Map projects
 next: pmf
 ---
 

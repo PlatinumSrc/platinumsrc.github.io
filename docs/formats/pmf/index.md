@@ -1,7 +1,6 @@
 ---
 title: PMF
-description: compiled maps
-section: File formats
+description: Compiled maps
 #next: 
 ---
 
@@ -36,8 +35,8 @@ section: File formats
 
 | Type | Description
 | -
-| <code>"<a href="#header">Header</a>"</code> | File header
-| <code>"<a href="#data">Data</a>"</code> | Model data
+| [Header](#header) | File header
+| [Data](#data) | Map data
 
 ---
 
@@ -53,7 +52,7 @@ section: File formats
 | `char[1...]` | `{..., 0}` | Authors
 | `char[1...]` | `{..., 0}` | Compiler info
 | `u8` | `0..32` | Gamemode count
-| `char[1..16] × 0..32` | `{..., 0}` | Gamemode names
+| `char[1..16]` × 0..32 | `{..., 0}` | Gamemode names
 
 ---
 
@@ -62,17 +61,17 @@ section: File formats
 | Type | Value | Description
 | -
 | `u32` | -- | String table size
-| `char[]` | -- | String table
-| `u32` | -- | Size of embedded resource archive
-| `u8[]` | [PFA archive]({{ page.dir }}../pfa/) | Embedded resources
+| `char` × "String table size" | -- | String table
+| `u32` | -- | Embedded resource archive size
+| `u8` × "Embedded resource archive size" | [PFA archive]({{ page.dir }}../pfa/) | Embedded resources
 | `u16` | -- | Extension count
-| `u32[]` | -- | Extension sizes
-| <code>"<a href="#extension">Extension</a>"...</code> | -- | Extensions
+| `u32` × "Extension count" | -- | Extension sizes
+| [Extension](#extension) × "Extension count" | -- | Extensions
 | `u8` | -- | Level count
-| `u32[]` | -- | Level data sizes
-| <code>"<a href="#level-data">Level data</a>"...</code> | -- | Levels
+| `u32` × "Level count" | -- | Level data sizes
+| [Level data](#level-data) × "Level count" | -- | Levels
 | `u32` | -- | Global entity count
-| <code>"<a href="{{ page.dir }}entities/#entity">Entity</a>"...</code> | -- | Global entities
+| [Entity]({{ page.dir }}entities/#entity) × "Global entity count" | -- | Global entities
 
 ---
 
@@ -87,13 +86,13 @@ section: File formats
 | `u32` | -- | Size of uncompressed common data
 | `u32` | -- | Size of uncompressed client-side data
 | `u32` | -- | Size of uncompressed server-side data
-| `u8[]` | Compressed <code>"<a href="#common-level-data">Common level data</a>"</code> | Common data
-| `u8[]` | Compressed <code>"<a href="#client-side-level-data">Client-side level data</a>"</code> | Client-side data
-| `u8[]` | Compressed <code>"<a href="#server-side-level-data">Server-side level data</a>"</code> | Server-side data
+| `u8` × "Size of uncompressed common data" | [Common level data](#common-level-data) | Common data
+| `u8` × "Size of uncompressed client-side data" | [Client-side level data](#client-side-level-data) | Client-side data
+| `u8` × "Size of uncompressed server-side data" | [Server-side level data](#server-side-level-data) | Server-side data
 | `u32` | [Level sector count](#level-sector-count) | Sector count
-| <code>"<a href="#sector-index">Sector index</a>"</code> | -- | Center sector
-| <code>"<a href="#level-sector-sizes">Level sector sizes</a>"...</code> | -- | Sector data sizes (ordered by `[Y][X][Z]`)
-| <code>"<a href="#level-sector-data">Level sector data</a>"...</code> | -- | Sector data (ordered by `[Y][X][Z]`)
+| [Sector index](#sector-index) | -- | Center sector
+| [Level sector sizes](#level-sector-sizes) × 1... | -- | Sector data sizes (ordered by `[Y][X][Z]`)
+| [Level sector data](#level-sector-data) × 1... | -- | Sector data (ordered by `[Y][X][Z]`)
 
 ##### Level flags
 
@@ -127,9 +126,9 @@ section: File formats
 
 | Type | Value | Description
 | -
-| `u8[]` | Compressed <code>"<a href="#sector">Sector</a>"</code> | Sector data
-| `u8[]` | Compressed <code>"<a href="#client-side-sector">Client-side sector</a>"</code> | Client-side sector data
-| `u8[]` | Compressed <code>"<a href="#server-side-sector">Server-side sector</a>"</code> | Server-side sector data
+| `u8[]` | Compressed [Common sector data](#common-sector-data) | Common sector data
+| `u8[]` | Compressed [Client-side sector data](#client-side-sector-data) | Common sector data
+| `u8[]` | Compressed [Server-side sector data](#server-side-sector-data) | Common sector data
 
 ---
 
@@ -154,31 +153,31 @@ section: File formats
 | Type | Description
 | -
 | `u32` | String table size
-| `char[]` | String table
+| `char` × "String table size" | String table
 | `u16` | Material count
-| <code>"<a href="#material">Material</a>"...</code> | Materials
+| [Material](#material) × "Material count" | Materials
 | `u16` | Physics material count
-| <code>"<a href="#physics-material">Physics material</a>"...</code> | Physics materials
-| <code>"<a href="#sound-environment">Sound environment</a>"</code> | Default sound environment
-| <code>"<a href="#weather-environment">Weather environment</a>"</code> | Default weather environment
-| <code>"<a href="#gravity-environment">Gravity environment</a>"</code> | Default gravity environment
+| [Physics material](#physics-material) × "Physics material count" | Physics materials
+| [Sound environment](#sound-environment) | Default sound environment
+| [Weather environment](#weather-environment) | Default weather environment
+| [Gravity environment](#gravity-environment) | Default gravity environment
 
 ### Client-side level data
 
 | Type | Description
 | -
 | `u32` | String table size
-| `char[]` | String table
-| <code>"<a href="#client-side-material">Client-side material</a>"...</code> | Client-side materials
+| `char` × "String table size" | String table
+| [Client-side material](#client-side-material) × "Material count" in [Common level data](#common-level-data) | Client-side materials
 
 ### Server-side level data
 
 | Type | Description
 | -
 | `u32` | String table size
-| `char[]` | String table
+| `char` × "String table size" | String table
 | `u32` | Level-wide entity count
-| <code>"<a href="{{ page.dir }}entities/#entity">Entity</a>"...</code> | Level-wide entities
+| [Entity]({{ page.dir }}entities/#entity) × "Level-wide entity count" | Level-wide entities
 
 ---
 
@@ -215,20 +214,23 @@ section: File formats
 
 ---
 
-### Sector
+### Common sector data
 
 | Type | Value | Description
 | -
+| 
 
-### Client-side sector
-
-| Type | Value | Description
-| -
-
-### Server-side sector
+### Client-side sector data
 
 | Type | Value | Description
 | -
+| 
+
+### Server-side sector data
+
+| Type | Value | Description
+| -
+| 
 
 ---
 
@@ -236,6 +238,7 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
 
 ---
 
@@ -243,11 +246,33 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
+
+##### Material flags
+
+| Bits \(LSB to MSB\) | Value | Description
+| -
+| 
+
+##### Material render mode
+
+| Name | Value
+| -
+| `ENTMAT_RENDMODE_NORMAL` | 0
+| `ENTMAT_RENDMODE_ADD` | 1
+
 
 ### Client-side material
 
 | Type | Value | Description
 | -
+| 
+
+##### Client-side material wave info
+
+| Type | Description
+| -
+| 
 
 ---
 
@@ -255,6 +280,13 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
+
+##### Physics material flags
+
+| Bits \(LSB to MSB\) | Value | Description
+| -
+| 
 
 ---
 
@@ -262,6 +294,7 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
 
 ---
 
@@ -269,6 +302,7 @@ section: File formats
 
 | Type | Description
 | -
+| 
 
 ---
 
@@ -276,11 +310,25 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
+
+##### Dynamic light flags
+
+| Bits \(LSB to MSB\) | Value | Description
+| -
+| 
 
 ### Client-side dynamic light
 
-| Type | Value | Description
+| Type | Description
 | -
+| 
+
+##### Client-side dynamic light lightmap layer
+
+| Type | Description
+| -
+| 
 
 ---
 
@@ -288,11 +336,25 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
+
+##### Fast light flags
+
+| Bits \(LSB to MSB\) | Value | Description
+| -
+| 
 
 ### Client-side fast light
 
 | Type | Value | Description
 | -
+| 
+
+##### Client-side fast light vertex range
+
+| Type | Description
+| -
+| 
 
 ---
 
@@ -300,16 +362,25 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
+
+##### Cube flags
+
+| Bits \(LSB to MSB\) | Value | Description
+| -
+| 
 
 ### Client-side cube
 
 | Type | Value | Description
 | -
+| 
 
 ### Server-side cube
 
 | Type | Value | Description
 | -
+| 
 
 ---
 
@@ -317,6 +388,13 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
+
+##### Parent cube flags
+
+| Bits \(LSB to MSB\) | Value | Description
+| -
+| 
 
 ---
 
@@ -324,21 +402,31 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
 
 ### Extended geometry cube data
 
 | Type | Value | Description
 | -
+| 
 
 ### Client-side geometry cube data
 
 | Type | Value | Description
 | -
+| 
+
+##### Client-side geometry cube face bits
+
+| Bits \(LSB to MSB\) | Value | Description
+| -
+| 
 
 ### Client-side extended geometry cube data
 
 | Type | Value | Description
 | -
+| 
 
 ---
 
@@ -346,11 +434,13 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
 
 ### Client-side solid cube data
 
 | Type | Value | Description
 | -
+| 
 
 ---
 
@@ -358,19 +448,33 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
 
+##### Dynamic cube point flags
+
+| Bits \(LSB to MSB\) | Value | Description
+| -
+| 
 
 ### Client-side dynamic cube data
 
 | Type | Value | Description
 | -
+| 
 
 ---
 
 ### Cube chunk data
 
-| Type | Value | Description
+| Type | Description
 | -
+| 
+
+##### Cube chunk data visibility data
+
+| Type | Description
+| -
+| 
 
 ---
 
@@ -378,13 +482,27 @@ section: File formats
 
 | Type | Value | Description
 | -
+| 
+
+##### Cube lighting data lights
+
+| Type | Value | Description
+| -
+| 
 
 ---
 
 ### Cube pathfinding data
 
-| Type | Value | Description
+| Type | Description
 | -
+| 
+
+##### Cube pathfinding data attribute
+
+| Type | Description
+| -
+| 
 
 ---
 

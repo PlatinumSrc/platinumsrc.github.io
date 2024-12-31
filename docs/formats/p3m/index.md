@@ -1,7 +1,6 @@
 ---
 title: P3M
 description: 3D models
-section: File formats
 next: ptf
 ---
 
@@ -42,8 +41,8 @@ next: ptf
 
 | Type | Description
 | -
-| <code>"<a href="#header">Header</a>"</code> | File header
-| <code>"<a href="#data">Data</a>"</code> | Model data
+| [Header](#header) | File header
+| [Data](#data) | Model data
 
 ---
 
@@ -69,17 +68,17 @@ next: ptf
 | -
 | `u8` | -- | Part count
 | `u8[0..32]` | -- | Part visibility bitmask \(Bytes ordered from least to most significant\)
-| <code>"<a href="#part">Part</a>"...</code> | -- | Parts
+| [Part](#part) × "Part count" | -- | Parts
 | `u8` | -- | Material count
-| <code>"<a href="#material">Material</a>"...</code> | -- | Materials
+| [Material](#material) × "Material count" | -- | Materials
 | `u8` | -- | Texture count
-| <code>"<a href="#texture">Texture</a>"...</code> | -- | Textures
+| [Texture](#texture) × "Texture count" | -- | Textures
 | `u8` | -- | Bone count
-| <code>"<a href="#bone">Bone</a>"...</code> | -- | Bones
+| [Bone](#bone) × "Bone count" | -- | Bones
 | `u8` | -- | Animation count
-| <code>"<a href="#animation">Animation</a>"...</code> | -- | Animations
+| [Animation](#animation) × "Animation count" | -- | Animations
 | `u8` | -- | Action count
-| <code>"<a href="#action">Action</a>"...</code> | -- | Actions
+| [Action](#action) × "Action count" | -- | Actions
 | `char[1...]` | `{..., 0}` | String table
 
 ---
@@ -89,15 +88,15 @@ next: ptf
 | Type | Value | Description
 | -
 | `u8` | [Part flags](#part-flags) | Flags
-| <code>"<a href="#string">String</a>"</code> | -- | Part name
+| [String](#string) | -- | Part name
 | `u8` | -- | Material index
 | `u16` | -- | Vertex count
-| <code>"<a href="#vertex">Vertex</a>"...</code> | -- | Vertices
-| <code>"<a href="#normal">Normal</a>"...</code> | -- | Normals \(only present if "Has normals" flag is set\)
+| [Vertex](#vertex) × "Vertex count" | -- | Vertices
+| [Normal](#normal) × "Vertex count" or 0 | -- | Normals \(only present if "Has normals" flag is set\)
 | `u16` | -- | Index count
-| `u16[]` | -- | Indices
+| `u16` × "Index count" | -- | Indices
 | `u8` | -- | Weight group count
-| <code>"<a href="#weight-group">Weight group</a>"...</code> | -- | Weight groups
+| [Weight group](#weight-group) × "Weight group count" | -- | Weight groups
 
 ##### Part flags
 
@@ -123,8 +122,8 @@ next: ptf
 
 | Type | Description
 | -
-| <code>"<a href="#string">String</a>"</code> | Bone name
-| <code>"<a href="#weight-range">Weight range</a>"...</code> | Weight data
+| [String](#string) | Bone name
+| [Weight range](#weight-range) × 1... | Weight data (terminated by a range with a "Weight count" of 0)
 
 #### Weight range
 
@@ -132,7 +131,7 @@ next: ptf
 | -
 | `u16` | Vertices to skip
 | `u16` | Weight count \(0 if last range\)
-| `u8[]` | Weights
+| `u8` × "Weight count" | Weights
 
 {:.note}
 > **Note:**
@@ -172,7 +171,7 @@ next: ptf
 | Type | Value | Description
 | -
 | `u8` | [Texture type](#texture-type) | Texture type
-| <code>{"<a href="#embedded-texture">Embedded texture</a>"|"<a href="#external-texture">External texture</a>"}...</code> | -- | Texture data
+| [Embedded texture](#embedded-texture) or [External texture](#external-texture) | -- | Texture data
 
 ##### Texture type
 
@@ -186,13 +185,13 @@ next: ptf
 | Type | Value | Description
 | -
 | `u32` | -- | Data size
-| `u8[]` | [PTF texture]({{ page.dir }}../ptf/) | Data
+| `u8` × "Data size" | [PTF texture]({{ page.dir }}../ptf/) | Data
 
 #### External texture
 
 | Type | Description
 | -
-| <code>"<a href="#string">String</a>"</code> | Resource path
+| [String](#string) | Resource path
 
 ---
 
@@ -200,7 +199,7 @@ next: ptf
 
 | Type | Description
 | -
-| <code>"<a href="#string">String</a>"</code> | Name
+| [String](#string) | Name
 | `float[3]` | Head XYZ
 | `float[3]` | Tail XYZ
 | `u8` | Child count
@@ -211,9 +210,9 @@ next: ptf
 
 | Type | Description
 | -
-| <code>"<a href="#string">String</a>"</code> | Name
+| [String](#string) | Name
 | `u8` | Action count
-| <code>"<a href="#animation-action">Animation action</a>"...</code> | Action reference
+| [Animation action](#animation-action) × "Action count" | Action reference
 
 #### Animation action
 
@@ -233,9 +232,9 @@ next: ptf
 | `u32` | -- | Microseconds per frame
 | `u8` | [Action part list mode](#action-part-list-mode) | Part list mode
 | `u8` | -- | Part list length
-| <code>"<a href="#string">String</a>"...</code> | -- | Part list
+| [String](#string) × "Part list length" | -- | Part list
 | `u8` | -- | Action data list length
-| <code>"<a href="#action-data">Action data</a>"...</code> | -- | Action data
+| [Action data](#action-data) × "Action data list length" | -- | Action data
 
 ##### Action part list mode
 
@@ -254,19 +253,19 @@ next: ptf
 
 | Type | Value | Description
 | -
-| <code>"<a href="#string">String</a>"</code> | -- | Bone
+| [String](#string) | -- | Bone
 | `u8` | -- | Translation keyframe count
 | `u8` | -- | Rotation keyframe count
 | `u8` | -- | Scale keyframe count
-| `u8[]` | -- | Translation keyframe frame skips
-| `u8[]` | -- | Rotation keyframe frame skips
-| `u8[]` | -- | Scale keyframe frame skips
-| `u8[]` | [Action interpolation mode](#action-interpolation-mode) | Translation keyframe interpolation modes
-| `u8[]` | [Action interpolation mode](#action-interpolation-mode) | Rotation keyframe interpolation modes
-| `u8[]` | [Action interpolation mode](#action-interpolation-mode) | Scale keyframe interpolation modes
-| `float[][3]` | -- | Translation keyframes
-| `float[][3]` | -- | Rotation keyframes
-| `float[][3]` | -- | Scale keyframes
+| `u8` × "Translation keyframe count" | -- | Translation keyframe frame skips
+| `u8` × "Rotation keyframe count" | -- | Rotation keyframe frame skips
+| `u8` × "Scale keyframe count" | -- | Scale keyframe frame skips
+| `u8` × "Translation keyframe count" | [Action interpolation mode](#action-interpolation-mode) | Translation keyframe interpolation modes
+| `u8` × "Rotation keyframe count" | [Action interpolation mode](#action-interpolation-mode) | Rotation keyframe interpolation modes
+| `u8` × "Scale keyframe count" | [Action interpolation mode](#action-interpolation-mode) | Scale keyframe interpolation modes
+| `float[3]` × "Translation keyframe count" | -- | XYZ translation keyframes
+| `float[3]` × "Rotation keyframe count" | -- | XYZ rotation keyframes
+| `float[3]` × "Scale keyframe count" | -- | XYZ scale keyframes
 
 {:.note}
 > **Note:**

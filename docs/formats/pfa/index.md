@@ -1,7 +1,6 @@
 ---
 title: PFA
-description: file archives
-section: File formats
+description: File archives
 next: pmp
 ---
 

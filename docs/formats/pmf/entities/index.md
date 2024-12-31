@@ -1,4 +1,4 @@
 ---
-title: PMF entities
+title: PMF Entities
 ---
 
