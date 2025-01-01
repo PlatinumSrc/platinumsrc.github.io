@@ -51,14 +51,14 @@ next: ptf
 | Type | Value | Description
 | -
 | `char[3]` | `{'P', '3', 'M'}` | Header magic
-| `u8` | `0` | Major version
+| `u8` | 0 | Major version
 | `u8` | [Header flags](#header-flags) | Flags
 
 ##### Header flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
-| 1-8 | `0` | Reserved
+| 7..0 | 0 | Reserved
 
 ---
 
@@ -100,10 +100,10 @@ next: ptf
 
 ##### Part flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
-| 1 | -- | Has normals
-| 2-8 | `0` | Reserved
+| 7..1 | 0 | Reserved
+| 0 | -- | Has normals
 
 #### Vertex
 
@@ -123,7 +123,7 @@ next: ptf
 | Type | Description
 | -
 | [String](#string) | Bone name
-| [Weight range](#weight-range) × 1... | Weight data (terminated by a range with a "Weight count" of 0)
+| [Weight range](#weight-range) × 1... | Weight data \(terminated by a range with a "Weight count" of 0\)
 
 #### Weight range
 
@@ -148,6 +148,9 @@ next: ptf
 | -
 | `u8` | [Material render mode](#material-render-mode) | Render mode
 | `u8` | -- | Texture index \(255 for none\)
+| `u8` | -- | Extra texture count
+| `u8` × "Extra texture count" | -- | Extra texture indices
+| `u32` | -- | Texture advance time in microseconds
 | `u8[4]` | -- | RGBA color
 | `u8[3]` | -- | RGB emission
 | `u8` | -- | Shading

@@ -17,8 +17,8 @@ description: Compiled maps
         - [Sector index](#sector-index)
             - [Sector index bits](#sector-index-bits)
         - [Common level data](#common-level-data)
-        - [Client-side level data](#client-side-level-data)
-        - [Server-side level data](#server-side-level-data)
+        - [Client level data](#client-level-data)
+        - [Server level data](#server-level-data)
         - [Sound environment](#sound-environment)
         - [Weather environment](#weather-environment)
         - [Gravity environment](#gravity-environment)
@@ -45,14 +45,14 @@ description: Compiled maps
 | Type | Value | Description
 | -
 | `char[3]` | `{'P', 'M', 'F'}` | Header magic
-| `u8` | `0` | Major version
+| `u8` | 0 | Major version
 | `u64` | -- | Creation time as a UTC Unix timestamp
 | `char[1...]` | `{..., 0}` | Name
 | `char[1...]` | `{..., 0}` | Description
 | `char[1...]` | `{..., 0}` | Authors
 | `char[1...]` | `{..., 0}` | Compiler info
-| `u8` | `0..32` | Gamemode count
-| `char[1..16]` × 0..32 | `{..., 0}` | Gamemode names
+| `u8` | 0..32 | Gamemode count
+| `char[1..16]` × "Gamemode count" | `{..., 0}` | Gamemode names
 
 ---
 
@@ -81,54 +81,54 @@ description: Compiled maps
 | -
 | `u8` | [Level flags](#level-flags) | Flags
 | `u32` | -- | Size of compressed common data
-| `u32` | -- | Size of compressed client-side data
-| `u32` | -- | Size of compressed server-side data
-| `u32` | -- | Size of uncompressed common data
-| `u32` | -- | Size of uncompressed client-side data
-| `u32` | -- | Size of uncompressed server-side data
-| `u8` × "Size of uncompressed common data" | [Common level data](#common-level-data) | Common data
-| `u8` × "Size of uncompressed client-side data" | [Client-side level data](#client-side-level-data) | Client-side data
-| `u8` × "Size of uncompressed server-side data" | [Server-side level data](#server-side-level-data) | Server-side data
+| `u32` | -- | Size of compressed client data
+| `u32` | -- | Size of compressed server data
+| `u32` | -- | Size of decompressed common data
+| `u32` | -- | Size of decompressed client data
+| `u32` | -- | Size of decompressed server data
+| `u8` × "Size of decompressed common data" | [Common level data](#common-level-data) | Common data
+| `u8` × "Size of decompressed client data" | [Client level data](#client-level-data) | Client data
+| `u8` × "Size of decompressed server data" | [Server level data](#server-level-data) | Server data
 | `u32` | [Level sector count](#level-sector-count) | Sector count
 | [Sector index](#sector-index) | -- | Center sector
-| [Level sector sizes](#level-sector-sizes) × 1... | -- | Sector data sizes (ordered by `[Y][X][Z]`)
-| [Level sector data](#level-sector-data) × 1... | -- | Sector data (ordered by `[Y][X][Z]`)
+| [Level sector sizes](#level-sector-sizes) × 1... | -- | Sector data sizes \(ordered by `[Y][X][Z]`\)
+| [Level sector data](#level-sector-data) × 1... | -- | Sector data \(ordered by `[Y][X][Z]`\)
 
 ##### Level flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
-| 1 | -- | Keep players' in-sector offset
-| 2 | -- | Keep players' sector offset
-| 3 | -- | Keep players' velocity
-| 4-8 | `0` | Reserved
+| 7..3 | 0 | Reserved
+| 2 | -- | Keep players' velocity
+| 1 | -- | Keep players' sector offset
+| 0 | -- | Keep players' in-sector offset
 
 ##### Level sector count
 
-| Bits \(LSB to MSB\) | Description
+| Bits \(MSB to LSB\) | Description
 | -
-| 1-12 | Sector Z count minus 1
-| 13-24 | Sector X count minus 1
-| 25-32 | Sector Y count minus 1
+| 31..24 | Sector Y count minus 1
+| 23..12 | Sector X count minus 1
+| 11..0 | Sector Z count minus 1
 
 ##### Level sector sizes
 
 | Type | Description
 | -
-| `u32` | Size of compressed sector data
-| `u32` | Size of compressed client-side sector data
-| `u32` | Size of compressed server-side sector data
-| `u32` | Size of uncompressed sector data
-| `u32` | Size of uncompressed client-side sector data
-| `u32` | Size of uncompressed server-side sector data
+| `u32` | Size of compressed common sector data
+| `u32` | Size of compressed client sector data
+| `u32` | Size of compressed server sector data
+| `u32` | Size of decompressed common sector data
+| `u32` | Size of decompressed client sector data
+| `u32` | Size of decompressed server sector data
 
 ##### Level sector data
 
 | Type | Value | Description
 | -
-| `u8[]` | Compressed [Common sector data](#common-sector-data) | Common sector data
-| `u8[]` | Compressed [Client-side sector data](#client-side-sector-data) | Common sector data
-| `u8[]` | Compressed [Server-side sector data](#server-side-sector-data) | Common sector data
+| `u8` × "Size of compressed common sector data" in respective [Level sector sizes](#level-sector-sizes) | Compressed [Common sector data](#common-sector-data) | Common sector data
+| `u8` × "Size of compressed client sector data" in respective [Level sector sizes](#level-sector-sizes) | Compressed [Client sector data](#client-sector-data) | Client sector data
+| `u8` × "Size of compressed server sector data" in respective [Level sector sizes](#level-sector-sizes) | Compressed [Server sector data](#server-sector-data) | Server sector data
 
 ---
 
@@ -140,11 +140,11 @@ description: Compiled maps
 
 ##### Sector index bits
 
-| Bits \(LSB to MSB\) | Description
+| Bits \(MSB to LSB\) | Description
 | -
-| 1-12 | Z
-| 13-24 | X
-| 25-32 | Y
+| 31..24 | Y
+| 23..12 | X
+| 11..0 | Z
 
 ---
 
@@ -162,7 +162,7 @@ description: Compiled maps
 | [Weather environment](#weather-environment) | Default weather environment
 | [Gravity environment](#gravity-environment) | Default gravity environment
 
-### Client-side level data
+### Client level data
 
 | Type | Description
 | -
@@ -170,7 +170,7 @@ description: Compiled maps
 | `char` × "String table size" | String table
 | [Client-side material](#client-side-material) × "Material count" in [Common level data](#common-level-data) | Client-side materials
 
-### Server-side level data
+### Server level data
 
 | Type | Description
 | -
@@ -218,27 +218,53 @@ description: Compiled maps
 
 | Type | Value | Description
 | -
-| 
+| `u32` | -- | String table size
+| `char` × "String table size" | -- | String table
+| `u8` | -- | Used material count
+| [String](#string) × "Used material count" | -- | Used material names
+| `u8` | -- | Used physics material count
+| [String](#string) × "Used physics material count" | -- | Used physics material names
+| `u8` | -- | Dynamic light count
+| [Dynamic light](#dynamic-light) × "Dynamic light count" | -- | Dynamic lights
+| `u8` | -- | Fast light count
+| [Fast light](#fast-light) × "Fast light count" | -- | Fast lights
+| `u32` | 1... | Cube count
+| [Cube](#cube) × "Cube count" | -- | Cubes
 
-### Client-side sector data
+### Client sector data
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| `u8` | Lightmap count
+| [Lightmap](#lightmap) × "Lightmap count" | Lightmaps
+| `u32` | Vertex count
+| [Vertex](#vertex) × "Vertex count" | Vertex data
+| [Client-side dynamic light](#client-side-dynamic-light) × "Dynamic light count" in respective [Common sector data](#common-sector-data) | Client-side dynamic light data
+| [Client-side fast light](#client-side-fast-light) × "Fast light count" in respective [Common sector data](#common-sector-data) | Client-side fast light data
+| [Client-side cube](#client-side-cube) × "Cube count" in respective [Common sector data](#common-sector-data) | Client-side cube data
 
-### Server-side sector data
+### Server sector data
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| `u32` | String table size
+| `char` × "String table size" | String table
+| `u8` | Load region count
+| [Region](#region) × "Region count" | Load region data
+| [Server-side cube](#server-side-cube) × "Cube count" in respective [Common sector data](#common-sector-data) | Server-side cube data
+| `u32` | Sector entity count
+| [Entity]({{ page.dir }}entities/#entity) × "Sector entity count" | Sector entities
 
 ---
 
 ### Region
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| `float[3]` | \(+X, +Y, +Z\) corner
+| `float[3]` | \(-X, -Y, -Z\) corner
+| `u32` | Other active sector count
+| [Sector index](#sector-index) × "Other active sector count" | Sector indices
 
 ---
 
@@ -246,13 +272,18 @@ description: Compiled maps
 
 | Type | Value | Description
 | -
-| 
+| [String](#string) | -- | Name
+| [String](#string) | -- | User-defined type
+| `u8` | [Material flags](#material-flags) | Flags
+| `u8` | [Material render mode](#material-render-mode) | Render mode
 
 ##### Material flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
-| 
+| 7..2 | 0 | Reserved
+| 1 | -- | Is liquid
+| 0 | -- | Is transparent
 
 ##### Material render mode
 
@@ -264,15 +295,26 @@ description: Compiled maps
 
 ### Client-side material
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| [String](#string) | Texture \(untextured if empty\)
+| `u8` | Extra texture count
+| [String](#string) × "Extra texture count" | Extra textures
+| `u32` | Texture advance time in microseconds
+| `u8[3]` | RGB color
+| `u8` | Alpha \(ignored unless 'Is transparent' flag is set\)
+| `u8[3]` | RGB emission
+| `u8` | Shading
+| [Client-side material wave info](#client-side-material-wave-info) | Wave info \(ignored unless 'Is liquid' flag is set\)
 
 ##### Client-side material wave info
 
 | Type | Description
 | -
-| 
+| `float` | Amount
+| `float` | Wind influence
+| `float` | Offset
+| `float` | Scale
 
 ---
 
@@ -284,7 +326,7 @@ description: Compiled maps
 
 ##### Physics material flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
 | 
 
@@ -314,7 +356,7 @@ description: Compiled maps
 
 ##### Dynamic light flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
 | 
 
@@ -340,7 +382,7 @@ description: Compiled maps
 
 ##### Fast light flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
 | 
 
@@ -366,7 +408,7 @@ description: Compiled maps
 
 ##### Cube flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
 | 
 
@@ -392,7 +434,7 @@ description: Compiled maps
 
 ##### Parent cube flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
 | 
 
@@ -418,7 +460,7 @@ description: Compiled maps
 
 ##### Client-side geometry cube face bits
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
 | 
 
@@ -452,7 +494,7 @@ description: Compiled maps
 
 ##### Dynamic cube point flags
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
 | 
 

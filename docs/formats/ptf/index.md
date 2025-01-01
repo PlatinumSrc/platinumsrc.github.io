@@ -34,16 +34,16 @@ next: ptm
 | Type | Value | Description
 | -
 | `char[3]` | `{'P', 'T', 'F'}` | Header magic
-| `u8` | `0` | Major version
+| `u8` | 0 | Major version
 | `u8` | [Header info byte](#header-info-byte) | Flags and resolution
 
 ##### Header info byte
 
-| Bits \(LSB to MSB\) | Value | Description
+| Bits \(MSB to LSB\) | Value | Description
 | -
-| 1-4 | -- | Resolution
-| 5 | -- | Has alpha
-| 6-8 | `0` | Reserved
+| 7..5 | 0 | Reserved
+| 4 | -- | Has alpha
+| 3..0 | -- | Resolution
 
 ---
 
