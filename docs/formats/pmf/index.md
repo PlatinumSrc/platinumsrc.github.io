@@ -158,6 +158,7 @@ description: Compiled maps
 | [Material](#material) × "Material count" | Materials
 | `u16` | Physics material count
 | [Physics material](#physics-material) × "Physics material count" | Physics materials
+| [String](#string) | Air physics material
 | [Sound environment](#sound-environment) | Default sound environment
 | [Weather environment](#weather-environment) | Default weather environment
 | [Gravity environment](#gravity-environment) | Default gravity environment
@@ -210,7 +211,6 @@ description: Compiled maps
 | Type | Description
 | -
 | `float[3]` | XYZ gravity
-| `float` | Drag
 
 ---
 
@@ -322,21 +322,30 @@ description: Compiled maps
 
 | Type | Value | Description
 | -
-| 
+| [String](#string) | -- | Name
+| `u8` | [Physics material flags](#physics-material-flags) | Flags
+| `float` | -- | Friction \(if 'not solid' flag is not set\) or max speed \(if 'not solid' flag is set\)
+| `float` | -- | Traction \(ignored if 'not solid' flag is set\)
+| `float` | -- | Bounce \(ignored if 'not solid' flag is set\)
+| `float` | -- | Minimum speed to cause damage
+| `float` | -- | Base damage
+| `float` | -- | Extra damage per meter per second
 
 ##### Physics material flags
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 
+| 7-1 | 0 | Reserved
+| 0 | -- | Not solid
 
 ---
 
 ### Lightmap
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| u8 | Size \(2<sup>n</sup>\)
+| `u8[3]` × 2<sup>"Size"</sup> | RGB luxels
 
 ---
 
@@ -344,7 +353,9 @@ description: Compiled maps
 
 | Type | Description
 | -
-| 
+| `float[3]` | XYZ
+| `float[2]` | Texture UV
+| `float[2]` | Lightmap UV
 
 ---
 
@@ -352,25 +363,31 @@ description: Compiled maps
 
 | Type | Value | Description
 | -
-| 
+| `u8` | [Dynamic light flags](#dynamic-light-flags) | Flags
+| `u32` | -- | Global ID
 
 ##### Dynamic light flags
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 
+| 7-2 | 0 | Reserved
+| 1 | -- | Preserve
+| 0 | -- | Enable
 
 ### Client-side dynamic light
 
 | Type | Description
 | -
-| 
+| `u8[3]` | RGB color
+| `u8` | Affected lightmap count
+| [Client-side dynamic light lightmap layer](#client-side-dynamic-light-lightmap-layer) × "Affected lightmap count" | Lightmap layers
 
 ##### Client-side dynamic light lightmap layer
 
 | Type | Description
 | -
-| 
+| `u8` | Target lightmap
+| `u8[3]` × 2<sup>"Size" in respective [Lightmap](#lightmap)</sup> | RGB luxels
 
 ---
 
@@ -378,25 +395,33 @@ description: Compiled maps
 
 | Type | Value | Description
 | -
-| 
+| `u8` | [Fast light flags](#fast-light-flags) | Flags
+| `u8` | -- | Initial intensity
+| `u32` | -- | Global ID
 
 ##### Fast light flags
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 
+| 7-2 | 0 | Reserved
+| 1 | -- | Preserve
+| 0 | -- | Enable
 
 ### Client-side fast light
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| `u8[3]` | RGB color
+| `u32` | Range count
+| [Client-side fast light vertex range](#client-side-fast-light-vertex-range) × "Range count" | Ranges
 
 ##### Client-side fast light vertex range
 
 | Type | Description
 | -
-| 
+| `u32` | Vertices to skip
+| `u32` | Multiplier count
+| `u8` × "Multiplier count" | Multipliers
 
 ---
 
