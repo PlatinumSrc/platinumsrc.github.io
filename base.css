@@ -286,7 +286,7 @@ center {
 #_content {
     padding: 3.25em;
 }
-#_content > *:first-child {
+#_content *:first-child {
     margin-top: 0;
 }
 #_sidebar {

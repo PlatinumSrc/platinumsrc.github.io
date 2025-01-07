@@ -22,7 +22,49 @@ description: Compiled maps
         - [Sound environment](#sound-environment)
         - [Weather environment](#weather-environment)
         - [Gravity environment](#gravity-environment)
+        - [Common sector data](#common-sector-data)
+        - [Client sector data](#client-sector-data)
+        - [Server sector data](#server-sector-data)
+        - [Region](#region)
+        - [Material](#material)
+            - [Material flags](#material-flags)
+            - [Material render mode](#material-render-mode)
+        - [Client-side material](#client-side-material)
+            - [Client-side material wave info](#client-side-material-wave-info)
+        - [Physics material](#physics-material)
+            - [Physics material flags](#physics-material-flags)
+        - [Lightmap](#lightmap)
+        - [Vertex](#vertex)
+        - [Dynamic light](#dynamic-light)
+            - [Dynamic light flags](#dynamic-light-flags)
+        - [Client-side dynamic light](#client-side-dynamic-light)
+            - [Client-side dynamic light lightmap layer](#client-side-dynamic-light-lightmap-layer)
+        - [Fast light](#fast-light)
+            - [Fast light flags](#fast-light-flags)
+        - [Client-side fast light](#client-side-fast-light)
+            - [Client-side fast light vertex range](#client-side-fast-light-vertex-range)
+        - [Cube](#cube)
+            - [Cube flags and type](#cube-flags-and-type)
+            - [Cube type](#cube-type)
+        - [Client-side cube](#client-side-cube)
+        - [Server-side cube](#server-side-cube)
+        - [Parent cube data](#parent-cube-data)
+            - [Parent cube flags](#parent-cube-flags)
+        - [Geometry cube data](#geometry-cube-data)
+        - [Client-side geometry cube data](#client-side-geometry-cube-data)
+            - [Client-side geometry cube face bits](#client-side-geometry-cube-face-bits)
+        - [Extended geometry cube data](#extended-geometry-cube-data)
+            - [Extended geometry cube point bits](#extended-geometry-cube-point-bits)
+        - [Client-side extended geometry cube data](#client-side-extended-geometry-cube-data)
+        - [Cube chunk data](#cube-chunk-data)
+            - [Cube chunk data visibility data](#cube-chunk-data-visibility-data)
+        - [Cube lighting data](#cube-lighting-data)
+            - [Cube lighting data light reference](#cube-lighting-data-light-reference)
+        - [Cube pathfinding data](#cube-pathfinding-data)
+            - [Cube pathfinding data attribute](#cube-pathfinding-data-attribute)
         - [String](#string)
+- [Entities]({{ page.dir }}entities/)
+- [Extensions]({{ page.dir }}extensions/)
 
 ---
 
@@ -45,7 +87,7 @@ description: Compiled maps
 | Type | Value | Description
 | -
 | `char[3]` | `{'P', 'M', 'F'}` | Header magic
-| `u8` | 0 | Major version
+| `u16` | 0 | Major version
 | `u64` | -- | Creation time as a UTC Unix timestamp
 | `char[1...]` | `{..., 0}` | Name
 | `char[1...]` | `{..., 0}` | Description
@@ -292,7 +334,6 @@ description: Compiled maps
 | `ENTMAT_RENDMODE_NORMAL` | 0
 | `ENTMAT_RENDMODE_ADD` | 1
 
-
 ### Client-side material
 
 | Type | Description
@@ -301,6 +342,7 @@ description: Compiled maps
 | `u8` | Extra texture count
 | [String](#string) × "Extra texture count" | Extra textures
 | `u32` | Texture advance time in microseconds
+| `float[2]` | Texture UV scroll
 | `u8[3]` | RGB color
 | `u8` | Alpha \(ignored unless 'Is transparent' flag is set\)
 | `u8[3]` | RGB emission
@@ -311,7 +353,7 @@ description: Compiled maps
 
 | Type | Description
 | -
-| `float` | Amount
+| `float[3]` | XYZ velocity
 | `float` | Wind influence
 | `float` | Offset
 | `float` | Scale
@@ -335,7 +377,7 @@ description: Compiled maps
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 7-1 | 0 | Reserved
+| 7..1 | 0 | Reserved
 | 0 | -- | Not solid
 
 ---
@@ -370,7 +412,7 @@ description: Compiled maps
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 7-2 | 0 | Reserved
+| 7..2 | 0 | Reserved
 | 1 | -- | Preserve
 | 0 | -- | Enable
 
@@ -403,7 +445,7 @@ description: Compiled maps
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 7-2 | 0 | Reserved
+| 7..2 | 0 | Reserved
 | 1 | -- | Preserve
 | 0 | -- | Enable
 
@@ -429,25 +471,43 @@ description: Compiled maps
 
 | Type | Value | Description
 | -
-| 
+| u8 | [Cube flags and type](#cube-flags-and-type) | Flags and type
+| [Cube chunk data](#cube-chunk-data) × 0..1 | -- | Chunk data \(only present if 'has chunk data' flag is set\)
+| '[Parent cube data](#parent-cube-data), [Geometry cube data](#geometry-cube-data), or [Extended geometry cube data](#extended-geometry-cube-data)' × 0..1 | -- | Cube data \(dependent on cube type, not present if type is `PMF_CUBE_EMPTY`\)
 
-##### Cube flags
+##### Cube flags and type
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 
+| 7 | 0 | Reserved
+| 6 | -- | Has pathfinding data
+| 5 | -- | Has lighting data
+| 4 | -- | Has chunk data
+| 3 | -- | Is extended client-side
+| 2 | -- | Is extended
+| 1..0 | [Cube type](#cube-type) | Type
+
+##### Cube type
+
+| Name | Value
+| -
+| `PMF_CUBE_EMPTY` | 0
+| `PMF_CUBE_PARENT` | 1
+| `PMF_CUBE_GEOMETRY` | 2
+| `PMF_CUBE_EXTGEOMETRY` | 3
 
 ### Client-side cube
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| [Cube lighting data](#cube-lighting-data) × 0..1 | Lighting data \(only present if 'has lighting data' flag is set\)
+| '[Client-side geometry cube data](#client-side-geometry-cube-data) or [Client-side extended geometry cube data](#client-side-extended-geometry-cube-data)' × 0..1 | Client-side Cube data \(dependent on cube type, only present if type is `PMF_CUBE_GEOMETRY` or `PMF_CUBE_EXTGEOMETRY`\)
 
 ### Server-side cube
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| [Cube pathfinding data](#cube-pathfinding-data) × 0..1 | Pathfinding data \(only present if 'has pathfinding data' flag is set\)
 
 ---
 
@@ -455,79 +515,116 @@ description: Compiled maps
 
 | Type | Value | Description
 | -
-| 
+| `u8` | [Parent cube flags](#parent-cube-flags) | Flags
+| `u32` × 0..1 | -- | (+X, +Y, +Z) child index (only present if 'has (+X, +Y, +Z) child' flag is set)
+| `u32` × 0..1 | -- | (-X, +Y, +Z) child index (only present if 'has (-X, +Y, +Z) child' flag is set)
+| `u32` × 0..1 | -- | (+X, +Y, -Z) child index (only present if 'has (+X, +Y, -Z) child' flag is set)
+| `u32` × 0..1 | -- | (-X, +Y, -Z) child index (only present if 'has (-X, +Y, -Z) child' flag is set)
+| `u32` × 0..1 | -- | (+X, -Y, +Z) child index (only present if 'has (+X, -Y, +Z) child' flag is set)
+| `u32` × 0..1 | -- | (-X, -Y, +Z) child index (only present if 'has (-X, -Y, +Z) child' flag is set)
+| `u32` × 0..1 | -- | (+X, -Y, -Z) child index (only present if 'has (+X, -Y, -Z) child' flag is set)
+| `u32` × 0..1 | -- | (-X, -Y, -Z) child index (only present if 'has (-X, -Y, -Z) child' flag is set)
 
 ##### Parent cube flags
 
-| Bits \(MSB to LSB\) | Value | Description
+| Bits \(MSB to LSB\) | Description
 | -
-| 
+| 7 | Has (-X, -Y, -Z) child
+| 6 | Has (+X, -Y, -Z) child
+| 5 | Has (-X, -Y, +Z) child
+| 4 | Has (+X, -Y, +Z) child
+| 3 | Has (-X, +Y, -Z) child
+| 2 | Has (+X, +Y, -Z) child
+| 1 | Has (-X, +Y, +Z) child
+| 0 | Has (+X, +Y, +Z) child
 
 ---
 
 ### Geometry cube data
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
-
-### Extended geometry cube data
-
-| Type | Value | Description
-| -
-| 
+| `u8` | Material
+| `u8` | Physics material
 
 ### Client-side geometry cube data
 
 | Type | Value | Description
 | -
-| 
+| `u8` | -- | Lightmap
+| `u8` | [Client-side geometry cube face bits](#client-side-geometry-cube-face-bits) | 'Has face' bits
+| `u32` | -- | Index of first quad's first vertex
 
 ##### Client-side geometry cube face bits
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 
+| 7..6 | 0 | Reserved
+| 5 | -- | -Z has face
+| 4 | -- | -Y has face
+| 3 | -- | -X has face
+| 2 | -- | +Z has face
+| 1 | -- | +Y has face
+| 0 | -- | +X has face
+
+---
+
+### Extended geometry cube data
+
+| Type | Value | Description
+| -
+| `u8` | -- | +X material
+| `u8` | -- | +Y material
+| `u8` | -- | +Z material
+| `u8` | -- | -X material
+| `u8` | -- | -Y material
+| `u8` | -- | -Z material
+| `u8` | -- | +X physics material
+| `u8` | -- | +Y physics material
+| `u8` | -- | +Z physics material
+| `u8` | -- | -X physics material
+| `u8` | -- | -Y physics material
+| `u8` | -- | -Z physics material
+| `u8` | [Extended geometry cube point bits](#extended-geometry-cube-point-bits) | 'Point moved' bits
+| `float[3]` × 0..1 | -- | (+X, +Y, +Z) XYZ (only present if '(+X, +Y, +Z) point moved' flag is set)
+| `float[3]` × 0..1 | -- | (-X, +Y, +Z) XYZ (only present if '(-X, +Y, +Z) point moved' flag is set)
+| `float[3]` × 0..1 | -- | (+X, +Y, -Z) XYZ (only present if '(+X, +Y, -Z) point moved' flag is set)
+| `float[3]` × 0..1 | -- | (-X, +Y, -Z) XYZ (only present if '(-X, +Y, -Z) point moved' flag is set)
+| `float[3]` × 0..1 | -- | (+X, -Y, +Z) XYZ (only present if '(+X, -Y, +Z) point moved' flag is set)
+| `float[3]` × 0..1 | -- | (-X, -Y, +Z) XYZ (only present if '(-X, -Y, +Z) point moved' flag is set)
+| `float[3]` × 0..1 | -- | (+X, -Y, -Z) XYZ (only present if '(+X, -Y, -Z) point moved' flag is set)
+| `float[3]` × 0..1 | -- | (-X, -Y, -Z) XYZ (only present if '(-X, -Y, -Z) point moved' flag is set)
+
+##### Extended geometry cube point bits
+
+| Bits \(MSB to LSB\) | Description
+| -
+| 7 | (-X, -Y, -Z) point moved
+| 6 | (+X, -Y, -Z) point moved
+| 5 | (-X, -Y, +Z) point moved
+| 4 | (+X, -Y, +Z) point moved
+| 3 | (-X, +Y, -Z) point moved
+| 2 | (+X, +Y, -Z) point moved
+| 1 | (-X, +Y, +Z) point moved
+| 0 | (+X, +Y, +Z) point moved
 
 ### Client-side extended geometry cube data
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
-
----
-
-### Solid cube data
-
-| Type | Value | Description
-| -
-| 
-
-### Client-side solid cube data
-
-| Type | Value | Description
-| -
-| 
-
----
-
-### Dynamic cube data
-
-| Type | Value | Description
-| -
-| 
-
-##### Dynamic cube point flags
-
-| Bits \(MSB to LSB\) | Value | Description
-| -
-| 
-
-### Client-side dynamic cube data
-
-| Type | Value | Description
-| -
-| 
+| `u8` | +X lightmap
+| `u8` | +Y lightmap
+| `u8` | +Z lightmap
+| `u8` | -X lightmap
+| `u8` | -Y lightmap
+| `u8` | -Z lightmap
+| `u8` | +X triangle count
+| `u8` | +Y triangle count
+| `u8` | +Z triangle count
+| `u8` | -X triangle count
+| `u8` | -Y triangle count
+| `u8` | -Z triangle count
+| `u32` | Index of first triangle's first vertex
 
 ---
 
@@ -535,27 +632,37 @@ description: Compiled maps
 
 | Type | Description
 | -
-| 
+| `u32` | Other visible cube count
+| `u32` × "Other visible cube count" | Visible cube indices
+| `u32` | Other visible sector count
+| [Cube chunk data visibility data](#cube-chunk-data-visibility-data) × "Other visible sector count" | Cube chunk data visibility data
 
 ##### Cube chunk data visibility data
 
 | Type | Description
 | -
-| 
+| [Sector index](#sector-index]
+| `u32` | Visible cube count (0 means all)
+| `u32` × "Visible cube count" | Cube indices
 
 ---
 
 ### Cube lighting data
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| `u8[3]` | Base light RGB color
+| `u8` | Dynamic light count
+| [Cube lighting data light reference](#cube-lighting-data-light-reference) × "Dynamic light count" | Dynamic light references
+| `u8` | Fast light count
+| [Cube lighting data light reference](#cube-lighting-data-light-reference) × "Fast light count" | Fast light references
 
-##### Cube lighting data lights
+##### Cube lighting data light reference
 
-| Type | Value | Description
+| Type | Description
 | -
-| 
+| `u8` | Index
+| `u8` | Amount
 
 ---
 
@@ -563,13 +670,15 @@ description: Compiled maps
 
 | Type | Description
 | -
-| 
+| `u8` | Attribute count
+| [Cube pathfinding data attribute](#cube-pathfinding-data-attribute) × "Attribute count" | Attributes
 
 ##### Cube pathfinding data attribute
 
 | Type | Description
 | -
-| 
+| [String](#string) | Name
+| `float[3]` | XYZ direction to face
 
 ---
 

@@ -63,6 +63,12 @@ title: Propaganda Wall
 
 ---
 
+## Captioned GIFs
+
+["Yes, I use PlatinumSrc" gigachad](i-use-psrc.gif)
+
+---
+
 ![](gimp.png)
 
 </div>
