@@ -1,7 +1,8 @@
 ---
+section: File Format Documentation
 title: PMF
 description: Compiled maps
-#next: 
+next: pmp
 ---
 
 # Table of contents
@@ -21,6 +22,8 @@ description: Compiled maps
         - [Server level data](#server-level-data)
         - [Sound environment](#sound-environment)
         - [Weather environment](#weather-environment)
+        - [Sky environment](#sky-environment)
+            - [Sky environment flags](#sky-environment-flags)
         - [Gravity environment](#gravity-environment)
         - [Common sector data](#common-sector-data)
         - [Client sector data](#client-sector-data)
@@ -87,7 +90,7 @@ description: Compiled maps
 | Type | Value | Description
 | -
 | `char[3]` | `{'P', 'M', 'F'}` | Header magic
-| `u16` | 0 | Major version
+| `u8` | 0 | Major version
 | `u64` | -- | Creation time as a UTC Unix timestamp
 | `char[1...]` | `{..., 0}` | Name
 | `char[1...]` | `{..., 0}` | Description
@@ -105,7 +108,7 @@ description: Compiled maps
 | `u32` | -- | String table size
 | `char` × "String table size" | -- | String table
 | `u32` | -- | Embedded resource archive size
-| `u8` × "Embedded resource archive size" | [PFA archive]({{ page.dir }}../pfa/) | Embedded resources
+| `u8` × "Embedded resource archive size" | [PAF archive]({{ page.dir }}../paf/) | Embedded resources
 | `u16` | -- | Extension count
 | `u32` × "Extension count" | -- | Extension sizes
 | [Extension](#extension) × "Extension count" | -- | Extensions
@@ -131,6 +134,7 @@ description: Compiled maps
 | `u8` × "Size of decompressed common data" | [Common level data](#common-level-data) | Common data
 | `u8` × "Size of decompressed client data" | [Client level data](#client-level-data) | Client data
 | `u8` × "Size of decompressed server data" | [Server level data](#server-level-data) | Server data
+| `u8` | -- | Sector size \(2<sup>n</sup>\)
 | `u32` | [Level sector count](#level-sector-count) | Sector count
 | [Sector index](#sector-index) | -- | Center sector
 | [Level sector sizes](#level-sector-sizes) × 1... | -- | Sector data sizes \(ordered by `[Y][X][Z]`\)
@@ -201,9 +205,12 @@ description: Compiled maps
 | `u16` | Physics material count
 | [Physics material](#physics-material) × "Physics material count" | Physics materials
 | [String](#string) | Air physics material
-| [Sound environment](#sound-environment) | Default sound environment
-| [Weather environment](#weather-environment) | Default weather environment
-| [Gravity environment](#gravity-environment) | Default gravity environment
+| `u8` | Weather environment count
+| [Weather environment](#weather-environment) × "Weather environment count" | Weather environments
+| `u8` | Gravity environment count
+| [Gravity environment](#gravity-environment) × "Gravity environment count" | Gravity environments
+| [String](#string) | Default weather environment
+| [String](#string) | Default gravity environment
 
 ### Client level data
 
@@ -211,6 +218,12 @@ description: Compiled maps
 | -
 | `u32` | String table size
 | `char` × "String table size" | String table
+| `u8` | Sound environment count
+| [Sound environment](#sound-environment) × "Sound environment count" | Sound environments
+| `u8` | Sky environment count
+| [Sky environment](#sky-environment) × "Sky environment count" | Sky environments
+| [String](#string) | Default sound environment
+| [String](#string) | Default sky environment
 | [Client-side material](#client-side-material) × "Material count" in [Common level data](#common-level-data) | Client-side materials
 
 ### Server level data
@@ -228,6 +241,7 @@ description: Compiled maps
 
 | Type | Description
 | -
+| [String](#string) | Name
 | `float` | Low pass filter amount
 | `float` | High pass filter amount
 | `float` | Reverb delay
@@ -240,18 +254,43 @@ description: Compiled maps
 
 | Type | Description
 | -
-| `float[3]` | XYZ direction and velocity
-| `u32` | Direction random seed
-| `float[3]` | XYZ direction randomness
-| `float` | Direction noise speed
-| `u32` | Velocity random seed
-| `float[3]` | XYZ velocity randomness
-| `float` | Velocity noise speed
+| [String](#string) | Name
+| `float[3]` | XYZ wind direction and velocity
+| `u32` | Wind direction random seed
+| `float[3]` | XYZ wind direction randomness
+| `float` | Wind direction noise speed
+| `u32` | Wind velocity random seed
+| `float` | Wind velocity randomness
+| `float` | Wind velocity noise speed
+
+### Sky environment
+
+| Type | Value | Description
+| -
+| [String](#string) | Name
+| `u8` | [Sky environment flags](#sky-environment-flags) | Flags
+| [String](#string) | -- | +X skybox material
+| [String](#string) | -- | +Y skybox material
+| [String](#string) | -- | +Z skybox material
+| [String](#string) | -- | -X skybox material
+| [String](#string) | -- | -Y skybox material
+| [String](#string) | -- | -Z skybox material
+| [String](#string) | -- | Top cloud layer material
+| [String](#string) | -- | Bottom cloud layer material
+| [Sector index](#sector-index) | -- | 3D skybox sector
+
+##### Sky environment flags
+
+| Bits \(MSB to LSB\) | Value | Description
+| -
+| 7..1 | 0 | Reserved
+| 0 | -- | 3D skybox
 
 ### Gravity environment
 
 | Type | Description
 | -
+| [String](#string) | Name
 | `float[3]` | XYZ gravity
 
 ---
@@ -266,6 +305,10 @@ description: Compiled maps
 | [String](#string) × "Used material count" | -- | Used material names
 | `u8` | -- | Used physics material count
 | [String](#string) × "Used physics material count" | -- | Used physics material names
+| `u8` | -- | Weather environment region count
+| [Environment region](#environment-region) × "Weather environment region count" | -- | Weather environment regions
+| `u8` | -- | Gravity environment region count
+| [Environment region](#environment-region) × "Gravity environment region count" | -- | Gravity environment regions
 | `u8` | -- | Dynamic light count
 | [Dynamic light](#dynamic-light) × "Dynamic light count" | -- | Dynamic lights
 | `u8` | -- | Fast light count
@@ -277,6 +320,10 @@ description: Compiled maps
 
 | Type | Description
 | -
+| `u8` | Sound environment region count
+| [Environment region](#environment-region) × "Sound environment region count" | Sound environment regions
+| `u8` | Sky environment region count
+| [Environment region](#environment-region) × "Sky environment region count" | Sky environment regions
 | `u8` | Lightmap count
 | [Lightmap](#lightmap) × "Lightmap count" | Lightmaps
 | `u32` | Vertex count
@@ -307,6 +354,22 @@ description: Compiled maps
 | `float[3]` | \(-X, -Y, -Z\) corner
 | `u32` | Other active sector count
 | [Sector index](#sector-index) × "Other active sector count" | Sector indices
+
+---
+
+### Environment region
+
+| Type | Description
+| -
+| `float[3]` | \(+X, +Y, +Z\) corner
+| `float[3]` | \(-X, +Y, +Z\) corner
+| `float[3]` | \(+X, +Y, -Z\) corner
+| `float[3]` | \(-X, +Y, -Z\) corner
+| `float[3]` | \(+X, -Y, +Z\) corner
+| `float[3]` | \(-X, -Y, +Z\) corner
+| `float[3]` | \(+X, -Y, -Z\) corner
+| `float[3]` | \(-X, -Y, -Z\) corner
+| [String](#string) | Environment name
 
 ---
 
@@ -641,7 +704,7 @@ description: Compiled maps
 
 | Type | Description
 | -
-| [Sector index](#sector-index]
+| [Sector index](#sector-index) | Sector
 | `u32` | Visible cube count (0 means all)
 | `u32` × "Visible cube count" | Cube indices
 

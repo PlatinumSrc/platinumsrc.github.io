@@ -1,7 +1,8 @@
 ---
+section: File Format Documentation
 title: P3M
 description: 3D models
-next: ptf
+next: paf
 ---
 
 # Table of contents
