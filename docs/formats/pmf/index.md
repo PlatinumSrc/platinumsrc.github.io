@@ -12,11 +12,11 @@ next: pmp
     - [Data](#data)
         - [Level data](#level-data)
             - [Level flags](#level-flags)
-            - [Level sector count](#level-sector-count)
-            - [Level sector sizes](#level-sector-sizes)
-            - [Level sector data](#level-sector-data)
-        - [Sector index](#sector-index)
-            - [Sector index bits](#sector-index-bits)
+            - [Level chunk count](#level-chunk-count)
+            - [Level chunk sizes](#level-chunk-sizes)
+            - [Level chunk data](#level-chunk-data)
+        - [Chunk index](#chunk-index)
+            - [Chunk index bits](#chunk-index-bits)
         - [Common level data](#common-level-data)
         - [Client level data](#client-level-data)
         - [Server level data](#server-level-data)
@@ -25,10 +25,11 @@ next: pmp
         - [Sky environment](#sky-environment)
             - [Sky environment flags](#sky-environment-flags)
         - [Gravity environment](#gravity-environment)
-        - [Common sector data](#common-sector-data)
-        - [Client sector data](#client-sector-data)
-        - [Server sector data](#server-sector-data)
+        - [Common chunk data](#common-chunk-data)
+        - [Client chunk data](#client-chunk-data)
+        - [Server chunk data](#server-chunk-data)
         - [Region](#region)
+        - [Environment region](#environment-region)
         - [Material](#material)
             - [Material flags](#material-flags)
             - [Material render mode](#material-render-mode)
@@ -59,8 +60,8 @@ next: pmp
         - [Extended geometry cube data](#extended-geometry-cube-data)
             - [Extended geometry cube point bits](#extended-geometry-cube-point-bits)
         - [Client-side extended geometry cube data](#client-side-extended-geometry-cube-data)
-        - [Cube chunk data](#cube-chunk-data)
-            - [Cube chunk data visibility data](#cube-chunk-data-visibility-data)
+        - [Cube visibility data](#cube-visibility-data)
+            - [Cube visibility data chunk](#cube-visibility-data-chunk)
         - [Cube lighting data](#cube-lighting-data)
             - [Cube lighting data light reference](#cube-lighting-data-light-reference)
         - [Cube pathfinding data](#cube-pathfinding-data)
@@ -134,11 +135,11 @@ next: pmp
 | `u8` × "Size of decompressed common data" | [Common level data](#common-level-data) | Common data
 | `u8` × "Size of decompressed client data" | [Client level data](#client-level-data) | Client data
 | `u8` × "Size of decompressed server data" | [Server level data](#server-level-data) | Server data
-| `u8` | -- | Sector size \(2<sup>n</sup>\)
-| `u32` | [Level sector count](#level-sector-count) | Sector count
-| [Sector index](#sector-index) | -- | Center sector
-| [Level sector sizes](#level-sector-sizes) × 1... | -- | Sector data sizes \(ordered by `[Y][X][Z]`\)
-| [Level sector data](#level-sector-data) × 1... | -- | Sector data \(ordered by `[Y][X][Z]`\)
+| `u8` | -- | Chunk size \(2<sup>n</sup>\)
+| `u32` | [Level chunk count](#level-chunk-count) | Chunk count
+| [Chunk index](#chunk-index) | -- | Center chunk
+| [Level chunk sizes](#level-chunk-sizes) × 1... | -- | Chunk data sizes \(ordered by `[Y][X][Z]`\)
+| [Level chunk data](#level-chunk-data) × 1... | -- | Chunk data \(ordered by `[Y][X][Z]`\)
 
 ##### Level flags
 
@@ -146,45 +147,45 @@ next: pmp
 | -
 | 7..3 | 0 | Reserved
 | 2 | -- | Keep players' velocity
-| 1 | -- | Keep players' sector offset
-| 0 | -- | Keep players' in-sector offset
+| 1 | -- | Keep players' chunk offset
+| 0 | -- | Keep players' in-chunk offset
 
-##### Level sector count
+##### Level chunk count
 
 | Bits \(MSB to LSB\) | Description
 | -
-| 31..24 | Sector Y count minus 1
-| 23..12 | Sector X count minus 1
-| 11..0 | Sector Z count minus 1
+| 31..24 | Chunk Y count minus 1
+| 23..12 | Chunk X count minus 1
+| 11..0 | Chunk Z count minus 1
 
-##### Level sector sizes
+##### Level chunk sizes
 
 | Type | Description
 | -
-| `u32` | Size of compressed common sector data
-| `u32` | Size of compressed client sector data
-| `u32` | Size of compressed server sector data
-| `u32` | Size of decompressed common sector data
-| `u32` | Size of decompressed client sector data
-| `u32` | Size of decompressed server sector data
+| `u32` | Size of compressed common chunk data
+| `u32` | Size of compressed client chunk data
+| `u32` | Size of compressed server chunk data
+| `u32` | Size of decompressed common chunk data
+| `u32` | Size of decompressed client chunk data
+| `u32` | Size of decompressed server chunk data
 
-##### Level sector data
+##### Level chunk data
 
 | Type | Value | Description
 | -
-| `u8` × "Size of compressed common sector data" in respective [Level sector sizes](#level-sector-sizes) | Compressed [Common sector data](#common-sector-data) | Common sector data
-| `u8` × "Size of compressed client sector data" in respective [Level sector sizes](#level-sector-sizes) | Compressed [Client sector data](#client-sector-data) | Client sector data
-| `u8` × "Size of compressed server sector data" in respective [Level sector sizes](#level-sector-sizes) | Compressed [Server sector data](#server-sector-data) | Server sector data
+| `u8` × "Size of compressed common chunk data" in respective [Level chunk sizes](#level-chunk-sizes) | Compressed [Common chunk data](#common-chunk-data) | Common chunk data
+| `u8` × "Size of compressed client chunk data" in respective [Level chunk sizes](#level-chunk-sizes) | Compressed [Client chunk data](#client-chunk-data) | Client chunk data
+| `u8` × "Size of compressed server chunk data" in respective [Level chunk sizes](#level-chunk-sizes) | Compressed [Server chunk data](#server-chunk-data) | Server chunk data
 
 ---
 
-### Sector index
+### Chunk index
 
 | Type | Value | Description
 | -
-| `u32` | [Sector index bits](#sector-index-bits) | Sector index
+| `u32` | [Chunk index bits](#chunk-index-bits) | Chunk index
 
-##### Sector index bits
+##### Chunk index bits
 
 | Bits \(MSB to LSB\) | Description
 | -
@@ -248,7 +249,7 @@ next: pmp
 | `float` | Reverb feedback
 | `float` | Reverb mix
 | `float` | Reverb low pass filter amount
-| `float` | Reverb high pass filter ammount
+| `float` | Reverb high pass filter amount
 
 ### Weather environment
 
@@ -277,7 +278,7 @@ next: pmp
 | [String](#string) | -- | -Z skybox material
 | [String](#string) | -- | Top cloud layer material
 | [String](#string) | -- | Bottom cloud layer material
-| [Sector index](#sector-index) | -- | 3D skybox sector
+| [Chunk index](#chunk-index) | -- | 3D skybox chunk
 
 ##### Sky environment flags
 
@@ -295,7 +296,7 @@ next: pmp
 
 ---
 
-### Common sector data
+### Common chunk data
 
 | Type | Value | Description
 | -
@@ -316,7 +317,7 @@ next: pmp
 | `u32` | 1... | Cube count
 | [Cube](#cube) × "Cube count" | -- | Cubes
 
-### Client sector data
+### Client chunk data
 
 | Type | Description
 | -
@@ -328,11 +329,11 @@ next: pmp
 | [Lightmap](#lightmap) × "Lightmap count" | Lightmaps
 | `u32` | Vertex count
 | [Vertex](#vertex) × "Vertex count" | Vertex data
-| [Client-side dynamic light](#client-side-dynamic-light) × "Dynamic light count" in respective [Common sector data](#common-sector-data) | Client-side dynamic light data
-| [Client-side fast light](#client-side-fast-light) × "Fast light count" in respective [Common sector data](#common-sector-data) | Client-side fast light data
-| [Client-side cube](#client-side-cube) × "Cube count" in respective [Common sector data](#common-sector-data) | Client-side cube data
+| [Client-side dynamic light](#client-side-dynamic-light) × "Dynamic light count" in respective [Common chunk data](#common-chunk-data) | Client-side dynamic light data
+| [Client-side fast light](#client-side-fast-light) × "Fast light count" in respective [Common chunk data](#common-chunk-data) | Client-side fast light data
+| [Client-side cube](#client-side-cube) × "Cube count" in respective [Common chunk data](#common-chunk-data) | Client-side cube data
 
-### Server sector data
+### Server chunk data
 
 | Type | Description
 | -
@@ -340,9 +341,9 @@ next: pmp
 | `char` × "String table size" | String table
 | `u8` | Load region count
 | [Region](#region) × "Region count" | Load region data
-| [Server-side cube](#server-side-cube) × "Cube count" in respective [Common sector data](#common-sector-data) | Server-side cube data
-| `u32` | Sector entity count
-| [Entity]({{ page.dir }}entities/#entity) × "Sector entity count" | Sector entities
+| [Server-side cube](#server-side-cube) × "Cube count" in respective [Common chunk data](#common-chunk-data) | Server-side cube data
+| `u32` | Chunk entity count
+| [Entity]({{ page.dir }}entities/#entity) × "Chunk entity count" | Chunk entities
 
 ---
 
@@ -352,8 +353,8 @@ next: pmp
 | -
 | `float[3]` | \(+X, +Y, +Z\) corner
 | `float[3]` | \(-X, -Y, -Z\) corner
-| `u32` | Other active sector count
-| [Sector index](#sector-index) × "Other active sector count" | Sector indices
+| `u32` | Other active chunk count
+| [Chunk index](#chunk-index) × "Other active chunk count" | Chunk indices
 
 ---
 
@@ -535,7 +536,7 @@ next: pmp
 | Type | Value | Description
 | -
 | u8 | [Cube flags and type](#cube-flags-and-type) | Flags and type
-| [Cube chunk data](#cube-chunk-data) × 0..1 | -- | Chunk data \(only present if 'has chunk data' flag is set\)
+| [Cube visibility data](#cube-chunk-data) × 0..1 | -- | Visibility data \(only present if 'has visibility data' flag is set\)
 | '[Parent cube data](#parent-cube-data), [Geometry cube data](#geometry-cube-data), or [Extended geometry cube data](#extended-geometry-cube-data)' × 0..1 | -- | Cube data \(dependent on cube type, not present if type is `PMF_CUBE_EMPTY`\)
 
 ##### Cube flags and type
@@ -545,7 +546,7 @@ next: pmp
 | 7 | 0 | Reserved
 | 6 | -- | Has pathfinding data
 | 5 | -- | Has lighting data
-| 4 | -- | Has chunk data
+| 4 | -- | Has visibility data
 | 3 | -- | Is extended client-side
 | 2 | -- | Is extended
 | 1..0 | [Cube type](#cube-type) | Type
@@ -691,20 +692,20 @@ next: pmp
 
 ---
 
-### Cube chunk data
+### Cube visibility data
 
 | Type | Description
 | -
 | `u32` | Other visible cube count
 | `u32` × "Other visible cube count" | Visible cube indices
-| `u32` | Other visible sector count
-| [Cube chunk data visibility data](#cube-chunk-data-visibility-data) × "Other visible sector count" | Cube chunk data visibility data
+| `u32` | Other visible chunk count
+| [Cube visibility data chunk](#cube-visibility-data-chunk) × "Other visible chunk count" | Cube visibility data chunk
 
-##### Cube chunk data visibility data
+##### Cube visibility data chunk
 
 | Type | Description
 | -
-| [Sector index](#sector-index) | Sector
+| [Chunk index](#chunk-index) | Chunk index
 | `u32` | Visible cube count (0 means all)
 | `u32` × "Visible cube count" | Cube indices
 
