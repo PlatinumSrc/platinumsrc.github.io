@@ -412,6 +412,8 @@ next: pmp
 | `u8[3]` | RGB emission
 | `u8` | Shading
 | [Client-side material wave info](#client-side-material-wave-info) | Wave info \(ignored unless 'Is liquid' flag is set\)
+| `float` | Sound volume dampening
+| `float` | Sound frequency dampening
 
 ##### Client-side material wave info
 
@@ -543,13 +545,11 @@ next: pmp
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 7 | 0 | Reserved
+| 7 | -- | Draw backfaces
 | 6 | -- | Has pathfinding data
 | 5 | -- | Has lighting data
 | 4 | -- | Has visibility data
-| 3 | -- | Is extended client-side
-| 2 | -- | Is extended
-| 1..0 | [Cube type](#cube-type) | Type
+| 3..0 | [Cube type](#cube-type) | Type
 
 ##### Cube type
 
