@@ -149,9 +149,6 @@ next: paf
 | -
 | `u8` | [Material render mode](#material-render-mode) | Render mode
 | `u8` | -- | Texture index \(255 for none\)
-| `u8` | -- | Extra texture count
-| `u8` × "Extra texture count" | -- | Extra texture indices
-| `u32` | -- | Texture advance time in microseconds
 | `u8[4]` | -- | RGBA color
 | `u8[3]` | -- | RGB emission
 | `u8` | -- | Shading
