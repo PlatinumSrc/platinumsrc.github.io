@@ -152,6 +152,8 @@ next: paf
 | `u8[4]` | -- | RGBA color
 | `u8[3]` | -- | RGB emission
 | `u8` | -- | Shading
+| `u8` | -- | Shine
+| `u8` | -- | Matcap texture index \(255 for none\)
 
 {:.note}
 > **Note:**

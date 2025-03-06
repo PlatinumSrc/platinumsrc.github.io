@@ -411,6 +411,8 @@ next: pmp
 | `u8` | Alpha \(ignored unless 'Is transparent' flag is set\)
 | `u8[3]` | RGB emission
 | `u8` | Shading
+| `u8` | Shine
+| [String](#string) | Matcap texture
 | [Client-side material wave info](#client-side-material-wave-info) | Wave info \(ignored unless 'Is liquid' flag is set\)
 | `float` | Sound volume dampening
 | `float` | Sound frequency dampening
