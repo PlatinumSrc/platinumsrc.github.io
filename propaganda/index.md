@@ -3,7 +3,6 @@ title: Propaganda Wall
 ---
 
 {::options parse_block_html="true" /}
-<style>div.propaganda img {border-radius: 0; image-rendering: pixelated;}</style>
 <div class="propaganda">
 
 ## 88x31 Badges
@@ -56,7 +55,7 @@ title: Propaganda Wall
 
 ---
 
-## [MakeSweet](https://makesweet.com/) GIFs
+## <a href="https://makesweet.com/" class="secret">MakeSweet</a> GIFs
 
 [Heart Locket](locket.gif)<br>
 [Circuit board](board.gif)
@@ -72,3 +71,5 @@ title: Propaganda Wall
 ![](gimp.png)
 
 </div>
+
+<style>div.propaganda img {border-radius: 0; image-rendering: pixelated;}</style>

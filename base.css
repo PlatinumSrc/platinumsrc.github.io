@@ -67,6 +67,9 @@ a.secret:hover {
 p {
     margin: 0.3em 0;
 }
+p.indent {
+    text-indent: 2em;
+}
 
 @keyframes headerjump {
     from {background: #c6c600;}
@@ -286,7 +289,7 @@ center {
 #_content {
     padding: 3.25em;
 }
-#_content *:first-child {
+#_content > :first-child, #_content > div:first-child > :first-child, #_content > span:first-child > :first-child {
     margin-top: 0;
 }
 #_sidebar {
