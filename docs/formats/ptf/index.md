@@ -36,15 +36,22 @@ next: ptm
 | -
 | `char[3]` | `{'P', 'T', 'F'}` | Header magic
 | `u8` | 0 | Major version
-| `u8` | [Header info byte](#header-info-byte) | Flags and resolution
+| `u8` | [Flags](#flags) | Flags
+| `u8` | [Resolution info](#resolution-info) | Resolution
 
-##### Header info byte
+##### Flags
 
 | Bits \(MSB to LSB\) | Value | Description
 | -
-| 7..5 | 0 | Reserved
-| 4 | -- | Has alpha
-| 3..0 | -- | Resolution
+| 7..1 | 0 | Reserved
+| 0 | -- | Has alpha
+
+##### Resolution info
+
+| Bits \(MSB to LSB\) | Description
+| -
+| 7..4 | Height (2^n)
+| 3..0 | Width (2^n)
 
 ---
 

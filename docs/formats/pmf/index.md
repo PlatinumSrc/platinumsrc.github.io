@@ -37,6 +37,7 @@ next: pmp
             - [Client-side material wave info](#client-side-material-wave-info)
         - [Physics material](#physics-material)
             - [Physics material flags](#physics-material-flags)
+        - [Sound material](#sound-material)
         - [Lightmap](#lightmap)
         - [Vertex](#vertex)
         - [Dynamic light](#dynamic-light)
@@ -205,6 +206,8 @@ next: pmp
 | [Material](#material) × "Material count" | Materials
 | `u16` | Physics material count
 | [Physics material](#physics-material) × "Physics material count" | Physics materials
+| `u16` | Sound material count
+| [Sound material](#sound-material) × "Physics sound count" | Sound materials
 | [String](#string) | Air physics material
 | `u8` | Weather environment count
 | [Weather environment](#weather-environment) × "Weather environment count" | Weather environments
@@ -306,6 +309,8 @@ next: pmp
 | [String](#string) × "Used material count" | -- | Used material names
 | `u8` | -- | Used physics material count
 | [String](#string) × "Used physics material count" | -- | Used physics material names
+| `u8` | -- | Used sound material count
+| [String](#string) × "Used sound material count" | -- | Used sound material names
 | `u8` | -- | Weather environment region count
 | [Environment region](#environment-region) × "Weather environment region count" | -- | Weather environment regions
 | `u8` | -- | Gravity environment region count
@@ -414,8 +419,6 @@ next: pmp
 | `u8` | Shine
 | [String](#string) | Matcap texture
 | [Client-side material wave info](#client-side-material-wave-info) | Wave info \(ignored unless 'Is liquid' flag is set\)
-| `float` | Sound volume dampening
-| `float` | Sound frequency dampening
 
 ##### Client-side material wave info
 
@@ -447,6 +450,15 @@ next: pmp
 | -
 | 7..1 | 0 | Reserved
 | 0 | -- | Not solid
+
+---
+
+### Sound material
+
+| Type | Description
+| -
+| `float` | Volume dampening
+| `float` | Frequency dampening
 
 ---
 
@@ -612,6 +624,7 @@ next: pmp
 | -
 | `u8` | Material
 | `u8` | Physics material
+| `u8` | Sound material
 
 ### Client-side geometry cube data
 
@@ -651,6 +664,7 @@ next: pmp
 | `u8` | -- | -X physics material
 | `u8` | -- | -Y physics material
 | `u8` | -- | -Z physics material
+| `u8` | -- | Sound material
 | `u8` | [Extended geometry cube point bits](#extended-geometry-cube-point-bits) | 'Point moved' bits
 | `float[3]` × 0..1 | -- | (+X, +Y, +Z) XYZ (only present if '(+X, +Y, +Z) point moved' flag is set)
 | `float[3]` × 0..1 | -- | (-X, +Y, +Z) XYZ (only present if '(-X, +Y, +Z) point moved' flag is set)
