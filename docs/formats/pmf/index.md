@@ -631,8 +631,8 @@ next: pmp
 | Type | Value | Description
 | -
 | `u8` | -- | Lightmap
-| `u8` | [Client-side geometry cube face bits](#client-side-geometry-cube-face-bits) | 'Has face' bits
 | `u32` | -- | Index of first quad's first vertex
+| `u8` | [Client-side geometry cube face bits](#client-side-geometry-cube-face-bits) | 'Has face' bits
 
 ##### Client-side geometry cube face bits
 
@@ -692,6 +692,7 @@ next: pmp
 
 | Type | Description
 | -
+| `u32` | Index of first triangle's first vertex
 | `u8` | +X lightmap
 | `u8` | +Y lightmap
 | `u8` | +Z lightmap
@@ -704,7 +705,6 @@ next: pmp
 | `u8` | -X triangle count
 | `u8` | -Y triangle count
 | `u8` | -Z triangle count
-| `u32` | Index of first triangle's first vertex
 
 ---
 
