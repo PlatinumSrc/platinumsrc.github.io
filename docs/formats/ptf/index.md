@@ -9,7 +9,8 @@ next: ptm
 
 - [Format](#format)
     - [Header](#header)
-        - [Header info byte](#header-info-byte)
+        - [Flags](#flags)
+        - [Resolution info](#resolution-info)
     - [Data](#data)
         - [RGB pixel](#rgb-pixel)
         - [RGBA pixel](#rgba-pixel)
