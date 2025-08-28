@@ -12,7 +12,9 @@
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_files_engine.zip"><b>Required files</b></a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_linux_x86_64.tar.gz">Linux x86 64-bit</a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_linux_i686.tar.gz">Linux x86 32-bit</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_windows_i686.zip">Windows x86</a><br>
+        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_windows_x86_64.zip">Windows x86 64-bit</a><br>
+        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_windows_i686.zip">Windows x86 32-bit</a><br>
+        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_win9x_i686.zip">Windows 95/98</a><br>
         <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_nxdk.zip">Xbox (NXDK)</a><br>
     </span>
 </span>
@@ -44,10 +46,10 @@
 <b><a href="/docs" class="secret">Documentation</a></b><br>
 {% include doclinks.liquid dir='editor' -%}
 {%- include gencollap.liquid header="Editor" link="/docs/editor" content=doclinks_output %}
-{% include doclinks.liquid dir='pbasic' -%}
-{%- include gencollap.liquid header="PBASIC" link="/docs/pbasic" content=doclinks_output %}
 {% include doclinks.liquid dir='engine' -%}
 {%- include gencollap.liquid header="Engine" link="/docs/engine" content=doclinks_output %}
+{% include doclinks.liquid dir='server' -%}
+{%- include gencollap.liquid header="Server" link="/docs/server" content=doclinks_output %}
 {% include doclinks.liquid dir='formats' -%}
 {%- include gencollap.liquid header="File formats" link="/docs/formats" content=doclinks_output %}
 <hr class="slim semi">
