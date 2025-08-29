@@ -127,6 +127,9 @@ pre, textarea {
     border-bottom: 0.2em solid {{ code-border-br-color }};
     border-right: 0.2em solid {{ code-border-br-color }};
 }
+figure.highlight {
+    margin: 0;
+}
 
 img {
     border: none;
@@ -138,7 +141,7 @@ canvas {
 }
 
 @media screen {
-    .highlight .o, .highlight .ow {color: {{ code-op-color }};}
+    .highlight .o, .highlight .ow, .highlight .p {color: {{ code-op-color }};}
     .highlight .k {color: {{ code-kw-color }}; font-weight: bold;}
     .highlight .kt {color: {{ code-type-color }}; font-weight: bold;}
     .highlight .m, .highlight .mb, .highlight .mf,
@@ -155,7 +158,8 @@ canvas {
     .highlight .ch {color: {{ code-comment-color }}; font-weight: bold;}
     .highlight .cp {color: {{ code-preproc-color }}; font-weight: bold;}
     .highlight .cpf {color: {{ code-preprocfile-color }}; font-weight: normal;}
-    .highlight .err {color: {{ font-color }}; background-color: {{ code-error-bgcolor }};}}
+    .highlight .err {color: {{ font-color }}; background-color: {{ code-error-bgcolor }};}
+}
 
 hr {
     border: none;
@@ -314,7 +318,7 @@ center {
     pre {
         border: 0.1em solid {{ code-bg-color }};
     }
-    * :not(html, body, #_main, #_content, #_content *) {
+    #_sidebar {
         display: none !important;
     }
 }

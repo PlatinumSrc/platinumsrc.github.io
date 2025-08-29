@@ -1,3 +1,9 @@
+# Config
+cfg defaultgame = h74
+cfg mods = h74_hqsounds
+cfg [Renderer]
+cfg gl.fastclear=false
+
 # Optional content
 url https://github.com/PQCraft/PQCraft/raw/master/test_model.p3m games/test/test_model.p3m
 

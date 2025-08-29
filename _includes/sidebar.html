@@ -46,6 +46,8 @@
 <b><a href="/docs" class="secret">Documentation</a></b><br>
 {% include doclinks.liquid dir='editor' -%}
 {%- include gencollap.liquid header="Editor" link="/docs/editor" content=doclinks_output %}
+{% include doclinks.liquid dir='pbasic' -%}
+{%- include gencollap.liquid header="PBASIC" link="/docs/pbasic" content=doclinks_output %}
 {% include doclinks.liquid dir='engine' -%}
 {%- include gencollap.liquid header="Engine" link="/docs/engine" content=doclinks_output %}
 {% include doclinks.liquid dir='server' -%}
@@ -56,6 +58,4 @@
 <b>Other Pages</b><br>
 <a href="/online-demo">Online Demo</a><br>
 <a href="/propaganda">Propaganda</a><br>
-<span class="collapsible">
-    <span class="collaptext collapsible-empty">News</span><br>
-</span>
+{%- include gencollap.liquid header="News" link="/news" content="" %}

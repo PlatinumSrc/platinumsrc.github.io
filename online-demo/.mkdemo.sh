@@ -7,31 +7,31 @@ unset gc B
 cd PlatinumSrc
 
 mkdir games mods
-copy() {
-    cp -rn tmp/games/. games
-    cp -rn tmp/mods/. mods
-}
-download() {
-    T="$1"
-    shift
-    case "$T" in
+CONFIGTEXT="onlinedemo=true"$'\n'
+evalcontent() {
+    copycontent() {
+        cp -rn "$1"/games/. "$2"/games
+        cp -rn "$1"/mods/. "$2"/mods
+    }
+    case "$1" in
+        cfg)
+            CONFIGTEXT+="$2"$'\n'
+            ;;
         git)
-            git clone --depth 1 "$@" tmp
-            copy
+            xargs bash -c 'git clone --depth 1 "$@" tmp' bash <<< "$2"
+            copycontent tmp .
             rm -rf tmp
             ;;
         url)
-            wget "$1" -O tmp
-            mkdir -p -- "$(dirname -- "$2")"
-            mv -- tmp "$2"
+            xargs bash -c 'P="./$(realpath -sm -- "$2")"; wget -O tmp -- "$1"; mkdir -p -- "$(dirname -- "$P")"; mv -- tmp "$P"' bash <<< "$2"
             ;;
     esac
 }
-while read -r l; do
-    [ "$(printf '%.1s' "$l")" == '#' ] || eval "download $l"
+while IFS='' read -r l; do
+    c="$(awk '{print $1;}' <<< "$l")"
+    [[ -z "$c" || "$c" =~ ^#.* ]] || evalcontent "$c" "$(sed 's/^\s*\S*\s*//' <<< "$l")"
 done < ../.content.txt
-
-printf '%s\n' 'defaultgame=h74' 'mods=hqsounds' 'onlinedemo=true' '[Renderer]' 'gl.fastclear=false' > internal/engine/config.cfg
+printf '%s' "$CONFIGTEXT" > internal/engine/config.cfg
 
 make CROSS=emscr LDFLAGS+=-sMINIFY_HTML=0 OUTDIR=.. EMSCR_SHELL=../.emscr_shell.html -j$(nproc)
 
