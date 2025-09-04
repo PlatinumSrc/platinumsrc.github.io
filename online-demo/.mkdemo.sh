@@ -23,7 +23,7 @@ evalcontent() {
             rm -rf tmp
             ;;
         url)
-            xargs bash -c 'P="./$(realpath -sm -- "$2")"; wget -O tmp -- "$1"; mkdir -p -- "$(dirname -- "$P")"; mv -- tmp "$P"' bash <<< "$2"
+            xargs bash -c 'wget -O tmp -- "$1"; mkdir -p -- "$(dirname -- "./$2")"; mv -- tmp "./$2"' bash <<< "$2"
             ;;
     esac
 }
