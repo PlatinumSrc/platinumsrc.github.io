@@ -24,7 +24,10 @@ title: Propaganda Wall
 
 **Powered by**<br>
 ![](powered-by.png "Static PNG")
+![](powered-by-stone.png "Static blue stone PNG")
 ![](powered-by-blue-stone.png "Static blue stone PNG")
+![](powered-by-marble.png "Static blue stone PNG")
+![](powered-by-water.png "Static blue stone PNG")
 
 **Logo and text**<br>
 ![](logo.png "Static PNG")
