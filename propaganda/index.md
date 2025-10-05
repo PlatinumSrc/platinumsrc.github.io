@@ -54,7 +54,7 @@ title: Propaganda Wall
 ![](text-water.png "Static water PNG")
 
 **Miscellaneous**<br>
-![](got-psrc.png "Static PNG")
+![](got-psrc.png "got psrc?")
 
 ---
 
@@ -68,6 +68,12 @@ title: Propaganda Wall
 ## Captioned GIFs
 
 ["Yes, I use PlatinumSrc" gigachad](i-use-psrc.gif)
+
+---
+
+## Other
+
+[PlatinumSrc... emoji](true.png)
 
 ---
 

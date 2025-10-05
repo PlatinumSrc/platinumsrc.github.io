@@ -10,8 +10,8 @@ mkdir games mods
 CONFIGTEXT="onlinedemo=true"$'\n'
 evalcontent() {
     copycontent() {
-        cp -rn "$1"/games/. "$2"/games
-        cp -rn "$1"/mods/. "$2"/mods
+        cp -r --update=none -- "$1"/games/. "$2"/games
+        cp -r --update=none -- "$1"/mods/. "$2"/mods
     }
     case "$1" in
         cfg)
