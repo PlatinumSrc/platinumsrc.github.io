@@ -1,4 +1,6 @@
 *
+!/assets/
+!/assets/**
 !/docs/
 !/docs/**
 !/news/
@@ -13,17 +15,12 @@
 !/404.html
 !/base.css
 !/base.js
-!/bg.png
 !/favicon.ico
 !/index.md
-!/icon.png
-!/mbedicon.png
-!/sidebar.png
 !/_config.yml
 .**
 !/online-demo/.content.txt
 !/online-demo/.emscr_shell.html
-!/online-demo/.make.sh
 !/online-demo/.mkdemo.sh
 !/.github/
 !/.github/**
