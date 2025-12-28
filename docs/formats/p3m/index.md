@@ -57,9 +57,9 @@ next: paf
 
 ##### Header flags
 
-| Bits \(MSB to LSB\) | Value | Description
+| Bits \(LSB to MSB\) | Value | Description
 | -
-| 7..0 | 0 | Reserved
+| 0..7 | 0 | Reserved
 
 ---
 
@@ -101,10 +101,10 @@ next: paf
 
 ##### Part flags
 
-| Bits \(MSB to LSB\) | Value | Description
+| Bits \(LSB to MSB\) | Value | Description
 | -
-| 7..1 | 0 | Reserved
 | 0 | -- | Has normals
+| 1..7 | 0 | Reserved
 
 #### Vertex
 
