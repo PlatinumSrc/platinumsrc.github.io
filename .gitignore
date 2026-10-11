@@ -21,6 +21,7 @@
 .**
 !/online-demo/.content.txt
 !/online-demo/.emscr_shell.html
+!/online-demo/.emscr_shell_embed.html
 !/online-demo/.mkdemo.sh
 !/.github/
 !/.github/**

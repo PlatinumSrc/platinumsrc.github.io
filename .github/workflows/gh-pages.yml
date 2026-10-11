@@ -34,7 +34,7 @@ jobs:
           destination: ./_site
       - name: Out with the old
         run: |
-          ls | grep -v _site | while read -r d; do find "$d" \( -iname \*.html -o -iname \*.js -o -iname \*.css \) | while read -r i; do rm "$i"; done; done
+          ls | grep -v _site | while read -r d; do find "$d" \( -iname \*.html -o -iname \*.js -o -iname \*.css \) -delete; done
       - name: Pages Minify
         uses: DrA1ex/pages-minify@v1.0.3
       - name: Upload artifact
