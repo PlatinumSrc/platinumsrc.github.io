@@ -213,6 +213,11 @@ table.container, tbody.container, thead.container, tr.container, th.container, t
     vertical-align: top;
 }
 
+progress {
+    border: 2px inset;
+    border-radius: 0.2em;
+}
+
 ul, ol {
     padding-left: 2.5em;
 }

@@ -2,6 +2,7 @@
 
 [ -z "$SKIPDL" ] && SKIPDL=0
 [ -z "$ONLYDL" ] && ONLYDL=0
+[ -z "$FORCEBUILD" ] && FORCEBUILD=0
 
 if [ "$SKIPDL" -eq 0 ]; then
     B="$(curl -s https://api.github.com/repos/PlatinumSrc/PlatinumSrc/releases/latest | jq -r .tag_name)"
@@ -42,8 +43,11 @@ if [ "$SKIPDL" -eq 0 ]; then
 fi
 
 if [ "$ONLYDL" -eq 0 ]; then
-    make deps= CROSS=emscr LDFLAGS+=-sMINIFY_HTML=0 OUTDIR=.. EMSCR_SHELL=../.emscr_shell.html -j$(nproc)
-    make deps= CROSS=emscr LDFLAGS+=-sMINIFY_HTML=0 OUTDIR=.. BINPATH=../embed.html EMSCR_SHELL=../.emscr_shell_embed.html -j$(nproc)
+    rm -f ../index.html ../embed.html
+    [ "$FORCEBUILD" -ne 0 ] && rm -f ../.psrc.html
+    make deps= CROSS=emscr LDFLAGS+=-sMINIFY_HTML=0 OUTDIR=.. BINPATH=../.psrc.html EMSCR_SHELL=../.emscr_shell.html -j$(nproc)
+    cat ../.pre_index.html ../.psrc.html > ../index.html
+    cat ../.pre_embed.html ../.psrc.html > ../embed.html
 fi
 
 cd ..

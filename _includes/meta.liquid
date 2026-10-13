@@ -1,0 +1,34 @@
+{%- if page.permalink != "/404.html" -%}
+    <meta name="description" content="PlatinumSrc">
+    <meta name="theme-color" content="{{ page.theme-color | default: theme-color }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="PlatinumSrc GitHub Page">
+    <meta property="og:image" content="{{ site.url }}/assets/mbedicon.png">
+    {%- if page.twitter-player -%}
+        <meta name="twitter:card" content="player">
+        <meta name="twitter:title" content="{{ title }}">
+        <meta name="twitter:description" content="PlatinumSrc GitHub Page">
+        <meta name="twitter:image" content="{{ site.url }}/assets/mbedicon.png">
+        {%- if page.twitter-player.path -%}
+            {%- assign tmp = page.twitter-player.path | slice: 0, 1 -%}
+            {%- if tmp == "/" -%}
+                {%- assign tmp = page.twitter-player.path -%}
+            {%- else -%}
+                {%- assign tmp = page.url | append: page.twitter-player.path -%}
+            {%- endif -%}
+            <meta name="twitter:player" content="{{ site.url }}{{ tmp }}">
+            {%- assign tmp = site.pages | where: "url", "/online-demo/embed.html" | first -%}
+            <meta name="twitter:player:width" content="{{ tmp.twitter-player.width }}">
+            <meta name="twitter:player:height" content="{{ tmp.twitter-player.height }}">
+        {%- else -%}
+            <meta name="twitter:player" content="{{ site.url }}{{ page.url }}">
+            <meta name="twitter:player:width" content="{{ page.twitter-player.width }}">
+            <meta name="twitter:player:height" content="{{ page.twitter-player.height }}">
+        {%- endif -%}
+    {%- else -%}
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ title }}">
+        <meta name="twitter:description" content="PlatinumSrc GitHub Page">
+        <meta name="twitter:image" content="{{ site.url }}/assets/mbedicon.png">
+    {%- endif -%}
+{%- endif -%}

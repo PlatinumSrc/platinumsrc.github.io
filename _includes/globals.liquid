@@ -1,4 +1,12 @@
+{%- capture title -%}
+    {%- if page.section -%}
+        {{- "PlatinumSrc: " | append: page.section | append: " - " | append: page.title -}}
+    {%- else -%}
+        {{- "PlatinumSrc - " | append: page.title -}}
+    {%- endif -%}
+{%- endcapture -%}
 {%- assign org = "PlatinumSrc" -%}
 {%- assign repo = "PlatinumSrc" -%}
 {%- assign bg-color = "#141b38" -%}
-{%- assign extlink = '<img src="/assets/extlink.png" loading="lazy" style="height: 0.75em; border-radius: 0;"></img>' -%}
+{%- assign theme-color = "#5f8bc3" -%}
+{%- assign extlink = '<img src="/assets/extlink.png" loading="lazy" style="height: 0.75em; border-radius: 0;">' -%}

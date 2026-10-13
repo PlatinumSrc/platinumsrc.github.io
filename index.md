@@ -8,7 +8,7 @@ title: Home
 
 - Try the [online demo](/online-demo)! \(JavaScript, WASM, and WebGL2 are required\)
 - Check out the [documentation](/docs)
-- Take a look at the [engine](https://github.com/{{ org }}/{{ repo }}) and [website](https://github.com/{{ org }}/{{ site.domain }}) code repositories
+- Take a look at the [engine {{ extlink }}](https://github.com/{{ org }}/{{ repo }}) and [website {{ extlink }}](https://github.com/{{ org }}/{{ site.domain }}) code repositories
 - Indoctrinate yourself with some [propaganda](/propaganda)
 
 {:.indent}

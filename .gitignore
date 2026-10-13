@@ -21,9 +21,9 @@
 .**
 !/online-demo/.content.txt
 !/online-demo/.emscr_shell.html
-!/online-demo/.emscr_shell_embed.html
+!/online-demo/.pre_embed.html
+!/online-demo/.pre_index.html
 !/online-demo/.mkdemo.sh
 !/.github/
 !/.github/**
 !/.gitignore
-!/.minify.json

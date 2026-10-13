@@ -1,20 +1,9 @@
----
-title: Online Demo
----
-<div style="display: flex; flex-flow: row; justify-content: center; min-height: calc(100vh - 14em);">
-    <div style="min-width: 800px; width: min-content; align-content: center;">
-        <div id="status" style="text-align: center;"></div>
-        <progress id="progress" class="hidden" style="display: block; margin: auto;"></progress>
-        <canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1 height=0></canvas>
-        <textarea id="output" rows="10" readonly style="resize: vertical;"></textarea>
-    </div>
-</div>
 <script>
-    var statusElement = document.getElementById('status');
-    var progressElement = document.getElementById('progress');
     var Module = {
-        preRun: [],
-        postRun: [],
+        onExit: () => {
+            Module.canvas.style.display = "none";
+            Module.setStatus("Thanks for playing!");
+        },
         print: (() => {
             var element = document.getElementById('output');
             if (element) element.value = '';
@@ -28,38 +17,25 @@ title: Online Demo
                 }
             };
         })(),
-        canvas: (() => {
-            var canvas = document.getElementById('canvas');
-            canvas.addEventListener("webglcontextlost", (e) => { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
-            return canvas;
-        })(),
+        canvas: document.getElementById('canvas'),
         setStatus: (text) => {
-            if (text != "") console.log(text);
             var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
             if (m) {
-                text = m[1];
-                progressElement.value = parseInt(m[2]);
-                progressElement.max = parseInt(m[4]);
-                progressElement.classList.remove('hidden');
+                Module.progressElement.value = parseInt(m[2]);
+                Module.progressElement.max = parseInt(m[4]);
+                Module.progressElement.classList.remove('hidden');
             } else {
-                progressElement.value = null;
-                progressElement.max = null;
-                progressElement.classList.add('hidden');
+                if (text != "") console.log(text);
+                Module.progressElement.value = null;
+                Module.progressElement.max = null;
+                Module.progressElement.classList.add('hidden');
             }
-            statusElement.innerHTML = text;
+            Module.statusElement.innerHTML = text;
         },
-        totalDependencies: 1,
-        monitorRunDependencies: (left) => {
-            Module.totalDependencies = Math.max(Module.totalDependencies, left);
-            Module.setStatus(left ? 'Preparing... (' + (Module.totalDependencies - left) + '/' + Module.totalDependencies + ')' : 'All downloads complete.');
-        }
+        statusElement: document.getElementById('status'),
+        progressElement: document.getElementById('progress')
     };
     Module.setStatus('Downloading...');
-    window.onerror = () => {
-        Module.setStatus('Exception thrown, see JavaScript console');
-        Module.setStatus = (text) => {
-            if (text) console.error('[post-exception status] ' + text);
-        };
-    };
+    window.onerror = () => {Module.setStatus('Exception thrown, see JavaScript console');};
 </script>
 {{{ SCRIPT }}}

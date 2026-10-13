@@ -1,0 +1,16 @@
+{%- include globals.liquid -%}
+<!DOCTYPE html>
+<html lang="en" bgcolor="{{ bg-color }}" style="height: 100%; background-color: {{ bg-color }};">
+    <head>
+        <title>{{ title }}</title>
+        <meta charset="UTF-8">
+        {%- include meta.liquid -%}
+        <link rel="icon" href="/assets/icon.png"></link>
+        <link rel="stylesheet" href="/base.css">
+        <script src="/base.js"></script>
+    </head>
+    <body bgcolor="{{ bg-color }}" style="height: 100%; padding: 0; background-color: {{ bg-color }};" background="/assets/bg.png">
+        {{- content -}}
+        <style>html {background-color: transparent !important;}</style>
+    </body>
+</html>
