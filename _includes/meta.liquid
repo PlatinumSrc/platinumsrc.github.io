@@ -4,11 +4,11 @@
     <meta property="og:title" content="{{ title }}">
     <meta property="og:description" content="PlatinumSrc GitHub Page">
     <meta property="og:image" content="{{ site.url }}/assets/mbedicon.png">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="PlatinumSrc GitHub Page">
+    <meta name="twitter:image" content="{{ site.url }}/assets/mbedicon.png">
     {%- if page.twitter-player -%}
         <meta name="twitter:card" content="player">
-        <meta name="twitter:title" content="{{ title }}">
-        <meta name="twitter:description" content="PlatinumSrc GitHub Page">
-        <meta name="twitter:image" content="{{ site.url }}/assets/mbedicon.png">
         {%- if page.twitter-player.path -%}
             {%- assign tmp = page.twitter-player.path | slice: 0, 1 -%}
             {%- if tmp == "/" -%}
@@ -27,8 +27,5 @@
         {%- endif -%}
     {%- else -%}
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="{{ title }}">
-        <meta name="twitter:description" content="PlatinumSrc GitHub Page">
-        <meta name="twitter:image" content="{{ site.url }}/assets/mbedicon.png">
     {%- endif -%}
 {%- endif -%}
