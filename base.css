@@ -44,8 +44,10 @@ html {
     margin: 0;
 }
 body {
-    margin: 0;
-    padding: 0 calc(50vw - 45em);
+    margin: 0 auto;
+    padding: 0;
+    max-width: 100%;
+    width: 90em;
 }
 
 a {
