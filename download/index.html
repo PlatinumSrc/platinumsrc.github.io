@@ -6,14 +6,17 @@ style: .style.css
 {% assign cdn = "https://github.com/" | append: org | append: "/" | append: repo | append: "/releases/latest/download" %}
 <h1>Downloads</h1>
 <ul>
-{% for dl in site.data.downloads %}
-    <li><a href="#{{ dl[0] }}">{{ dl[1].name }}</a></li>
-{% endfor %}
+    {% for dl in site.data.downloads %}
+        <li><a href="#{{ dl[0] }}">{{ dl[1].name }}</a></li>
+    {% endfor %}
 </ul>
 <p><a href="https://github.com/{{ org }}/{{ repo }}/releases">Releases on GitHub {{ extlink }}</a></p>
 {% for dl in site.data.downloads %}
-    <hr>
-    <table id="{{ dl[0] }}" class="dl">
+    <hr id="{{ dl[0] }}">
+    {% for e in dl[1].pre %}
+        <blockquote class="{{ e.type }}"><p>{% if e.type %}<strong>{{ e.type | capitalize }}:</strong> {% endif %}{{ e.text }}</p></blockquote>
+    {% endfor %}
+    <table class="dl">
         <thead>
             <tr>
                 <th colspan=2>{{ dl[1].name }}</th>
@@ -22,7 +25,7 @@ style: .style.css
         <tbody>
             {% if dl[1].base %}
                 <tr>
-                    <td class="br"><b>Base files</b></td>
+                    <td class="br"><b>Base files <span class="inactive">(required)</span></b></td>
                     <td class="br dl"><a href="{{ cdn }}/ptsrc_{{ dl[1].base }}"><div class="dl"><img class="dl" src="/assets/download.png"></div></a></td>
                 </tr>
             {% endif %}
@@ -45,7 +48,7 @@ style: .style.css
             {% endfor %}
         </tbody>
     </table>
-    {% if dl[1].note %}
-        <blockquote class="note"><p><strong>Note:</strong> {{ dl[1].note }}</p></blockquote>
-    {% endif %}
+    {% for e in dl[1].post %}
+        <blockquote class="{{ e.type }}"><p>{% if e.type %}<strong>{{ e.type | capitalize }}:</strong> {% endif %}{{ e.text }}</p></blockquote>
+    {% endfor %}
 {% endfor %}

@@ -23,6 +23,7 @@
 !/index.md
 !/_config.yml
 .**
+!.*.css
 !/online-demo/.content.txt
 !/online-demo/.emscr_shell.html
 !/online-demo/.pre_embed.html
@@ -31,4 +32,3 @@
 !/.github/
 !/.github/**
 !/.gitignore
-!.*.css
