@@ -3,11 +3,15 @@
 !/assets/**
 !/docs/
 !/docs/**
+!/download/
+!/download/**
 !/news/
 !/news/**
 !/online-demo/
 !/propaganda/
 !/propaganda/**
+!/_data/
+!/_data/**
 !/_includes/
 !/_includes/**
 !/_layouts/
@@ -27,3 +31,4 @@
 !/.github/
 !/.github/**
 !/.gitignore
+!.*.css

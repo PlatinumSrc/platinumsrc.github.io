@@ -1,0 +1,149 @@
+engine:
+    name: Engine
+    base: files_engine.zip
+    plat:
+        linux:
+            name: Linux
+            plat:
+                linux_x86_64.tar.gz:
+                    name: x86_64
+                    desc: 64-bit x86
+                linux_i686.tar.gz:
+                    name: i686
+                    desc: 32-bit x86
+                linux_aarch64.tar.gz:
+                    name: aarch64
+                    desc: 64-bit ARM
+                linux_armv7l.tar.gz:
+                    name: armv7l
+                    desc: 32-bit ARM
+        win32:
+            name: Windows
+            plat:
+                windows_x86_64.zip:
+                    name: x86_64
+                    desc: 64-bit x86
+                windows_i686.zip:
+                    name: i686
+                    desc: 32-bit x86
+                    extra: for Windows 2000 and later
+                win98_i686.zip:
+                    name: i686
+                    desc: 32-bit x86
+                    extra: for Windows 98
+        consoles:
+            name: Consoles
+            plat:
+                3ds.zip:
+                    name: 3DS
+                dc.zip:
+                    name: Dreamcast
+                gc.zip:
+                    name: GameCube
+                ps2.zip:
+                    name: PS2
+                wii.zip:
+                    name: Wii
+                nxdk.zip:
+                    name: Xbox
+                    desc: NXDK
+server:
+    name: Server
+    base: files_server.zip
+    plat:
+        linux:
+            name: Linux
+            plat:
+                linux_x86_64.tar.gz:
+                    name: x86_64
+                    desc: 64-bit x86
+                linux_i686.tar.gz:
+                    name: i686
+                    desc: 32-bit x86
+                linux_aarch64.tar.gz:
+                    name: aarch64
+                    desc: 64-bit ARM
+                linux_armv7l.tar.gz:
+                    name: armv7l
+                    desc: 32-bit ARM
+        win32:
+            name: Windows
+            plat:
+                windows_x86_64.zip:
+                    name: x86_64
+                    desc: 64-bit x86
+                windows_i686.zip:
+                    name: i686
+                    desc: 32-bit x86
+editor:
+    name: Editor
+    base: files_editor.zip
+    plat:
+        linux:
+            name: Linux
+            plat:
+                linux_x86_64.tar.gz:
+                    name: x86_64
+                    desc: 64-bit x86
+                linux_i686.tar.gz:
+                    name: i686
+                    desc: 32-bit x86
+                linux_aarch64.tar.gz:
+                    name: aarch64
+                    desc: 64-bit ARM
+                linux_armv7l.tar.gz:
+                    name: armv7l
+                    desc: 32-bit ARM
+        win32:
+            name: Windows
+            plat:
+                windows_x86_64.zip:
+                    name: x86_64
+                    desc: 64-bit x86
+                windows_i686.zip:
+                    name: i686
+                    desc: 32-bit x86
+                    extra: for Windows 2000 and later
+                win98_i686.zip:
+                    name: i686
+                    desc: 32-bit x86
+                    extra: for Windows 98
+tools:
+    name: Tools
+    plat:
+        any:
+            plat:
+                any.zip:
+                    name: Platform-agnostic
+        linux:
+            name: Linux
+            plat:
+                linux_x86_64.tar.gz:
+                    name: x86_64
+                    desc: 64-bit x86
+                linux_i686.tar.gz:
+                    name: i686
+                    desc: 32-bit x86
+                linux_aarch64.tar.gz:
+                    name: aarch64
+                    desc: 64-bit ARM
+                linux_armv7l.tar.gz:
+                    name: armv7l
+                    desc: 32-bit ARM
+        win32:
+            name: Windows
+            plat:
+                windows_x86_64.zip:
+                    name: x86_64
+                    desc: 64-bit x86
+                windows_i686.zip:
+                    name: i686
+                    desc: 32-bit x86
+    note: The platform-agnostic tools are things such as blender plugins, syntax highlighting files, etc.
+extras:
+    name: Extras
+    plat:
+        any:
+            plat:
+                docs.zip:
+                    name: Documentation

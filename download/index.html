@@ -1,0 +1,51 @@
+---
+title: Download
+style: .style.css
+---
+{% include globals.liquid %}
+{% assign cdn = "https://github.com/" | append: org | append: "/" | append: repo | append: "/releases/latest/download" %}
+<h1>Downloads</h1>
+<ul>
+{% for dl in site.data.downloads %}
+    <li><a href="#{{ dl[0] }}">{{ dl[1].name }}</a></li>
+{% endfor %}
+</ul>
+<p><a href="https://github.com/{{ org }}/{{ repo }}/releases">Releases on GitHub {{ extlink }}</a></p>
+{% for dl in site.data.downloads %}
+    <hr>
+    <table id="{{ dl[0] }}" class="dl">
+        <thead>
+            <tr>
+                <th colspan=2>{{ dl[1].name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if dl[1].base %}
+                <tr>
+                    <td class="br"><b>Base files</b></td>
+                    <td class="br dl"><a href="{{ cdn }}/ptsrc_{{ dl[1].base }}"><div class="dl"><img class="dl" src="/assets/download.png"></div></a></td>
+                </tr>
+            {% endif %}
+            {% for p in dl[1].plat %}
+                {% if p[1].name %}
+                    <tr>
+                        <td colspan=2 class="br" style="text-align: center;"><b>{{ p[1].name }}</b></td>
+                    </tr>
+                {% endif %}
+                {% for sp in p[1].plat %}
+                    <tr>
+                        <td>
+                            {{- sp[1].name -}}
+                            {%- if sp[1].desc %} <span class="inactive">({{ sp[1].desc }})</span>{% endif -%}
+                            {%- if sp[1].extra %} <i>{{ sp[1].extra }}</i>{% endif -%}
+                        </td>
+                        <td class="dl"><a href="{{ cdn }}/ptsrc_{{ dl[0] }}_{{ sp[0] }}"><div class="dl"><img class="dl" src="/assets/download.png"></div></a></td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if dl[1].note %}
+        <blockquote class="note"><p><strong>Note:</strong> {{ dl[1].note }}</p></blockquote>
+    {% endif %}
+{% endfor %}

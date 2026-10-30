@@ -1,0 +1,23 @@
+table.dl {
+    min-width: 30em;
+}
+tr.dl {
+    vertical-align: middle;
+}
+td.dl {
+    text-align: center;
+    width: 1px;
+    padding: 0;
+}
+td.dl :hover {
+    background: {{ panel-bg-color }};
+}
+img.dl {
+    height: 1.25em;
+    margin: 0.325em;
+}
+div.dl {
+    cursor: hand;
+    width: 4em;
+    height: 1.9em;
+}

@@ -1,47 +1,14 @@
 <a href="/"><img src="/assets/sidebar.png" class="sidebarimg"></img></a>
 <hr class="slim">
-<b>External Links</b><br>
+<b>Quick Links</b><br>
+<a href="/download">Download</a><br>
+<a href="/online-demo">Online Demo</a><br>
+<a href="/propaganda">Propaganda</a><br>
+<hr class="slim semi">
+<b>Project Links</b><br>
 <a href="https://github.com/{{ org }}">GitHub organization</a><br>
 <a href="https://github.com/{{ org }}/{{ repo }}">Engine source code</a><br>
 <a href="https://github.com/{{ org }}/{{ site.domain }}">Website source code</a><br>
-<hr class="slim semi">
-<b><a href="https://github.com/{{ org }}/{{ repo }}/releases/latest" class="secret">Downloads</a></b><br>
-<span class="collapsible" nocache>
-    <span class="collaptext">Engine</span><br>
-    <span class="collapcontent">
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_files_engine.zip"><b>Required files</b></a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_linux_x86_64.tar.gz">Linux x86 64-bit</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_linux_i686.tar.gz">Linux x86 32-bit</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_windows_x86_64.zip">Windows x86 64-bit</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_windows_i686.zip">Windows x86 32-bit</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_win9x_i686.zip">Windows 95/98</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_engine_nxdk.zip">Xbox (NXDK)</a><br>
-    </span>
-</span>
-<span class="collapsible" nocache>
-    <span class="collaptext">Dedicated server</span><br>
-    <span class="collapcontent">
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_files_server.zip"><b>Required files</b></a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_server_linux_x86_64.tar.gz">Linux x86 64-bit</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_server_windows_i686.zip">Windows x86</a><br>
-    </span>
-</span>
-<span class="collapsible" nocache>
-    <span class="collaptext">Editor</span><br>
-    <span class="collapcontent">
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_files_editor.zip"><b>Required files</b></a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_editor_linux_x86_64.tar.gz">Linux x86 64-bit</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_editor_windows_i686.zip">Windows x86</a><br>
-    </span>
-</span>
-<span class="collapsible" nocache>
-    <span class="collaptext">Tools</span><br>
-    <span class="collapcontent">
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_tools_any.zip">Platform agnostic</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_tools_linux_x86_64.tar.gz">Linux x86 64-bit</a><br>
-        <a href="https://github.com/{{ org }}/{{ repo }}/releases/latest/download/psrc_tools_windows_i686.zip">Windows x86</a><br>
-    </span>
-</span>
 <hr class="slim semi">
 <b><a href="/docs" class="secret">Documentation</a></b><br>
 {% include doclinks.liquid dir='editor' -%}
@@ -56,6 +23,4 @@
 {%- include gencollap.liquid header="File formats" link="/docs/formats" content=doclinks_output %}
 <hr class="slim semi">
 <b>Other Pages</b><br>
-<a href="/online-demo">Online Demo</a><br>
-<a href="/propaganda">Propaganda</a><br>
 {%- include gencollap.liquid header="News" link="/news" content="" %}

@@ -53,9 +53,6 @@ title: Propaganda Wall
 ![](text-marble.png "Static marble PNG")
 ![](text-water.png "Static water PNG")
 
-**Miscellaneous**<br>
-![](got-psrc.png "got psrc?")
-
 ---
 
 ## <a href="https://makesweet.com/" class="secret">MakeSweet</a> GIFs
@@ -67,7 +64,7 @@ title: Propaganda Wall
 
 ## Captioned GIFs
 
-["Yes, I use PlatinumSrc" gigachad](i-use-psrc.gif)
+["Yes, I use PlatinumSrc" gigachad](i-use-ptsrc.gif)
 
 ---
 

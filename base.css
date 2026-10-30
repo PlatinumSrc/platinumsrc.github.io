@@ -4,13 +4,13 @@ layout: none
 
 {%- include globals.liquid -%}
 
-{%- assign panel-bg-color = "#314b78" -%}
 {%- assign panel-border-br-color = "#3b5788" -%}
 {%- assign panel-border-dim-color = "#24375e" -%}
 {%- assign code-bg-color = "#3b4668" -%}
 {%- assign code-border-br-color = "#4a5881" -%}
 {%- assign code-border-dim-color = "#2d364f" -%}
 {%- assign table-bg-color = "#131626" -%}
+{%- assign table-bg-br-color = "#172847" -%}
 {%- assign thead-bg-color = "#314b78" -%}
 {%- assign table-border-br-color = "#3b5788" -%}
 {%- assign table-border-dim-color = "#24375e" -%}
@@ -203,6 +203,9 @@ th {
 }
 td {
     border-left: 0.2em groove {{ table-border-br-color }};
+}
+td.br {
+    background: {{ table-bg-br-color }};
 }
 th:first-child, td:first-child {
     border-left: none;

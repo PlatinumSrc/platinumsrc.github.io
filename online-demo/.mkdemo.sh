@@ -8,10 +8,10 @@ if [ "$SKIPDL" -eq 0 ]; then
     B="$(curl -s https://api.github.com/repos/PlatinumSrc/PlatinumSrc/releases/latest | jq -r .tag_name)"
     A=()
     [ "$B" -a "$B" != "null" ] && A+=(-b "$B")
-    git clone "${A[@]}" --depth 1 https://github.com/PlatinumSrc/PlatinumSrc
+    git clone "${A[@]}" --depth 1 https://github.com/PlatinumSrc/PlatinumSrc .PlatinumSrc
     unset A B
 fi
-cd PlatinumSrc
+cd .PlatinumSrc
 
 if [ "$SKIPDL" -eq 0 ]; then
     mkdir games mods
@@ -44,11 +44,11 @@ fi
 
 if [ "$ONLYDL" -eq 0 ]; then
     rm -f ../index.html ../embed.html
-    [ "$FORCEBUILD" -ne 0 ] && rm -f ../.psrc.html
-    make deps= CROSS=emscr LDFLAGS+=-sMINIFY_HTML=0 OUTDIR=.. BINPATH=../.psrc.html EMSCR_SHELL=../.emscr_shell.html -j$(nproc)
-    cat ../.pre_index.html ../.psrc.html > ../index.html
-    cat ../.pre_embed.html ../.psrc.html > ../embed.html
+    [ "$FORCEBUILD" -ne 0 ] && rm -f ../.ptsrc.html
+    make deps= CROSS=emscr LDFLAGS+=-sMINIFY_HTML=0 OUTDIR=.. BINPATH=../.ptsrc.html EMSCR_SHELL=../.emscr_shell.html -j$(nproc)
+    cat ../.pre_index.html ../.ptsrc.html > ../index.html
+    cat ../.pre_embed.html ../.ptsrc.html > ../embed.html
 fi
 
 cd ..
-[ "$SKIPDL" -eq 0 -a "$ONLYDL" -eq 0 ] && rm -rf PlatinumSrc
+[ "$SKIPDL" -eq 0 -a "$ONLYDL" -eq 0 ] && rm -rf .PlatinumSrc
